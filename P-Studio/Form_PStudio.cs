@@ -26,7 +26,7 @@ namespace P_Studio
             #if DEBUG
                 settings.ProjectName = "FEMC";
                 settings.Game = "Persona 3 FES";
-                settings.ArchivePath = @"D:\Games\Persona\Backups\Persona 3 FES\P3FES-partymod.iso";
+                settings.ArchivePath = @"C:\Users\ryans\Documents\GitHub\P-Studio\P-Studio\bin\Debug\ISO\P3FES-partymod.iso";
                 settings.OutputPath = @"D:\Games\Persona\AemulusPackageManager\Packages\Persona 3 FES";
             #endif
         }

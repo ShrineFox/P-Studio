@@ -31,6 +31,8 @@ namespace P_Studio
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Project));
             this.darkGroupBox_Game = new DarkUI.Controls.DarkGroupBox();
+            this.darkRadioButton_UseExtracted = new DarkUI.Controls.DarkRadioButton();
+            this.darkRadioButton_UseArchive = new DarkUI.Controls.DarkRadioButton();
             this.darkButton_ExtractBrowse = new DarkUI.Controls.DarkButton();
             this.darkLabel_ExtractPath = new DarkUI.Controls.DarkLabel();
             this.darkTextBox_ExtractPath = new DarkUI.Controls.DarkTextBox();
@@ -46,9 +48,8 @@ namespace P_Studio
             this.darkButton_Save = new DarkUI.Controls.DarkButton();
             this.darkTextBox_ProjectName = new DarkUI.Controls.DarkTextBox();
             this.darkLabel_ProjectName = new DarkUI.Controls.DarkLabel();
-            this.darkRadioButton_UseArchive = new DarkUI.Controls.DarkRadioButton();
-            this.darkRadioButton_UseExtracted = new DarkUI.Controls.DarkRadioButton();
             this.darkButton_Cancel = new DarkUI.Controls.DarkButton();
+            darkLabel_Status = new DarkUI.Controls.DarkLabel();
             this.darkGroupBox_Game.SuspendLayout();
             this.darkGroupBox_Project.SuspendLayout();
             this.SuspendLayout();
@@ -66,12 +67,34 @@ namespace P_Studio
             this.darkGroupBox_Game.Controls.Add(this.darkButton_BrowseArchive);
             this.darkGroupBox_Game.Controls.Add(this.darkLabel_ArchivePath);
             this.darkGroupBox_Game.Controls.Add(this.darkTextBox_ArchivePath);
-            this.darkGroupBox_Game.Location = new System.Drawing.Point(12, 68);
+            this.darkGroupBox_Game.Location = new System.Drawing.Point(12, 63);
             this.darkGroupBox_Game.Name = "darkGroupBox_Game";
-            this.darkGroupBox_Game.Size = new System.Drawing.Size(481, 158);
+            this.darkGroupBox_Game.Size = new System.Drawing.Size(481, 167);
             this.darkGroupBox_Game.TabIndex = 2;
             this.darkGroupBox_Game.TabStop = false;
             this.darkGroupBox_Game.Text = "Game Settings";
+            // 
+            // darkRadioButton_UseExtracted
+            // 
+            this.darkRadioButton_UseExtracted.AutoSize = true;
+            this.darkRadioButton_UseExtracted.Location = new System.Drawing.Point(6, 114);
+            this.darkRadioButton_UseExtracted.Name = "darkRadioButton_UseExtracted";
+            this.darkRadioButton_UseExtracted.Size = new System.Drawing.Size(150, 21);
+            this.darkRadioButton_UseExtracted.TabIndex = 9;
+            this.darkRadioButton_UseExtracted.Text = "Use Extracted Files";
+            this.darkRadioButton_UseExtracted.Click += new System.EventHandler(this.InputType_Changed);
+            // 
+            // darkRadioButton_UseArchive
+            // 
+            this.darkRadioButton_UseArchive.AutoSize = true;
+            this.darkRadioButton_UseArchive.Checked = true;
+            this.darkRadioButton_UseArchive.Location = new System.Drawing.Point(6, 64);
+            this.darkRadioButton_UseArchive.Name = "darkRadioButton_UseArchive";
+            this.darkRadioButton_UseArchive.Size = new System.Drawing.Size(132, 21);
+            this.darkRadioButton_UseArchive.TabIndex = 5;
+            this.darkRadioButton_UseArchive.TabStop = true;
+            this.darkRadioButton_UseArchive.Text = "Extract ISO/PKG";
+            this.darkRadioButton_UseArchive.Click += new System.EventHandler(this.InputType_Changed);
             // 
             // darkButton_ExtractBrowse
             // 
@@ -233,28 +256,6 @@ namespace P_Studio
             this.darkLabel_ProjectName.TabIndex = 0;
             this.darkLabel_ProjectName.Text = "Project Name:";
             // 
-            // darkRadioButton_UseArchive
-            // 
-            this.darkRadioButton_UseArchive.AutoSize = true;
-            this.darkRadioButton_UseArchive.Checked = true;
-            this.darkRadioButton_UseArchive.Location = new System.Drawing.Point(6, 64);
-            this.darkRadioButton_UseArchive.Name = "darkRadioButton_UseArchive";
-            this.darkRadioButton_UseArchive.Size = new System.Drawing.Size(132, 21);
-            this.darkRadioButton_UseArchive.TabIndex = 5;
-            this.darkRadioButton_UseArchive.TabStop = true;
-            this.darkRadioButton_UseArchive.Text = "Extract ISO/PKG";
-            this.darkRadioButton_UseArchive.Click += new System.EventHandler(this.InputType_Changed);
-            // 
-            // darkRadioButton_UseExtracted
-            // 
-            this.darkRadioButton_UseExtracted.AutoSize = true;
-            this.darkRadioButton_UseExtracted.Location = new System.Drawing.Point(6, 114);
-            this.darkRadioButton_UseExtracted.Name = "darkRadioButton_UseExtracted";
-            this.darkRadioButton_UseExtracted.Size = new System.Drawing.Size(150, 21);
-            this.darkRadioButton_UseExtracted.TabIndex = 9;
-            this.darkRadioButton_UseExtracted.Text = "Use Extracted Files";
-            this.darkRadioButton_UseExtracted.Click += new System.EventHandler(this.InputType_Changed);
-            // 
             // darkButton_Cancel
             // 
             this.darkButton_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -265,11 +266,21 @@ namespace P_Studio
             this.darkButton_Cancel.TabIndex = 17;
             this.darkButton_Cancel.Text = "Cancel";
             // 
+            // darkLabel_Status
+            // 
+            darkLabel_Status.AutoSize = true;
+            darkLabel_Status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            darkLabel_Status.Location = new System.Drawing.Point(24, 328);
+            darkLabel_Status.Name = "darkLabel_Status";
+            darkLabel_Status.Size = new System.Drawing.Size(0, 17);
+            darkLabel_Status.TabIndex = 19;
+            // 
             // Form_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 363);
+            this.Controls.Add(darkLabel_Status);
             this.Controls.Add(this.darkButton_Cancel);
             this.Controls.Add(this.darkTextBox_ProjectName);
             this.Controls.Add(this.darkButton_Save);
@@ -309,5 +320,6 @@ namespace P_Studio
         private DarkUI.Controls.DarkRadioButton darkRadioButton_UseArchive;
         private DarkUI.Controls.DarkRadioButton darkRadioButton_UseExtracted;
         private DarkUI.Controls.DarkButton darkButton_Cancel;
+        public static DarkUI.Controls.DarkLabel darkLabel_Status;
     }
 }

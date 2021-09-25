@@ -62,9 +62,22 @@ namespace P_Studio
                     string saveMsg = $"Project saved as \"{settings.ProjectName}\"!";
                     if (darkRadioButton_UseArchive.Checked)
                     {
-                        ExtractArchive();
-                        saveMsg += $"\nExtracted contents of {Path.GetFileName(settings.ExtractedPath)} to:\n" +
-                            $"{Path.Combine(Path.GetDirectoryName(settings.ExtractedPath), "Extracted")}";
+                        // Show message informing user extraction is taking place
+                        MessageBox.Show("Extracting archive, please be patient as this may take awhile.", "Extracting...", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Extract ISO/CVM or PKG/CPK contents
+                        string extractedPath = Path.Combine(Path.Combine(Path.GetDirectoryName(settings.ArchivePath), "Extracted"), darkDropdownList_Game.SelectedItem.Text);
+                        ExtractArchive(extractedPath);
+                        // Update settings
+                        darkTextBox_ExtractPath.Text = extractedPath;
+                        settings.ExtractedPath = extractedPath;
+                        darkRadioButton_UseExtracted.Checked = true;
+                        // Inform user extraction is complete and settings have changed
+                        saveMsg += $"\nExtracted contents of {Path.GetFileName(settings.ArchivePath)} to:\n" +
+                            $"{extractedPath}\n\nThis path will be used instead from now on.";
+                        // Remove archive path settings
+                        settings.ArchivePath = "";
+                        darkTextBox_ArchivePath.Text = "";
                     }
                     MessageBox.Show(saveMsg, "Project Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // Change "Save" to "Close"
@@ -88,12 +101,17 @@ namespace P_Studio
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 settings.ProjectName = "";
+                darkTextBox_ArchivePath.Text = "";
             }
         }
 
-        private void ExtractArchive()
+        private void ExtractArchive(string outputPath)
         {
-            throw new NotImplementedException();
+            if (settings.ArchivePath.ToUpper().EndsWith(".ISO"))
+            {
+                Unpacker.Unzip(settings.ArchivePath);
+            }
+            // else if pkg...
         }
 
         public Form_Project()
@@ -189,6 +207,11 @@ namespace P_Studio
                 darkButton_ExtractBrowse.Enabled = true;
                 darkTextBox_ExtractPath.Text = "";
             }
+        }
+
+        public static void UpdateStatus(string status)
+        {
+            darkLabel_Status.Text = status;
         }
     }
 }
