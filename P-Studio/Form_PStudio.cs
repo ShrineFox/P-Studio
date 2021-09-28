@@ -63,8 +63,6 @@ namespace P_Studio
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 Form_Project.settings = deserializer.Deserialize<Form_Project.Settings>(File.ReadAllText(dialog.FileName));
-                darkRadioButton_Game.Enabled = true;
-                darkRadioButton_Project.Enabled = true;
                 LoadProject();
             }
         }
@@ -76,46 +74,37 @@ namespace P_Studio
                 this.Text = $"P-Studio v0.1 - {Form_Project.settings.ProjectName}";
                 // Enable, select and load Project file view
                 Treeview_Project();
-            }
-        }
-
-        private void Treeview_Change(object sender, EventArgs e)
-        {
-            if (darkRadioButton_Game.Checked)
                 Treeview_Game();
-            else
-                Treeview_Project();
+            }
         }
 
         private void Treeview_Project()
         {
+            darkTreeView_Project.Nodes.Clear();
             if (Directory.Exists(Path.GetDirectoryName(Form_Project.settings.ProjectPath)))
-            {
-                LoadDirectory(Path.GetDirectoryName(Form_Project.settings.ProjectPath));
-                darkRadioButton_Project.Checked = true;
-            }
+                darkTreeView_Project.Nodes.Add(LoadDirectory(Path.GetDirectoryName(Form_Project.settings.ProjectPath)));
         }
 
         private void Treeview_Game()
         {
+            darkTreeView_Game.Nodes.Clear();
             if (Directory.Exists(Form_Project.settings.ExtractedPath))
-            {
-                LoadDirectory(Form_Project.settings.ExtractedPath);
-                darkRadioButton_Game.Checked = true;
-            }
+                darkTreeView_Game.Nodes.Add(LoadDirectory(Form_Project.settings.ExtractedPath));
         }
 
-        public void LoadDirectory(string dir)
+        public DarkTreeNode LoadDirectory(string dir)
         {
-            darkTreeView_FileExplorer.Nodes.Clear();
             DirectoryInfo di = new DirectoryInfo(dir);
             DarkTreeNode tds = new DarkTreeNode(di.Name);
             tds.Tag = di.FullName;
             tds.Icon = Properties.Resources.folder;
             tds.ExpandedIcon = Properties.Resources.folder;
-            darkTreeView_FileExplorer.Nodes.Add(LoadSubDirectories(dir));
+
+            tds.Nodes.Add(LoadSubDirectories(dir));
             foreach (var node in LoadFiles(dir).Nodes)
-                darkTreeView_FileExplorer.Nodes.Add(node);
+                tds.Nodes.Add(node);
+
+            return tds;
         }
 
         private static DarkTreeNode LoadSubDirectories(string dir)
@@ -123,6 +112,8 @@ namespace P_Studio
             // Get all subdirectories  
             string[] subdirectoryEntries = Directory.GetDirectories(dir);
             DarkTreeNode tds = new DarkTreeNode(Path.GetFileName(dir));
+            tds.Icon = Properties.Resources.folder;
+            tds.ExpandedIcon = Properties.Resources.folder;
             // Loop through them to see if they have any other subdirectories  
             foreach (string subdirectory in subdirectoryEntries)
             {
@@ -211,6 +202,12 @@ namespace P_Studio
                     case ".gnf":
                         tds.Icon = Properties.Resources.image;
                         break;
+                    case ".spr":
+                        tds.Icon = Properties.Resources.picture;
+                        break;
+                    case ".fnt":
+                        tds.Icon = Properties.Resources.font;
+                        break;
                     case ".sfd":
                     case ".umd":
                     case ".mp4":
@@ -240,7 +237,7 @@ namespace P_Studio
 
         public static void UpdateStatus(string status)
         {
-            darkLabel_Status.Text = status;
+            darkTextBox_Status.Text = status;
         }
     }
 }

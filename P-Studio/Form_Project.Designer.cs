@@ -49,7 +49,7 @@ namespace P_Studio
             this.darkTextBox_ProjectName = new DarkUI.Controls.DarkTextBox();
             this.darkLabel_ProjectName = new DarkUI.Controls.DarkLabel();
             this.darkButton_Cancel = new DarkUI.Controls.DarkButton();
-            darkLabel_Status = new DarkUI.Controls.DarkLabel();
+            this.darkLabel_Status = new DarkUI.Controls.DarkLabel();
             this.darkGroupBox_Game.SuspendLayout();
             this.darkGroupBox_Project.SuspendLayout();
             this.SuspendLayout();
@@ -268,19 +268,19 @@ namespace P_Studio
             // 
             // darkLabel_Status
             // 
-            darkLabel_Status.AutoSize = true;
-            darkLabel_Status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            darkLabel_Status.Location = new System.Drawing.Point(24, 328);
-            darkLabel_Status.Name = "darkLabel_Status";
-            darkLabel_Status.Size = new System.Drawing.Size(0, 17);
-            darkLabel_Status.TabIndex = 19;
+            this.darkLabel_Status.AutoSize = true;
+            this.darkLabel_Status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.darkLabel_Status.Location = new System.Drawing.Point(24, 328);
+            this.darkLabel_Status.Name = "darkLabel_Status";
+            this.darkLabel_Status.Size = new System.Drawing.Size(0, 17);
+            this.darkLabel_Status.TabIndex = 19;
             // 
             // Form_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 363);
-            this.Controls.Add(darkLabel_Status);
+            this.Controls.Add(this.darkLabel_Status);
             this.Controls.Add(this.darkButton_Cancel);
             this.Controls.Add(this.darkTextBox_ProjectName);
             this.Controls.Add(this.darkButton_Save);
@@ -288,7 +288,10 @@ namespace P_Studio
             this.Controls.Add(this.darkLabel_ProjectName);
             this.Controls.Add(this.darkGroupBox_Game);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(523, 410);
+            this.MinimumSize = new System.Drawing.Size(523, 410);
             this.Name = "Form_Project";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "P-Studio Project Settings";
             this.darkGroupBox_Game.ResumeLayout(false);
             this.darkGroupBox_Game.PerformLayout();
@@ -320,6 +323,6 @@ namespace P_Studio
         private DarkUI.Controls.DarkRadioButton darkRadioButton_UseArchive;
         private DarkUI.Controls.DarkRadioButton darkRadioButton_UseExtracted;
         private DarkUI.Controls.DarkButton darkButton_Cancel;
-        public static DarkUI.Controls.DarkLabel darkLabel_Status;
+        public DarkUI.Controls.DarkLabel darkLabel_Status;
     }
 }

@@ -558,6 +558,7 @@
     <None Include="Resources\table.bmp" />
     <None Include="Resources\vector.bmp" />
     <None Include="Resources\world.bmp" />
+    <None Include="Resources\font.bmp" />
     <Content Include="Windows Logo.png" />
   </ItemGroup>
   <ItemGroup>
