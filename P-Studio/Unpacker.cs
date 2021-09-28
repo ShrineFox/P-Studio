@@ -418,6 +418,7 @@ namespace P_Studio
             }
             return contents;
         }
+
         private static int commonPrefixUtil(String str1, String str2)
         {
             String result = "";
@@ -458,6 +459,16 @@ namespace P_Studio
             {
                 Directory.Delete(path, true);
             }
+        }
+
+        public static bool HasUnpackedFiles(string unpackedDir, string game)
+        {
+            if (game == "Persona 3 FES" || game == "Persona 4")
+                if (Directory.GetDirectories(unpackedDir).Contains("DATA") &&
+                    Directory.GetDirectories(unpackedDir).Contains("BTL") &&
+                    Directory.GetDirectories(unpackedDir).Contains("BGM"))
+                    return true;
+            return false;
         }
     }
 }

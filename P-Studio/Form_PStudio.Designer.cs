@@ -102,8 +102,7 @@ namespace P_Studio
             // projectSettingsToolStripMenuItem
             // 
             this.projectSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
-            this.projectSettingsToolStripMenuItem.Enabled = false;
-            this.projectSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.projectSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.projectSettingsToolStripMenuItem.Name = "projectSettingsToolStripMenuItem";
             this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.projectSettingsToolStripMenuItem.Text = "Settings";
@@ -197,6 +196,7 @@ namespace P_Studio
             // darkRadioButton_Game
             // 
             this.darkRadioButton_Game.AutoSize = true;
+            this.darkRadioButton_Game.Enabled = false;
             this.darkRadioButton_Game.Location = new System.Drawing.Point(4, 422);
             this.darkRadioButton_Game.Name = "darkRadioButton_Game";
             this.darkRadioButton_Game.Size = new System.Drawing.Size(67, 21);
@@ -209,6 +209,7 @@ namespace P_Studio
             // 
             this.darkRadioButton_Project.AutoSize = true;
             this.darkRadioButton_Project.Checked = true;
+            this.darkRadioButton_Project.Enabled = false;
             this.darkRadioButton_Project.Location = new System.Drawing.Point(77, 422);
             this.darkRadioButton_Project.Name = "darkRadioButton_Project";
             this.darkRadioButton_Project.Size = new System.Drawing.Size(73, 21);

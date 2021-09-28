@@ -535,6 +535,29 @@
     </Content>
     <Content Include="license.txt" />
     <Content Include="pstudio.ico" />
+    <None Include="Resources\application_xp_terminal.bmp" />
+    <None Include="Resources\cd.bmp" />
+    <None Include="Resources\chart_organisation.bmp" />
+    <None Include="Resources\database.bmp" />
+    <None Include="Resources\film.bmp" />
+    <None Include="Resources\folder.bmp" />
+    <None Include="Resources\image.bmp" />
+    <None Include="Resources\music.bmp" />
+    <None Include="Resources\package.bmp" />
+    <None Include="Resources\package_green.bmp" />
+    <None Include="Resources\page_white.bmp" />
+    <None Include="Resources\page_white_code_red.bmp" />
+    <None Include="Resources\page_white_edit.bmp" />
+    <None Include="Resources\page_white_paint.bmp" />
+    <None Include="Resources\page_white_text.bmp" />
+    <None Include="Resources\picture.bmp" />
+    <None Include="Resources\script_code.bmp" />
+    <None Include="Resources\script_code_red.bmp" />
+    <None Include="Resources\script_edit.bmp" />
+    <None Include="Resources\script_gear.bmp" />
+    <None Include="Resources\table.bmp" />
+    <None Include="Resources\vector.bmp" />
+    <None Include="Resources\world.bmp" />
     <Content Include="Windows Logo.png" />
   </ItemGroup>
   <ItemGroup>

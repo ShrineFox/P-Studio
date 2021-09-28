@@ -225,7 +225,24 @@ namespace P_Studio
 
         public static void UpdateStatus(string status)
         {
-            darkLabel_Status.Text = status;
+            Form_PStudio.darkLabel_Status.Text = status;
+        }
+
+        public static bool IsValid()
+        {
+            if (((!settings.UseExtractedPath && File.Exists(settings.ArchivePath))
+                || (settings.UseExtractedPath && Directory.Exists(settings.ExtractedPath)))
+                && (Form_Project.settings.ProjectName != "" && Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9]*$") && Directory.Exists(settings.OutputPath))
+                && (settings.Game.Equals("Persona 3 FES") || settings.Game.Equals("Persona 4")))
+            {
+                UpdateStatus($"Successfully loaded project: {settings.ProjectName}");
+                return true;
+            }  
+            else
+            {
+                UpdateStatus("Error loading project: invalid settings.yml");
+                return false;
+            }
         }
     }
 }
