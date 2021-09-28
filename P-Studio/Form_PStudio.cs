@@ -19,20 +19,15 @@ namespace P_Studio
 {
     public partial class Form_PStudio : DarkForm
     {
-        public static Form_Project.Settings settings = new Form_Project.Settings();
         public Form_PStudio()
         {
             InitializeComponent();
-            #if DEBUG
-                settings.ProjectName = "FEMC";
-                settings.Game = "Persona 3 FES";
-                settings.ArchivePath = @"C:\Users\ryans\Documents\GitHub\P-Studio\P-Studio\bin\Debug\ISO\P3FES-partymod.iso";
-                settings.OutputPath = @"D:\Games\Persona\AemulusPackageManager\Packages\Persona 3 FES";
-            #endif
         }
 
         private void NewProject_Click(object sender, EventArgs e)
         {
+            this.Text = $"P-Studio v0.1";
+            Form_Project.settings = new Form_Project.Settings();
             OpenSettingsForm();
         }
 
@@ -48,7 +43,6 @@ namespace P_Studio
             {
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
-                settings = dialog.settings;
             }
 
             LoadProject();
@@ -56,10 +50,9 @@ namespace P_Studio
 
         private void LoadProject()
         {
-            if (settings.ProjectName != "")
+            if (Form_Project.settings.ProjectName != "")
             {
-                this.Text = $"P-Studio v0.1 - {settings.ProjectName}";
-                saveProjectToolStripMenuItem.Enabled = true;
+                this.Text = $"P-Studio v0.1 - {Form_Project.settings.ProjectName}";
                 projectSettingsToolStripMenuItem.Enabled = true;
             }
         }
@@ -76,7 +69,7 @@ namespace P_Studio
             // Load Settings if YML file chosen
             var deserializer = new DeserializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                settings = deserializer.Deserialize<Form_Project.Settings>(File.ReadAllText(dialog.FileName));
+                Form_Project.settings = deserializer.Deserialize<Form_Project.Settings>(File.ReadAllText(dialog.FileName));
 
             LoadProject();
         }
@@ -91,19 +84,19 @@ namespace P_Studio
 
         private void Treeview_Project()
         {
-            if (Directory.Exists(settings.ProjectPath))
+            if (Directory.Exists(Form_Project.settings.ProjectPath))
             {
                 darkTreeView_FileExplorer.Nodes.Clear();
-                LoadDirectory(settings.ProjectPath);
+                LoadDirectory(Form_Project.settings.ProjectPath);
             }
         }
 
         private void Treeview_Game()
         {
-            if (Directory.Exists(settings.ExtractedPath))
+            if (Directory.Exists(Form_Project.settings.ExtractedPath))
             {
                 darkTreeView_FileExplorer.Nodes.Clear();
-                LoadDirectory(settings.ExtractedPath);
+                LoadDirectory(Form_Project.settings.ExtractedPath);
             }
         }
 
@@ -150,6 +143,11 @@ namespace P_Studio
                 tds.Tag = fi.FullName;
                 td.Nodes.Add(tds);
             }
+        }
+
+        public static void UpdateStatus(string status)
+        {
+            darkLabel_Status.Text = status;
         }
     }
 }

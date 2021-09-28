@@ -34,7 +34,6 @@ namespace P_Studio
             this.darkMenuStrip1 = new DarkUI.Controls.DarkMenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +48,7 @@ namespace P_Studio
             this.darkRadioButton_Game = new DarkUI.Controls.DarkRadioButton();
             this.darkRadioButton_Project = new DarkUI.Controls.DarkRadioButton();
             this.toolTip_PStudio = new System.Windows.Forms.ToolTip(this.components);
-            this.darkLabel_Status = new DarkUI.Controls.DarkLabel();
+            darkLabel_Status = new DarkUI.Controls.DarkLabel();
             this.darkMenuStrip1.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +65,7 @@ namespace P_Studio
             this.darkMenuStrip1.Location = new System.Drawing.Point(0, 0);
             this.darkMenuStrip1.Name = "darkMenuStrip1";
             this.darkMenuStrip1.Padding = new System.Windows.Forms.Padding(3, 2, 0, 2);
-            this.darkMenuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.darkMenuStrip1.Size = new System.Drawing.Size(800, 28);
             this.darkMenuStrip1.TabIndex = 1;
             this.darkMenuStrip1.Text = "darkMenuStrip";
             // 
@@ -75,12 +74,11 @@ namespace P_Studio
             this.fileToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
-            this.saveProjectToolStripMenuItem,
             this.loadProjectToolStripMenuItem,
             this.projectSettingsToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newProjectToolStripMenuItem
@@ -88,25 +86,16 @@ namespace P_Studio
             this.newProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
             this.newProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject_Click);
-            // 
-            // saveProjectToolStripMenuItem
-            // 
-            this.saveProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
-            this.saveProjectToolStripMenuItem.Enabled = false;
-            this.saveProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
-            this.saveProjectToolStripMenuItem.Text = "Save Project";
             // 
             // loadProjectToolStripMenuItem
             // 
             this.loadProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
             this.loadProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
             // 
@@ -116,8 +105,8 @@ namespace P_Studio
             this.projectSettingsToolStripMenuItem.Enabled = false;
             this.projectSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.projectSettingsToolStripMenuItem.Name = "projectSettingsToolStripMenuItem";
-            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
-            this.projectSettingsToolStripMenuItem.Text = "Project Settings";
+            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.projectSettingsToolStripMenuItem.Text = "Settings";
             this.projectSettingsToolStripMenuItem.Click += new System.EventHandler(this.Settings_Click);
             // 
             // runToolStripMenuItem
@@ -127,7 +116,7 @@ namespace P_Studio
             this.buildLaunchToolStripMenuItem});
             this.runToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(48, 26);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
             this.runToolStripMenuItem.Text = "Run";
             // 
             // buildLaunchToolStripMenuItem
@@ -146,7 +135,7 @@ namespace P_Studio
             this.flowscriptReferenceToolStripMenuItem});
             this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -208,7 +197,7 @@ namespace P_Studio
             // darkRadioButton_Game
             // 
             this.darkRadioButton_Game.AutoSize = true;
-            this.darkRadioButton_Game.Location = new System.Drawing.Point(99, 424);
+            this.darkRadioButton_Game.Location = new System.Drawing.Point(4, 422);
             this.darkRadioButton_Game.Name = "darkRadioButton_Game";
             this.darkRadioButton_Game.Size = new System.Drawing.Size(67, 21);
             this.darkRadioButton_Game.TabIndex = 3;
@@ -220,7 +209,7 @@ namespace P_Studio
             // 
             this.darkRadioButton_Project.AutoSize = true;
             this.darkRadioButton_Project.Checked = true;
-            this.darkRadioButton_Project.Location = new System.Drawing.Point(172, 424);
+            this.darkRadioButton_Project.Location = new System.Drawing.Point(77, 422);
             this.darkRadioButton_Project.Name = "darkRadioButton_Project";
             this.darkRadioButton_Project.Size = new System.Drawing.Size(73, 21);
             this.darkRadioButton_Project.TabIndex = 4;
@@ -235,19 +224,19 @@ namespace P_Studio
             // 
             // darkLabel_Status
             // 
-            this.darkLabel_Status.AutoSize = true;
-            this.darkLabel_Status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.darkLabel_Status.Location = new System.Drawing.Point(248, 424);
-            this.darkLabel_Status.Name = "darkLabel_Status";
-            this.darkLabel_Status.Size = new System.Drawing.Size(0, 17);
-            this.darkLabel_Status.TabIndex = 6;
+            darkLabel_Status.AutoSize = true;
+            darkLabel_Status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            darkLabel_Status.Location = new System.Drawing.Point(248, 424);
+            darkLabel_Status.Name = "darkLabel_Status";
+            darkLabel_Status.Size = new System.Drawing.Size(0, 17);
+            darkLabel_Status.TabIndex = 6;
             // 
             // Form_PStudio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.darkLabel_Status);
+            this.Controls.Add(darkLabel_Status);
             this.Controls.Add(this.darkRadioButton_Project);
             this.Controls.Add(this.darkRadioButton_Game);
             this.Controls.Add(this.darkTreeView_FileExplorer);
@@ -269,7 +258,6 @@ namespace P_Studio
         private DarkUI.Controls.DarkMenuStrip darkMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildLaunchToolStripMenuItem;
         private DarkUI.Controls.DarkTreeView darkTreeView_FileExplorer;
@@ -284,7 +272,7 @@ namespace P_Studio
         private DarkUI.Controls.DarkRadioButton darkRadioButton_Project;
         private System.Windows.Forms.ToolTip toolTip_PStudio;
         private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
-        private DarkUI.Controls.DarkLabel darkLabel_Status;
+        public static DarkUI.Controls.DarkLabel darkLabel_Status;
     }
 }
 

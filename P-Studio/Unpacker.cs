@@ -13,12 +13,12 @@ namespace P_Studio
 {
     public static class Unpacker
     {
-        // P3F
-        public static void Unzip(string iso)
+        // P3F, P4
+        public static void UnzipISO(string iso, string game)
         {
-            if (!FileIOWrapper.Exists(iso))
+            if (!File.Exists(iso))
             {
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find {iso}. Please correct the file path in config.");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find {Path.GetFileName(iso)}. Please correct the file path in config.");
                 return;
             }
 
@@ -27,49 +27,48 @@ namespace P_Studio
             startInfo.FileName = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\7z\7z.exe";
             if (!FileIOWrapper.Exists(startInfo.FileName))
             {
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find {startInfo.FileName}. Please check if it was blocked by your anti-virus.");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find {startInfo.FileName}. Please check if it was blocked by your anti-virus.");
                 return;
             }
 
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.UseShellExecute = false;
-            startInfo.Arguments = $"x -y \"{iso}\" -o\"" + $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES" + "\" BTL.CVM DATA.CVM";
-            Form_Project.UpdateStatus($"[INFO] Extracting BTL.CVM and DATA.CVM from {iso}");
+            startInfo.Arguments = $"x -y \"{iso}\" -o\"" + $"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\\Extracted\\{game}\" *.CVM";
+            Form_PStudio.UpdateStatus($"Extracting all CVM archives from {Path.GetFileName(iso)}");
             using (Process process = new Process())
             {
                 process.StartInfo = startInfo;
                 process.Start();
                 process.WaitForExit();
             }
-            startInfo.Arguments = "x -y \"" + $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES\BTL.CVM" + "\" -o\"" + $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES\BTL" + "\" *.BIN *.PAK *.PAC *.TBL *.SPR *.BF *.BMD *.PM1 *.bf *.bmd *.pm1 -r";
-            Form_Project.UpdateStatus($"[INFO] Extracting base files from BTL.CVM");
+        }
+
+        public static void UnzipCVM(string cvm, string game)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.CreateNoWindow = true;
+            startInfo.FileName = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\7z\7z.exe";
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.UseShellExecute = false;
+            startInfo.Arguments = "x -y \"" + cvm + "\" -o\"" + Path.Combine(Path.GetDirectoryName(cvm), Path.GetFileNameWithoutExtension(cvm)) + "\" *.* -r";
+            Form_PStudio.UpdateStatus($"Extracting base files from {Path.GetFileName(cvm)}");
             using (Process process = new Process())
             {
                 process.StartInfo = startInfo;
                 process.Start();
                 process.WaitForExit();
             }
-            FileIOWrapper.Delete($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES\BTL.CVM");
-            startInfo.Arguments = "x -y \"" + $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES\DATA.CVM" + "\" -o\"" + $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES\DATA" + "\" *.BIN *.PAK *.PAC *.TBL *.SPR *.BF *.BMD *.PM1 *.bf *.bmd *.pm1 -r";
-            Form_Project.UpdateStatus($"[INFO] Extracting base files from DATA.CVM");
-            using (Process process = new Process())
-            {
-                process.StartInfo = startInfo;
-                process.Start();
-                process.WaitForExit();
-            }
-            FileIOWrapper.Delete($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES\DATA.CVM");
-            ExtractWantedFiles($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 3 FES");
-            Form_Project.UpdateStatus($"[INFO] Finished unpacking base files!");
+            FileIOWrapper.Delete(cvm);
         }
 
         // P4G
         public static void Unpack(string directory, string cpk)
         {
-            Directory.CreateDirectory($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 4 Golden");
+            string game = "Persona 4 Golden";
+            Directory.CreateDirectory($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}");
             if (!Directory.Exists(directory))
             {
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find {directory}. Please correct the file path in config.");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find {directory}. Please correct the file path in config.");
                 return;
             }
             List<string> pacs = new List<string>();
@@ -100,7 +99,7 @@ namespace P_Studio
             startInfo.FileName = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\Preappfile\preappfile.exe";
             if (!FileIOWrapper.Exists(startInfo.FileName))
             {
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find {startInfo.FileName}. Please check if it was blocked by your anti-virus.");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find {startInfo.FileName}. Please check if it was blocked by your anti-virus.");
                 return;
             }
 
@@ -109,10 +108,10 @@ namespace P_Studio
             startInfo.UseShellExecute = false;
             foreach (var pac in pacs)
             {
-                Form_Project.UpdateStatus($"[INFO] Unpacking files for {pac}...");
+                Form_PStudio.UpdateStatus($"Unpacking files for {pac}...");
                 foreach (var glob in globs)
                 {
-                    startInfo.Arguments = $@"-i ""{directory}\{pac}"" -o ""{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 4 Golden\{Path.GetFileNameWithoutExtension(pac)}"" --unpack-filter {glob}";
+                    startInfo.Arguments = $@"-i ""{directory}\{pac}"" -o ""{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\{Path.GetFileNameWithoutExtension(pac)}"" --unpack-filter {glob}";
                     using (Process process = new Process())
                     {
                         process.StartInfo = startInfo;
@@ -121,39 +120,39 @@ namespace P_Studio
                         {
                             string text = process.StandardOutput.ReadLine();
                             if (text != "" && text != null)
-                                Form_Project.UpdateStatus($"[INFO] {text}");
+                                Form_PStudio.UpdateStatus($"{text}");
                         }
                     }
                 }
-                ExtractWantedFiles($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 4 Golden\{Path.GetFileNameWithoutExtension(pac)}");
+                ExtractWantedFiles($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\{Path.GetFileNameWithoutExtension(pac)}", game);
             }
-            if (FileIOWrapper.Exists($@"{directory}\{cpk}") && !FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 4 Golden\{cpk}"))
+            if (FileIOWrapper.Exists($@"{directory}\{cpk}") && !FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\{cpk}"))
             {
-                Form_Project.UpdateStatus($@"[INFO] Backing up {cpk}");
-                FileIOWrapper.Copy($@"{directory}\{cpk}", $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 4 Golden\{cpk}", true);
+                Form_PStudio.UpdateStatus($@"Backing up {cpk}");
+                FileIOWrapper.Copy($@"{directory}\{cpk}", $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\{cpk}", true);
             }
-            if (FileIOWrapper.Exists($@"{directory}\movie.cpk") && !FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 4 Golden\movie.cpk"))
+            if (FileIOWrapper.Exists($@"{directory}\movie.cpk") && !FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\movie.cpk"))
             {
-                Form_Project.UpdateStatus($@"[INFO] Backing up movie.cpk");
-                FileIOWrapper.Copy($@"{directory}\movie.cpk", $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 4 Golden\movie.cpk", true);
+                Form_PStudio.UpdateStatus($@"Backing up movie.cpk");
+                FileIOWrapper.Copy($@"{directory}\movie.cpk", $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\movie.cpk", true);
             }
 
-            Form_Project.UpdateStatus("[INFO] Finished unpacking base files!");
+            Form_PStudio.UpdateStatus("Finished unpacking base files!");
         }
 
 
-        public static void UnpackCPK(string directory)
+        public static void UnpackCPK(string directory, string game)
         {
             if (!Directory.Exists(directory))
             {
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find {directory}. Please correct the file path in config.");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find {directory}. Please correct the file path in config.");
                 return;
             }
 
             if (FileIOWrapper.Exists($@"{directory}\ps3.cpk.66600") && FileIOWrapper.Exists($@"{directory}\ps3.cpk.66601") && FileIOWrapper.Exists($@"{directory}\ps3.cpk.66602")
                    && !FileIOWrapper.Exists($@"{directory}\ps3.cpk"))
             {
-                Form_Project.UpdateStatus("[INFO] Combining ps3.cpk parts");
+                Form_PStudio.UpdateStatus("Combining ps3.cpk parts");
                 ProcessStartInfo cmdInfo = new ProcessStartInfo();
                 cmdInfo.CreateNoWindow = true;
                 cmdInfo.FileName = @"CMD.exe";
@@ -173,7 +172,7 @@ namespace P_Studio
             if (!FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\MakeCpk\filtered_data.csv")
                 || !FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\MakeCpk\filtered_ps3.csv"))
             {
-                Form_Project.UpdateStatus($@"[ERROR] Couldn't find CSV files used for unpacking in Dependencies\MakeCpk");
+                Form_PStudio.UpdateStatus($@"[ERROR] Couldn't find CSV files used for unpacking in Dependencies\MakeCpk");
                 return;
             }
 
@@ -185,7 +184,7 @@ namespace P_Studio
             startInfo.FileName = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\MakeCpk\YACpkTool.exe";
             if (!FileIOWrapper.Exists(startInfo.FileName))
             {
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find {startInfo.FileName}. Please check if it was blocked by your anti-virus.");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find {startInfo.FileName}. Please check if it was blocked by your anti-virus.");
                 return;
             }
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -195,7 +194,7 @@ namespace P_Studio
 
             if (FileIOWrapper.Exists($@"{directory}\data.cpk"))
             {
-                Form_Project.UpdateStatus($"[INFO] Extracting data.cpk");
+                Form_PStudio.UpdateStatus($"Extracting data.cpk");
                 foreach (var file in dataFiles)
                 {
                     startInfo.Arguments = $@"-X {file} -i ""{directory}\data.cpk"" -o ""{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 5""";
@@ -208,17 +207,17 @@ namespace P_Studio
                         {
                             string text = process.StandardOutput.ReadLine();
                             if (text != "" && text != null)
-                                Form_Project.UpdateStatus($"[INFO] {text}");
+                                Form_PStudio.UpdateStatus($"{text}");
                         }
                     }
                 }
             }
             else
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find data.cpk in {directory}.");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find data.cpk in {directory}.");
 
             if (FileIOWrapper.Exists($@"{directory}\data.cpk"))
             {
-                Form_Project.UpdateStatus($"[INFO] Extracting ps3.cpk");
+                Form_PStudio.UpdateStatus($"Extracting ps3.cpk");
                 foreach (var file in ps3Files)
                 {
                     startInfo.Arguments = $@"-X {file} -i ""{directory}\ps3.cpk"" -o ""{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 5""";
@@ -231,42 +230,66 @@ namespace P_Studio
                         {
                             string text = process.StandardOutput.ReadLine();
                             if (text != "" && text != null)
-                                Form_Project.UpdateStatus($"[INFO] {text}");
+                                Form_PStudio.UpdateStatus($"{text}");
                         }
                     }
                 }
             }
             else
-                Form_Project.UpdateStatus($"[ERROR] Couldn't find ps3.cpk in {directory}.");
-            ExtractWantedFiles($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 5");
-            Form_Project.UpdateStatus($"[INFO] Finished unpacking base files!");
+                Form_PStudio.UpdateStatus($"[ERROR] Couldn't find ps3.cpk in {directory}.");
+            ExtractWantedFiles($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}", game);
+            Form_PStudio.UpdateStatus($"Finished unpacking base files!");
         }
 
-        private static void ExtractWantedFiles(string directory)
+        public static void ExtractWantedFiles(string directory, string game)
         {
             if (!Directory.Exists(directory))
                 return;
 
-            var files = Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories).
-                Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak"));
-            foreach (string file in files)
+            // Extract BIN/PAC contents
+            var archives = Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
+                .Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak"));
+            foreach (string archive in archives)
             {
-                List<string> contents = binMerge.getFileContents(file).Select(x => x.ToLower()).ToList();
-                // Check if there are any files we want (or files that could have files we want) and unpack them if so
-                bool containersFound = contents.Exists(x => x.EndsWith(".bin") || x.EndsWith(".pac") || x.EndsWith(".pak"));
-                if (contents.Exists(x => x.EndsWith(".bf") || x.EndsWith(".bmd") || x.EndsWith(".pm1") || containersFound))
-                {
-                    Form_Project.UpdateStatus($"[INFO] Unpacking {file}");
-                    binMerge.PAKPackCMD($"unpack \"{file}\"");
+                Form_PStudio.UpdateStatus($"Unpacking archive: {archive.Substring(directory.Length)}");
+                binMerge.PAKPackCMD($"unpack \"{archive}\"");
 
-                    // Search the location of the unpacked container for wanted files
-                    if (containersFound)
-                        ExtractWantedFiles(Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                // Search the location of the unpacked container for wanted files
+                string outputDir = Path.Combine(Path.GetDirectoryName(archive), Path.GetFileNameWithoutExtension(archive));
+                foreach (string outputFile in Directory.EnumerateFiles(outputDir, "*.*", SearchOption.AllDirectories)
+                    .Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak")))
+                        ExtractWantedFiles(outputFile, game);
+            }
+
+            // Decompile .BF/.BMD
+            var scripts = Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
+                .Where(s => s.ToLower().EndsWith(".bf") || s.ToLower().EndsWith(".bmd"));
+            {
+                foreach (string script in scripts)
+                {
+                    string encodingArg = "";
+                    string libraryArg = "";
+
+                    if (game == "Persona 3 FES")
+                        encodingArg = "-Encoding P3";
+                    else if (game == "Persona 4")
+                        encodingArg = "-Encoding P4";
+
+                    if (script.ToLower().EndsWith(".bf"))
+                    {
+                        if (game == "Persona 3 FES")
+                            libraryArg = "-Library P3F";
+                        else if (game == "Persona 4")
+                            libraryArg = "-Library P4";
+                    }
+
+                    Form_PStudio.UpdateStatus($"Decompiling script: {script.Substring(directory.Length)}");
+                    binMerge.CompilerCMD($"\"{script}\" -Decompile {encodingArg} {libraryArg}");
                 }
             }
 
+            Form_PStudio.UpdateStatus($"Finished unpacking {game} files!");
         }
-
     }
 
     public static class FileIOWrapper
@@ -327,11 +350,11 @@ namespace P_Studio
 
     public static class binMerge
     {
-        private static string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\PAKPack\PAKPack.exe";
-
         // Use PAKPack command
         public static void PAKPackCMD(string args)
         {
+            string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\PAKPack\PAKPack.exe";
+
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
@@ -343,13 +366,34 @@ namespace P_Studio
                 process.StartInfo = startInfo;
                 process.Start();
 
-                // Add this: wait until process does its work
+                process.WaitForExit();
+            }
+        }
+
+        // Use PAKPack command
+        public static void CompilerCMD(string args)
+        {
+            string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\AtlusScriptCompiler\AtlusScriptCompiler.exe";
+
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.CreateNoWindow = true;
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = $"\"{exePath}\"";
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.Arguments = args;
+            using (Process process = new Process())
+            {
+                process.StartInfo = startInfo;
+                process.Start();
+
                 process.WaitForExit();
             }
         }
 
         public static List<string> getFileContents(string path)
         {
+            string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\PAKPack\PAKPack.exe";
+
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
@@ -370,7 +414,6 @@ namespace P_Studio
                         contents.Add(line);
                     }
                 }
-                // Add this: wait until process does its work
                 process.WaitForExit();
             }
             return contents;

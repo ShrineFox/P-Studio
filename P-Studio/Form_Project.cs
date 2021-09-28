@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace P_Studio
 {
     public partial class Form_Project : DarkForm
     {
-        public Settings settings { get; set; } = Form_PStudio.settings;
+        public static Settings settings { get; set; } = new Settings();
 
         public class Settings
         {
@@ -27,67 +28,58 @@ namespace P_Studio
             // Input
             public string Game { get; set; } = "";
             public string ArchivePath { get; set; } = "";
+            public bool UseExtractedPath { get; set; } = false;
             public string ExtractedPath { get; set; } = "";
             public string OutputPath { get; set; } = "";
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
-            settings.ProjectName = darkTextBox_ProjectName.Text;
-            settings.Game = darkDropdownList_Game.SelectedItem.Text;
-            settings.ArchivePath = darkTextBox_ArchivePath.Text;
-            settings.ExtractedPath = darkTextBox_ExtractPath.Text;
-            settings.OutputPath = darkTextBox_OutputPath.Text;
+            // Commit form changes to settings object
+            UpdateSettings();
 
             // Make sure project path is valid and can be created
             if (settings.ProjectName != "" && Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9]*$"))
             {
+                // Set path and create project/output directory
                 settings.ProjectPath = Path.Combine(Path.Combine("Projects", settings.ProjectName), settings.ProjectName + ".yml");
+                Directory.CreateDirectory(Path.GetDirectoryName(settings.ProjectPath));
+                Directory.CreateDirectory(Path.GetDirectoryName(settings.OutputPath));
 
-                // Create Project Directory if making a new project
-                if (darkTextBox_ProjectName.Enabled)
-                    Directory.CreateDirectory(Path.GetDirectoryName(settings.ProjectPath));
-                
-                if (darkButton_Save.DialogResult != DialogResult.OK 
-                    && ((darkRadioButton_UseArchive.Checked && File.Exists(darkTextBox_ArchivePath.Text)) 
-                        || (darkRadioButton_UseExtracted.Checked && Directory.Exists(darkTextBox_ExtractPath.Text)))
-                    && Directory.Exists(darkTextBox_OutputPath.Text))
+                if ((!settings.UseExtractedPath && File.Exists(settings.ArchivePath))
+                    || (settings.UseExtractedPath && Directory.Exists(settings.ExtractedPath)))
                 {
-                    // Save project YML file
-                    var serializer = new SerializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
-                    var yaml = serializer.Serialize(settings);
-                    File.WriteAllText(settings.ProjectPath, yaml);
-
-                    // Show dialog and extract files
-                    string saveMsg = $"Project saved as \"{settings.ProjectName}\"!";
-                    if (darkRadioButton_UseArchive.Checked)
+                    // Extract files if using archive path
+                    if (!settings.UseExtractedPath)
                     {
-                        // Show message informing user extraction is taking place
-                        MessageBox.Show("Extracting archive, please be patient as this may take awhile.", "Extracting...", 
+                        // Show message informing user extraction is about to take place
+                        MessageBox.Show("Extracting archive, please be patient as this may take awhile.\nThis only needs to happen once.", "Extracting...", 
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // Extract ISO/CVM or PKG/CPK contents
                         string extractedPath = Path.Combine(Path.Combine(Path.GetDirectoryName(settings.ArchivePath), "Extracted"), darkDropdownList_Game.SelectedItem.Text);
-                        ExtractArchive(extractedPath);
-                        // Update settings
-                        darkTextBox_ExtractPath.Text = extractedPath;
+                        ExtractArchive();
+                        // Update settings now that extraction is done
                         settings.ExtractedPath = extractedPath;
-                        darkRadioButton_UseExtracted.Checked = true;
+                        settings.UseExtractedPath = true;
+                        // Reflect settings updates in form
+                        UpdateForm();
                         // Inform user extraction is complete and settings have changed
-                        saveMsg += $"\nExtracted contents of {Path.GetFileName(settings.ArchivePath)} to:\n" +
-                            $"{extractedPath}\n\nThis path will be used instead from now on.";
-                        // Remove archive path settings
-                        settings.ArchivePath = "";
-                        darkTextBox_ArchivePath.Text = "";
+                        MessageBox.Show($"\nExtracted contents of {Path.GetFileName(settings.ArchivePath)} to:\n" +
+                            $"{extractedPath}\n\nThis path will be used instead from now on.", "Extraction Complete!",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    MessageBox.Show(saveMsg, "Project Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // Change "Save" to "Close"
-                    darkButton_Save.DialogResult = DialogResult.OK;
-                    darkButton_Save.Text = "Close";
+                    // Save project YML file
+                    SaveSettings();
+                    this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
-                    MessageBox.Show("You must choose an existing input\n" +
-                        "and output path.",
+                    string missingPath = "";
+                    if (!settings.UseExtractedPath && !File.Exists(settings.ArchivePath))
+                        missingPath = $"Archive Path: {settings.ArchivePath}";
+                    else if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
+                        missingPath = $"Extracted Path: {settings.ExtractedPath}";
+                    MessageBox.Show($"Specified path does not exist.\n{missingPath}",
                         "Warning: Invalid Path",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
@@ -104,12 +96,47 @@ namespace P_Studio
                 darkTextBox_ArchivePath.Text = "";
             }
         }
-
-        private void ExtractArchive(string outputPath)
+        private void UpdateSettings()
         {
+            settings.ProjectName = darkTextBox_ProjectName.Text;
+            settings.Game = darkDropdownList_Game.SelectedItem.Text;
+            settings.ArchivePath = darkTextBox_ArchivePath.Text;
+            settings.UseExtractedPath = darkRadioButton_UseExtracted.Checked;
+            settings.ExtractedPath = darkTextBox_ExtractPath.Text;
+            settings.OutputPath = darkTextBox_OutputPath.Text;
+        }
+
+        private void UpdateForm()
+        {
+            darkTextBox_ProjectName.Text = settings.ProjectName;
+            darkDropdownList_Game.SelectedItem = darkDropdownList_Game.Items.First(x => x.Text.Equals(settings.Game));
+            darkTextBox_ArchivePath.Text = settings.ArchivePath;
+            darkRadioButton_UseExtracted.Checked = settings.UseExtractedPath;
+            darkRadioButton_UseArchive.Checked = !settings.UseExtractedPath;
+            darkTextBox_ExtractPath.Text = settings.ExtractedPath;
+            darkTextBox_OutputPath.Text = settings.OutputPath;
+        }
+
+        private void SaveSettings()
+        {
+            var serializer = new SerializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
+            var yaml = serializer.Serialize(settings);
+            File.WriteAllText(settings.ProjectPath, yaml);
+
+            MessageBox.Show($"Saved project as \"{settings.ProjectName}\"!", "Project Saved", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ExtractArchive()
+        {
+            string game = darkDropdownList_Game.SelectedItem.Text;
             if (settings.ArchivePath.ToUpper().EndsWith(".ISO"))
             {
-                Unpacker.Unzip(settings.ArchivePath);
+                Unpacker.UnzipISO(settings.ArchivePath, game);
+                string unpackedDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}";
+                foreach (string cvm in Directory.GetFiles(unpackedDir, "*.CVM", SearchOption.AllDirectories))
+                    Unpacker.UnzipCVM(cvm, game);
+                Unpacker.ExtractWantedFiles(unpackedDir, game);
             }
             // else if pkg...
         }
@@ -120,35 +147,24 @@ namespace P_Studio
             // Add Games to dropdown
             darkDropdownList_Game.Items.Add(new DarkUI.Controls.DarkDropdownItem("Persona 3 FES"));
             darkDropdownList_Game.Items.Add(new DarkUI.Controls.DarkDropdownItem("Persona 4"));
-            // Load defaults
-            #if DEBUG
-                settings = Form_PStudio.settings;
-                darkTextBox_ProjectName.Text = settings.ProjectName;
-                darkDropdownList_Game.SelectedItem = darkDropdownList_Game.Items.First(x => x.Text.Equals(settings.Game));
-                darkTextBox_ArchivePath.Text = settings.ArchivePath;
-                darkTextBox_ExtractPath.Text = settings.ExtractedPath;
-                darkTextBox_OutputPath.Text = settings.OutputPath;
-            #endif
             // Load settings
-            if (File.Exists(Form_PStudio.settings.ProjectPath))
+            if (File.Exists(settings.ProjectPath))
             {
-                var deserializer = new DeserializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
-                settings = deserializer.Deserialize<Settings>(File.ReadAllText(Form_PStudio.settings.ProjectPath));
-                darkTextBox_ProjectName.Text = settings.ProjectName;
-                darkDropdownList_Game.SelectedItem = darkDropdownList_Game.Items.First(x => x.Text.Equals(settings.Game));
-                darkTextBox_ArchivePath.Text = settings.ArchivePath;
-                darkTextBox_ExtractPath.Text = settings.ExtractedPath;
-                darkTextBox_OutputPath.Text = settings.OutputPath;
+                LoadSettings();
+                UpdateForm();
             }
             else
             {
                 // Use defaults and allow project name/game entry if no settingsPath exists
-#if !DEBUG
-                    settings = new Settings();
-#endif
                 darkTextBox_ProjectName.Enabled = true;
                 darkDropdownList_Game.Enabled = true;
             }
+        }
+
+        private void LoadSettings()
+        {
+            var deserializer = new DeserializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
+            settings = deserializer.Deserialize<Settings>(File.ReadAllText(settings.ProjectPath));
         }
 
         private void ArchivePath_Click(object sender, EventArgs e)
@@ -197,7 +213,6 @@ namespace P_Studio
                 darkButton_BrowseArchive.Enabled = true;
                 darkTextBox_ExtractPath.Enabled = false;
                 darkButton_ExtractBrowse.Enabled = false;
-                darkTextBox_ArchivePath.Text = "";
             }
             else
             {
@@ -205,7 +220,6 @@ namespace P_Studio
                 darkButton_BrowseArchive.Enabled = false;
                 darkTextBox_ExtractPath.Enabled = true;
                 darkButton_ExtractBrowse.Enabled = true;
-                darkTextBox_ExtractPath.Text = "";
             }
         }
 
