@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -469,6 +470,18 @@ namespace P_Studio
                     Directory.GetDirectories(unpackedDir).Any(x => x.ToUpper().Contains("BGM")))
                     return true;
             return false;
+        }
+
+        public static void CopyEntireDirectory(DirectoryInfo source, DirectoryInfo target, bool overwiteFiles = true)
+        {
+            if (!source.Exists) return;
+            if (!target.Exists) target.Create();
+
+            Parallel.ForEach(source.GetDirectories(), (sourceChildDirectory) =>
+                CopyEntireDirectory(sourceChildDirectory, new DirectoryInfo(Path.Combine(target.FullName, sourceChildDirectory.Name))));
+
+            Parallel.ForEach(source.GetFiles(), sourceFile =>
+                sourceFile.CopyTo(Path.Combine(target.FullName, sourceFile.Name), overwiteFiles));
         }
     }
 }

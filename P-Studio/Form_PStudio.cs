@@ -15,6 +15,8 @@ using YamlDotNet.Serialization.NamingConventions;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using DarkUI.Controls;
 using System.Resources;
+using System.Diagnostics;
+using System.Threading;
 
 namespace P_Studio
 {
@@ -77,6 +79,7 @@ namespace P_Studio
                 // Enable, select and load Project file view
                 Treeview_Project();
                 Treeview_Game();
+                ExpandAll();
             }
         }
 
@@ -85,6 +88,7 @@ namespace P_Studio
             darkTreeView_Project.Nodes.Clear();
             if (Directory.Exists(Path.GetDirectoryName(Form_Project.settings.ProjectPath)))
                 darkTreeView_Project.Nodes.Add(LoadDirectory(Path.GetDirectoryName(Form_Project.settings.ProjectPath)));
+
         }
 
         private void Treeview_Game()
@@ -144,7 +148,7 @@ namespace P_Studio
             {
                 FileInfo fi = new FileInfo(file);
                 DarkTreeNode tds = new DarkTreeNode(fi.Name);
-                
+
                 switch (Path.GetExtension(file).ToLower())
                 {
                     case ".adx":
@@ -242,6 +246,44 @@ namespace P_Studio
             darkTextBox_Tips.Text = tip;
         }
 
+        public void ExpandAll()
+        {
+            if (darkTreeView_Project.Nodes != null)
+            {
+                foreach (var node in darkTreeView_Project.Nodes)
+                {
+                    node.Expanded = true;
+                    foreach (var node2 in node.Nodes)
+                    {
+                        node2.Expanded = true;
+                        foreach (var node3 in node2.Nodes)
+                            node3.Expanded = true;
+                    }
+                }
+            }
+            if (darkTreeView_Game.Nodes != null)
+            {
+                foreach (var node in darkTreeView_Game.Nodes)
+                {
+                    node.Expanded = true;
+                    foreach (var node2 in node.Nodes)
+                        node2.Expanded = true;
+                }
+            }
+        }
+
+        public void ExpandToNode(string path)
+        {
+            if (darkTreeView_Project.Nodes.Any(x => x.Tag.ToString().Contains(path)))
+            {
+                var node = darkTreeView_Project.Nodes.First(x => x.Tag.ToString().Contains(path.Replace(Form_Project.settings.ExtractedPath, "")));
+                foreach (var parentNode in node.ParentTree.Nodes)
+                {
+                    darkTreeView_Project.Nodes.First(x => x.Equals(parentNode)).Expanded = true;
+                }
+            }
+        }
+
         private void tabControl_GameProject_IndexChanged(object sender, EventArgs e)
         {
             if (Form_Project.IsValid())
@@ -251,6 +293,129 @@ namespace P_Studio
                 else
                     UpdateTips("Double-click a file to view it in the editor.\n" +
                         "Right click to delete, copy, or quick replace a file.");
+            }
+        }
+
+        private void darkTreeView_Game_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (darkTreeView_Game.SelectedNodes.Count > 0)
+            {
+                var selectedNode = darkTreeView_Game.SelectedNodes[0];
+                //Show context menu if right clicked
+                if (e.Button.Equals(MouseButtons.Right))
+                    darkContextMenuGame_RightClick.Show(this, new Point(e.X + ((Control)sender).Left + 4, e.Y + ((Control)sender).Top + 4));
+            }
+        }
+
+        private void AddToProject_Click(object sender, EventArgs e)
+        {
+            if (darkTreeView_Game.SelectedNodes.Count > 0)
+            {
+                string file = darkTreeView_Game.SelectedNodes[0].Tag.ToString();
+                if (Directory.Exists(file))
+                    binMerge.CopyEntireDirectory(new DirectoryInfo(file), new DirectoryInfo(file.Replace(Form_Project.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(Form_Project.settings.ProjectPath)))));
+                else if (File.Exists(file))
+                {
+                    string copiedFile = file.Replace(Form_Project.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(Form_Project.settings.ProjectPath)));
+                    Directory.CreateDirectory(Path.GetDirectoryName(copiedFile));
+                    File.Copy(file, copiedFile);
+                }
+                else
+                {
+                    Program.status.Update($"[ERROR] Failed to copy {Path.GetFileName(file)} to project.");
+                    return;
+                }
+                Program.status.Update($"Copied {Path.GetFileName(file)} to project.");
+                Treeview_Project();
+                ExpandToNode(file);
+            }
+        }
+
+        private void OpenLocationGame_Click(object sender, EventArgs e)
+        {
+            if (darkTreeView_Game.SelectedNodes.Count > 0)
+            {
+                string file = darkTreeView_Game.SelectedNodes[0].Tag.ToString();
+                OpenLocation(file);
+            }
+        }
+
+        private void DarkTreeView_Project_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (darkTreeView_Project.SelectedNodes.Count > 0)
+            {
+                var selectedNode = darkTreeView_Project.SelectedNodes[0];
+                //Show context menu if right clicked
+                if (e.Button.Equals(MouseButtons.Right))
+                    darkContextMenuProject_RightClick.Show(this, new Point(e.X + ((Control)sender).Left + 4, e.Y + ((Control)sender).Top + 4));
+            }
+        }
+
+        private void OpenLocationProject_Click(object sender, EventArgs e)
+        {
+            if (darkTreeView_Project.SelectedNodes.Count > 0)
+            {
+                string file = darkTreeView_Project.SelectedNodes[0].Tag.ToString();
+                OpenLocation(file);
+            }
+        }
+
+        private void OpenLocation(string file)
+        {
+            if (Directory.Exists(file))
+                System.Diagnostics.Process.Start("explorer.exe", file);
+            else if (File.Exists(file))
+            {
+                ProcessStartInfo info = new ProcessStartInfo();
+                info.FileName = "explorer";
+                info.Arguments = string.Format($"/e, /select, \"{file}\"");
+                Process.Start(info);
+            }
+            else
+                Program.status.Update($"[ERROR] Couldn't open path to {Path.GetFileName(file)}.");
+        }
+
+        private void RemoveFromProject_Click(object sender, EventArgs e)
+        {
+            if (darkTreeView_Project.SelectedNodes.Count > 0)
+            {
+                string file = darkTreeView_Project.SelectedNodes[0].Tag.ToString();
+                if (Directory.Exists(file))
+                    Directory.Delete(file, true);
+                else if (File.Exists(file))
+                    File.Delete(file);
+                else
+                {
+                    Program.status.Update($"[ERROR] Couldn't find file to delete: {Path.GetFileName(file)}.");
+                    return;
+                }
+                Treeview_Project();
+                ExpandToNode(Path.GetDirectoryName(file));
+            }
+        }
+
+        private void MakeBackupCopy_Click(object sender, EventArgs e)
+        {
+            if (darkTreeView_Project.SelectedNodes.Count > 0)
+            {
+                string file = darkTreeView_Project.SelectedNodes[0].Tag.ToString();
+                if (File.Exists(file))
+                {
+                    for (int i = 0; i < 99; i++)
+                    {
+                        string newFile = file + $".bak.{i.ToString().PadLeft(3, '0')}";
+                        if (!File.Exists(newFile))
+                        {
+                            File.Copy(file, newFile);
+                            Program.status.Update($"Created backup copy: {Path.GetFileName(newFile)}.");
+                            Treeview_Project();
+                            ExpandToNode(file);
+                            break;
+                        }
+                    }
+                }
+                else
+                    Program.status.Update($"[ERROR] Couldn't find file to copy: {Path.GetFileName(file)}.");
             }
         }
     }

@@ -559,6 +559,13 @@
     <None Include="Resources\vector.bmp" />
     <None Include="Resources\world.bmp" />
     <None Include="Resources\font.bmp" />
+    <None Include="Resources\delete.bmp" />
+    <None Include="Resources\page_edit.bmp" />
+    <None Include="Resources\accept.bmp" />
+    <None Include="Resources\add.bmp" />
+    <None Include="Resources\magnifier.bmp" />
+    <None Include="Resources\folder_search.bmp" />
+    <None Include="Resources\page_copy.bmp" />
     <Content Include="Windows Logo.png" />
   </ItemGroup>
   <ItemGroup>
