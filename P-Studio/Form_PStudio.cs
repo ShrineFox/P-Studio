@@ -23,6 +23,8 @@ namespace P_Studio
         public Form_PStudio()
         {
             InitializeComponent();
+            Program.status = new Status(darkTextBox_Status);
+            UpdateTips("Create a new project or open an existing one to get started.");
         }
 
         private void NewProject_Click(object sender, EventArgs e)
@@ -235,9 +237,35 @@ namespace P_Studio
             return td;
         }
 
-        public static void UpdateStatus(string status)
+        public void UpdateTips(string tip)
         {
-            darkTextBox_Status.Text = status;
+            darkTextBox_Tips.Text = tip;
+        }
+
+        private void tabControl_GameProject_IndexChanged(object sender, EventArgs e)
+        {
+            if (Form_Project.IsValid())
+            {
+                if (tabControl_GameProject.SelectedIndex == 0)
+                    UpdateTips("Right click a file or directory to add a copy to your project.");
+                else
+                    UpdateTips("Double-click a file to view it in the editor.\n" +
+                        "Right click to delete, copy, or quick replace a file.");
+            }
+        }
+    }
+
+    public class Status
+    {
+        DarkTextBox dtb;
+        public Status(DarkTextBox dtb)
+        {
+            this.dtb = dtb;
+        }
+
+        public void Update(string msg)
+        {
+            dtb.Text = msg;
         }
     }
 }

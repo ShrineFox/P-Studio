@@ -240,6 +240,7 @@ namespace P_Studio
             // 
             this.darkTextBox_ProjectName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
             this.darkTextBox_ProjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.darkTextBox_ProjectName.Enabled = false;
             this.darkTextBox_ProjectName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.darkTextBox_ProjectName.Location = new System.Drawing.Point(149, 23);
             this.darkTextBox_ProjectName.Name = "darkTextBox_ProjectName";

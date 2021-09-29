@@ -33,6 +33,26 @@ namespace P_Studio
             public string OutputPath { get; set; } = "";
         }
 
+        public Form_Project()
+        {
+            InitializeComponent();
+            // Add Games to dropdown
+            darkDropdownList_Game.Items.Add(new DarkUI.Controls.DarkDropdownItem("Persona 3 FES"));
+            darkDropdownList_Game.Items.Add(new DarkUI.Controls.DarkDropdownItem("Persona 4"));
+            // Load settings
+            if (File.Exists(settings.ProjectPath))
+            {
+                LoadSettings();
+                UpdateForm();
+            }
+            else
+            {
+                // Use defaults and allow project name/game entry if no settingsPath exists
+                darkTextBox_ProjectName.Enabled = true;
+                darkDropdownList_Game.Enabled = true;
+            }
+        }
+
         private void Save_Click(object sender, EventArgs e)
         {
             // Commit form changes to settings object
@@ -56,16 +76,14 @@ namespace P_Studio
                         MessageBox.Show("Extracting archive, please be patient as this may take awhile.\nThis only needs to happen once.", "Extracting...", 
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // Extract ISO/CVM or PKG/CPK contents
-                        string extractedPath = Path.Combine(Path.Combine(Path.GetDirectoryName(settings.ArchivePath), "Extracted"), darkDropdownList_Game.SelectedItem.Text);
-                        ExtractArchive();
+                        settings.ExtractedPath = ExtractArchive();
                         // Update settings now that extraction is done
-                        settings.ExtractedPath = extractedPath;
                         settings.UseExtractedPath = true;
                         // Reflect settings updates in form
                         UpdateForm();
                         // Inform user extraction is complete and settings have changed
                         MessageBox.Show($"\nExtracted contents of {Path.GetFileName(settings.ArchivePath)} to:\n" +
-                            $"{extractedPath}\n\nThis path will be used instead from now on.", "Extraction Complete!",
+                            $"\"{settings.ExtractedPath}\"\n\nThis path will be used instead from now on.", "Extraction Complete!",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     // Save project YML file
@@ -127,38 +145,20 @@ namespace P_Studio
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void ExtractArchive()
+        private string ExtractArchive()
         {
             string game = darkDropdownList_Game.SelectedItem.Text;
+            string unpackedDir = "";
             if (settings.ArchivePath.ToUpper().EndsWith(".ISO"))
             {
                 Unpacker.UnzipISO(settings.ArchivePath, game);
-                string unpackedDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}";
+                unpackedDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}";
                 foreach (string cvm in Directory.GetFiles(unpackedDir, "*.CVM", SearchOption.AllDirectories))
                     Unpacker.UnzipCVM(cvm, game);
                 Unpacker.ExtractWantedFiles(unpackedDir, game);
             }
             // else if pkg...
-        }
-
-        public Form_Project()
-        {
-            InitializeComponent();
-            // Add Games to dropdown
-            darkDropdownList_Game.Items.Add(new DarkUI.Controls.DarkDropdownItem("Persona 3 FES"));
-            darkDropdownList_Game.Items.Add(new DarkUI.Controls.DarkDropdownItem("Persona 4"));
-            // Load settings
-            if (File.Exists(settings.ProjectPath))
-            {
-                LoadSettings();
-                UpdateForm();
-            }
-            else
-            {
-                // Use defaults and allow project name/game entry if no settingsPath exists
-                darkTextBox_ProjectName.Enabled = true;
-                darkDropdownList_Game.Enabled = true;
-            }
+            return unpackedDir;
         }
 
         private void LoadSettings()
@@ -225,19 +225,34 @@ namespace P_Studio
 
         public static bool IsValid()
         {
-            if (((!settings.UseExtractedPath && File.Exists(settings.ArchivePath))
-                || (settings.UseExtractedPath && Directory.Exists(settings.ExtractedPath)))
-                && (Form_Project.settings.ProjectName != "" && Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9]*$") && Directory.Exists(settings.OutputPath))
-                && (settings.Game.Equals("Persona 3 FES") || settings.Game.Equals("Persona 4")))
+            if (!settings.UseExtractedPath && !File.Exists(settings.ArchivePath))
             {
-                Form_PStudio.UpdateStatus($"Successfully loaded project: {settings.ProjectName}");
-                return true;
-            }  
-            else
-            {
-                Form_PStudio.UpdateStatus("Error loading project: invalid settings.yml");
+                Program.status.Update("Error loading project: invalid Archive Path");
                 return false;
             }
+            if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
+            {
+                Program.status.Update("Error loading project: invalid Extracted Path");
+                return false;
+            }
+            if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
+            {
+                Program.status.Update("Error loading project: invalid Extracted Path");
+                return false;
+            }
+            if (settings.ProjectName == "" || !Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9]*$")) 
+            {
+                Program.status.Update("Error loading project: invalid Project Name");
+                return false;
+            }
+            if (!Directory.Exists(settings.OutputPath))
+            {
+                Program.status.Update("Error loading project: invalid Output Path");
+                return false;
+            }
+
+            Program.status.Update($"Successfully loaded project: \"{settings.ProjectName}\"");
+            return true;
         }
     }
 }
