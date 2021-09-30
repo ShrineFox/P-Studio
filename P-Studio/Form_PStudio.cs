@@ -1,5 +1,4 @@
-﻿using DarkUI.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +12,11 @@ using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using DarkUI.Controls;
 using System.Resources;
 using System.Diagnostics;
 using System.Threading;
+using DarkUI.Controls;
+using DarkUI.Forms;
 
 namespace P_Studio
 {
@@ -32,7 +32,7 @@ namespace P_Studio
         private void NewProject_Click(object sender, EventArgs e)
         {
             this.Text = $"P-Studio v0.1";
-            Form_Project.settings = new Form_Project.Settings();
+            SettingsForm.settings = new SettingsForm.Settings();
             OpenSettingsForm();
         }
 
@@ -44,7 +44,7 @@ namespace P_Studio
         private void OpenSettingsForm(string projectPath = "")
         {
             // Load settings from form
-            using (var dialog = new Form_Project())
+            using (var dialog = new SettingsForm())
             {
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
@@ -66,16 +66,16 @@ namespace P_Studio
             var deserializer = new DeserializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                Form_Project.settings = deserializer.Deserialize<Form_Project.Settings>(File.ReadAllText(dialog.FileName));
+                SettingsForm.settings = deserializer.Deserialize<SettingsForm.Settings>(File.ReadAllText(dialog.FileName));
                 LoadProject();
             }
         }
 
         private void LoadProject()
         {
-            if (Form_Project.IsValid())
+            if (SettingsForm.IsValid())
             {
-                this.Text = $"P-Studio v0.1 - {Form_Project.settings.ProjectName}";
+                this.Text = $"P-Studio v0.1 - {SettingsForm.settings.ProjectName}";
                 // Enable, select and load Project file view
                 Treeview_Project();
                 Treeview_Game();
@@ -86,16 +86,16 @@ namespace P_Studio
         private void Treeview_Project()
         {
             darkTreeView_Project.Nodes.Clear();
-            if (Directory.Exists(Path.GetDirectoryName(Form_Project.settings.ProjectPath)))
-                darkTreeView_Project.Nodes.Add(LoadDirectory(Path.GetDirectoryName(Form_Project.settings.ProjectPath)));
+            if (Directory.Exists(Path.GetDirectoryName(SettingsForm.settings.ProjectPath)))
+                darkTreeView_Project.Nodes.Add(LoadDirectory(Path.GetDirectoryName(SettingsForm.settings.ProjectPath)));
 
         }
 
         private void Treeview_Game()
         {
             darkTreeView_Game.Nodes.Clear();
-            if (Directory.Exists(Form_Project.settings.ExtractedPath))
-                darkTreeView_Game.Nodes.Add(LoadDirectory(Form_Project.settings.ExtractedPath));
+            if (Directory.Exists(SettingsForm.settings.ExtractedPath))
+                darkTreeView_Game.Nodes.Add(LoadDirectory(SettingsForm.settings.ExtractedPath));
         }
 
         public DarkTreeNode LoadDirectory(string dir)
@@ -276,7 +276,7 @@ namespace P_Studio
         {
             if (darkTreeView_Project.Nodes.Any(x => x.Tag.ToString().Contains(path)))
             {
-                var node = darkTreeView_Project.Nodes.First(x => x.Tag.ToString().Contains(path.Replace(Form_Project.settings.ExtractedPath, "")));
+                var node = darkTreeView_Project.Nodes.First(x => x.Tag.ToString().Contains(path.Replace(SettingsForm.settings.ExtractedPath, "")));
                 foreach (var parentNode in node.ParentTree.Nodes)
                 {
                     darkTreeView_Project.Nodes.First(x => x.Equals(parentNode)).Expanded = true;
@@ -286,7 +286,7 @@ namespace P_Studio
 
         private void tabControl_GameProject_IndexChanged(object sender, EventArgs e)
         {
-            if (Form_Project.IsValid())
+            if (SettingsForm.IsValid())
             {
                 if (tabControl_GameProject.SelectedIndex == 0)
                     UpdateTips("Right click a file or directory to add a copy to your project.");
@@ -313,10 +313,10 @@ namespace P_Studio
             {
                 string file = darkTreeView_Game.SelectedNodes[0].Tag.ToString();
                 if (Directory.Exists(file))
-                    binMerge.CopyEntireDirectory(new DirectoryInfo(file), new DirectoryInfo(file.Replace(Form_Project.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(Form_Project.settings.ProjectPath)))));
+                    binMerge.CopyEntireDirectory(new DirectoryInfo(file), new DirectoryInfo(file.Replace(SettingsForm.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(SettingsForm.settings.ProjectPath)))));
                 else if (File.Exists(file))
                 {
-                    string copiedFile = file.Replace(Form_Project.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(Form_Project.settings.ProjectPath)));
+                    string copiedFile = file.Replace(SettingsForm.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(SettingsForm.settings.ProjectPath)));
                     Directory.CreateDirectory(Path.GetDirectoryName(copiedFile));
                     File.Copy(file, copiedFile);
                 }
@@ -417,6 +417,10 @@ namespace P_Studio
                 else
                     Program.status.Update($"[ERROR] Couldn't find file to copy: {Path.GetFileName(file)}.");
             }
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
         }
     }
 

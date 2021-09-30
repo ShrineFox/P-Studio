@@ -89,7 +89,7 @@ namespace P_Studio
             this.projectSettingsToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newProjectToolStripMenuItem
@@ -97,7 +97,7 @@ namespace P_Studio
             this.newProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
             this.newProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject_Click);
             // 
@@ -106,7 +106,7 @@ namespace P_Studio
             this.loadProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
             this.loadProjectToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
             // 
@@ -115,7 +115,7 @@ namespace P_Studio
             this.projectSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
             this.projectSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.projectSettingsToolStripMenuItem.Name = "projectSettingsToolStripMenuItem";
-            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.projectSettingsToolStripMenuItem.Text = "Settings";
             this.projectSettingsToolStripMenuItem.Click += new System.EventHandler(this.Settings_Click);
             // 
@@ -126,7 +126,7 @@ namespace P_Studio
             this.buildLaunchToolStripMenuItem});
             this.runToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(48, 26);
             this.runToolStripMenuItem.Text = "Run";
             // 
             // buildLaunchToolStripMenuItem
@@ -145,7 +145,7 @@ namespace P_Studio
             this.flowscriptReferenceToolStripMenuItem});
             this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -155,6 +155,7 @@ namespace P_Studio
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.About_Click);
             // 
             // flowscriptReferenceToolStripMenuItem
             // 
@@ -176,7 +177,7 @@ namespace P_Studio
             this.darkMenuStrip1.Location = new System.Drawing.Point(0, 0);
             this.darkMenuStrip1.Name = "darkMenuStrip1";
             this.darkMenuStrip1.Padding = new System.Windows.Forms.Padding(3, 2, 0, 2);
-            this.darkMenuStrip1.Size = new System.Drawing.Size(942, 28);
+            this.darkMenuStrip1.Size = new System.Drawing.Size(942, 30);
             this.darkMenuStrip1.TabIndex = 1;
             this.darkMenuStrip1.Text = "darkMenuStrip";
             // 
@@ -184,10 +185,10 @@ namespace P_Studio
             // 
             this.panel_Main.Controls.Add(this.tableLayoutPanel_Workspace);
             this.panel_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_Main.Location = new System.Drawing.Point(0, 28);
+            this.panel_Main.Location = new System.Drawing.Point(0, 30);
             this.panel_Main.Name = "panel_Main";
             this.panel_Main.Padding = new System.Windows.Forms.Padding(10);
-            this.panel_Main.Size = new System.Drawing.Size(942, 465);
+            this.panel_Main.Size = new System.Drawing.Size(942, 463);
             this.panel_Main.TabIndex = 2;
             // 
             // tableLayoutPanel_Workspace
@@ -207,7 +208,7 @@ namespace P_Studio
             this.tableLayoutPanel_Workspace.RowCount = 2;
             this.tableLayoutPanel_Workspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_Workspace.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel_Workspace.Size = new System.Drawing.Size(917, 436);
+            this.tableLayoutPanel_Workspace.Size = new System.Drawing.Size(917, 434);
             this.tableLayoutPanel_Workspace.TabIndex = 3;
             // 
             // darkTextBox_Tips
@@ -217,7 +218,7 @@ namespace P_Studio
             this.darkTextBox_Tips.Dock = System.Windows.Forms.DockStyle.Fill;
             this.darkTextBox_Tips.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.darkTextBox_Tips.ForeColor = System.Drawing.Color.DarkGray;
-            this.darkTextBox_Tips.Location = new System.Drawing.Point(3, 383);
+            this.darkTextBox_Tips.Location = new System.Drawing.Point(3, 381);
             this.darkTextBox_Tips.Multiline = true;
             this.darkTextBox_Tips.Name = "darkTextBox_Tips";
             this.darkTextBox_Tips.ReadOnly = true;
@@ -235,7 +236,7 @@ namespace P_Studio
             this.tabControl_GameProject.Name = "tabControl_GameProject";
             this.tabControl_GameProject.Padding = new System.Drawing.Point(5, 5);
             this.tabControl_GameProject.SelectedIndex = 0;
-            this.tabControl_GameProject.Size = new System.Drawing.Size(320, 380);
+            this.tabControl_GameProject.Size = new System.Drawing.Size(320, 378);
             this.tabControl_GameProject.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl_GameProject.TabIndex = 1;
             this.tabControl_GameProject.SelectedIndexChanged += new System.EventHandler(this.tabControl_GameProject_IndexChanged);
@@ -248,7 +249,7 @@ namespace P_Studio
             this.tabPage_Game.Location = new System.Drawing.Point(4, 4);
             this.tabPage_Game.Name = "tabPage_Game";
             this.tabPage_Game.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Game.Size = new System.Drawing.Size(312, 347);
+            this.tabPage_Game.Size = new System.Drawing.Size(312, 345);
             this.tabPage_Game.TabIndex = 0;
             this.tabPage_Game.Text = "Game";
             // 
@@ -260,7 +261,7 @@ namespace P_Studio
             this.darkTreeView_Game.MaxDragChange = 20;
             this.darkTreeView_Game.Name = "darkTreeView_Game";
             this.darkTreeView_Game.ShowIcons = true;
-            this.darkTreeView_Game.Size = new System.Drawing.Size(306, 341);
+            this.darkTreeView_Game.Size = new System.Drawing.Size(306, 339);
             this.darkTreeView_Game.TabIndex = 0;
             this.darkTreeView_Game.MouseClick += new System.Windows.Forms.MouseEventHandler(this.darkTreeView_Game_MouseClick);
             // 
@@ -298,7 +299,7 @@ namespace P_Studio
             this.tabControl_Editor.Location = new System.Drawing.Point(323, 3);
             this.tabControl_Editor.Name = "tabControl_Editor";
             this.tabControl_Editor.SelectedIndex = 0;
-            this.tabControl_Editor.Size = new System.Drawing.Size(591, 374);
+            this.tabControl_Editor.Size = new System.Drawing.Size(591, 372);
             this.tabControl_Editor.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl_Editor.TabIndex = 7;
             // 
@@ -309,7 +310,7 @@ namespace P_Studio
             this.tabPage_Edit.Location = new System.Drawing.Point(4, 27);
             this.tabPage_Edit.Name = "tabPage_Edit";
             this.tabPage_Edit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Edit.Size = new System.Drawing.Size(583, 343);
+            this.tabPage_Edit.Size = new System.Drawing.Size(583, 341);
             this.tabPage_Edit.TabIndex = 0;
             this.tabPage_Edit.Text = "Edit Asset";
             // 
@@ -331,7 +332,7 @@ namespace P_Studio
             this.darkTextBox_Status.Dock = System.Windows.Forms.DockStyle.Fill;
             this.darkTextBox_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.darkTextBox_Status.ForeColor = System.Drawing.Color.DarkGray;
-            this.darkTextBox_Status.Location = new System.Drawing.Point(323, 383);
+            this.darkTextBox_Status.Location = new System.Drawing.Point(323, 381);
             this.darkTextBox_Status.Multiline = true;
             this.darkTextBox_Status.Name = "darkTextBox_Status";
             this.darkTextBox_Status.ReadOnly = true;
