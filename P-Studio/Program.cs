@@ -17,7 +17,7 @@ namespace P_Studio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_PStudio());
+            Application.Run(new PStudio());
         }
     }
 }
