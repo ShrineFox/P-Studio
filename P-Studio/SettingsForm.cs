@@ -178,31 +178,31 @@ namespace P_Studio
         {
             if (!settings.UseExtractedPath && !File.Exists(settings.ArchivePath))
             {
-                Program.status.Update("Error loading project: invalid Archive Path");
+                Program.status.Update("[ERROR] Failed to load project: invalid Archive Path");
                 return false;
             }
             if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
             {
-                Program.status.Update("Error loading project: invalid Extracted Path");
+                Program.status.Update("[ERROR] Failed to load project: invalid Extracted Path");
                 return false;
             }
             if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
             {
-                Program.status.Update("Error loading project: invalid Extracted Path");
+                Program.status.Update("[ERROR] Failed to load project: invalid Extracted Path");
                 return false;
             }
             if (settings.ProjectName == "" || !Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9]*$"))
             {
-                Program.status.Update("Error loading project: invalid Project Name");
+                Program.status.Update("[ERROR] Failed to load project: invalid Project Name");
                 return false;
             }
             if (!Directory.Exists(settings.OutputPath))
             {
-                Program.status.Update("Error loading project: invalid Output Path");
+                Program.status.Update("[ERROR] Failed to load project: invalid Output Path");
                 return false;
             }
 
-            Program.status.Update($"Successfully loaded project: \"{settings.ProjectName}\"");
+            Program.status.Update($"[INFO] Successfully loaded project: \"{settings.ProjectName}\"");
             return true;
         }
 

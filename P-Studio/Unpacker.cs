@@ -35,7 +35,7 @@ namespace P_Studio
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.UseShellExecute = false;
             startInfo.Arguments = $"x -y \"{iso}\" -o\"" + $"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\\Extracted\\{game}\" *.CVM";
-            Program.status.Update($"Extracting all CVM archives from {Path.GetFileName(iso)}");
+            Program.status.Update($"[INFO] Extracting all CVM archives from {Path.GetFileName(iso)}");
             using (Process process = new Process())
             {
                 process.StartInfo = startInfo;
@@ -52,7 +52,7 @@ namespace P_Studio
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.UseShellExecute = false;
             startInfo.Arguments = "x -y \"" + cvm + "\" -o\"" + Path.Combine(Path.GetDirectoryName(cvm), Path.GetFileNameWithoutExtension(cvm)) + "\" *.* -r";
-            Program.status.Update($"Extracting base files from {Path.GetFileName(cvm)}");
+            Program.status.Update($"[INFO] Extracting base files from {Path.GetFileName(cvm)}");
             using (Process process = new Process())
             {
                 process.StartInfo = startInfo;
@@ -109,7 +109,7 @@ namespace P_Studio
             startInfo.UseShellExecute = false;
             foreach (var pac in pacs)
             {
-                Program.status.Update($"Unpacking files for {pac}...");
+                Program.status.Update($"[INFO] Unpacking files for {pac}...");
                 foreach (var glob in globs)
                 {
                     startInfo.Arguments = $@"-i ""{directory}\{pac}"" -o ""{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\{Path.GetFileNameWithoutExtension(pac)}"" --unpack-filter {glob}";
@@ -129,16 +129,16 @@ namespace P_Studio
             }
             if (FileIOWrapper.Exists($@"{directory}\{cpk}") && !FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\{cpk}"))
             {
-                Program.status.Update($@"Backing up {cpk}");
+                Program.status.Update($@"[INFO] Backing up {cpk}");
                 FileIOWrapper.Copy($@"{directory}\{cpk}", $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\{cpk}", true);
             }
             if (FileIOWrapper.Exists($@"{directory}\movie.cpk") && !FileIOWrapper.Exists($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\movie.cpk"))
             {
-                Program.status.Update($@"Backing up movie.cpk");
+                Program.status.Update($@"[INFO] Backing up movie.cpk");
                 FileIOWrapper.Copy($@"{directory}\movie.cpk", $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\movie.cpk", true);
             }
 
-            Program.status.Update("Finished unpacking base files!");
+            Program.status.Update("[INFO] Finished unpacking base files!");
         }
 
 
@@ -195,7 +195,7 @@ namespace P_Studio
 
             if (FileIOWrapper.Exists($@"{directory}\data.cpk"))
             {
-                Program.status.Update($"Extracting data.cpk");
+                Program.status.Update($"[INFO] Extracting data.cpk");
                 foreach (var file in dataFiles)
                 {
                     startInfo.Arguments = $@"-X {file} -i ""{directory}\data.cpk"" -o ""{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 5""";
@@ -218,7 +218,7 @@ namespace P_Studio
 
             if (FileIOWrapper.Exists($@"{directory}\data.cpk"))
             {
-                Program.status.Update($"Extracting ps3.cpk");
+                Program.status.Update($"[INFO] Extracting ps3.cpk");
                 foreach (var file in ps3Files)
                 {
                     startInfo.Arguments = $@"-X {file} -i ""{directory}\ps3.cpk"" -o ""{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\Persona 5""";
@@ -239,7 +239,7 @@ namespace P_Studio
             else
                 Program.status.Update($"[ERROR] Couldn't find ps3.cpk in {directory}.");
             ExtractWantedFiles($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}", game);
-            Program.status.Update($"Finished unpacking base files!");
+            Program.status.Update($"[INFO] Finished unpacking base files!");
         }
 
         public static void ExtractWantedFiles(string directory, string game)
@@ -252,7 +252,7 @@ namespace P_Studio
                 .Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak"));
             foreach (string archive in archives)
             {
-                Program.status.Update($"Unpacking archive: {archive.Substring(directory.Length)}");
+                Program.status.Update($"[INFO] Unpacking archive: {archive.Substring(directory.Length)}");
                 binMerge.PAKPackCMD($"unpack \"{archive}\"");
 
                 // Search the location of the unpacked container for wanted files
@@ -284,12 +284,12 @@ namespace P_Studio
                             libraryArg = "-Library P4";
                     }
 
-                    Program.status.Update($"Decompiling script: {script.Substring(directory.Length)}");
+                    Program.status.Update($"[INFO] Decompiling script: {script.Substring(directory.Length)}");
                     binMerge.CompilerCMD($"\"{script}\" -Decompile {encodingArg} {libraryArg}");
                 }
             }
 
-            Program.status.Update($"Finished unpacking {game} files!");
+            Program.status.Update($"[INFO] Finished unpacking {game} files!");
         }
     }
 

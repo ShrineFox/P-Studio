@@ -42,6 +42,7 @@ namespace P_Studio
             this.tableLayoutPanel_Workspace = new System.Windows.Forms.TableLayoutPanel();
             this.metroSetTabControl_Workspace = new MetroSet_UI.Controls.MetroSetTabControl();
             this.tabPage_Asset = new System.Windows.Forms.TabPage();
+            panel_Asset = new System.Windows.Forms.Panel();
             this.tabPage_Scripting = new System.Windows.Forms.TabPage();
             this.richTextBox_Status = new System.Windows.Forms.RichTextBox();
             this.menuStrip_Main = new System.Windows.Forms.MenuStrip();
@@ -62,6 +63,7 @@ namespace P_Studio
             this.tabPage_Project.SuspendLayout();
             this.tableLayoutPanel_Workspace.SuspendLayout();
             this.metroSetTabControl_Workspace.SuspendLayout();
+            this.tabPage_Asset.SuspendLayout();
             this.menuStrip_Main.SuspendLayout();
             this.metroSetContextMenuStrip_Game.SuspendLayout();
             this.metroSetContextMenuStrip_Project.SuspendLayout();
@@ -151,7 +153,7 @@ namespace P_Studio
             this.metroSetTabControl_GameProject.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl_GameProject.Location = new System.Drawing.Point(3, 3);
             this.metroSetTabControl_GameProject.Name = "metroSetTabControl_GameProject";
-            this.metroSetTabControl_GameProject.SelectedIndex = 0;
+            this.metroSetTabControl_GameProject.SelectedIndex = 1;
             this.metroSetTabControl_GameProject.SelectedTextColor = System.Drawing.Color.White;
             this.metroSetTabControl_GameProject.Size = new System.Drawing.Size(278, 429);
             this.metroSetTabControl_GameProject.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -210,6 +212,7 @@ namespace P_Studio
             this.treeView_Project.Size = new System.Drawing.Size(270, 383);
             this.treeView_Project.TabIndex = 1;
             this.treeView_Project.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ProjectNode_MouseClick);
+            this.treeView_Project.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ProjectNode_DoubleClick);
             // 
             // tableLayoutPanel_Workspace
             // 
@@ -238,7 +241,7 @@ namespace P_Studio
             this.metroSetTabControl_Workspace.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Asset);
             this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Scripting);
-            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Default;
+            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroSetTabControl_Workspace.HotTrack = true;
             this.metroSetTabControl_Workspace.IsDerivedStyle = true;
             this.metroSetTabControl_Workspace.ItemSize = new System.Drawing.Size(100, 38);
@@ -260,11 +263,20 @@ namespace P_Studio
             // tabPage_Asset
             // 
             this.tabPage_Asset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.tabPage_Asset.Controls.Add(panel_Asset);
             this.tabPage_Asset.Location = new System.Drawing.Point(4, 42);
             this.tabPage_Asset.Name = "tabPage_Asset";
             this.tabPage_Asset.Size = new System.Drawing.Size(643, 312);
             this.tabPage_Asset.TabIndex = 0;
             this.tabPage_Asset.Text = "Edit Asset";
+            // 
+            // panel_Asset
+            // 
+            panel_Asset.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel_Asset.Location = new System.Drawing.Point(0, 0);
+            panel_Asset.Name = "panel_Asset";
+            panel_Asset.Size = new System.Drawing.Size(643, 312);
+            panel_Asset.TabIndex = 0;
             // 
             // tabPage_Scripting
             // 
@@ -423,6 +435,7 @@ namespace P_Studio
             this.Text = "P-Studio v0.1";
             this.ThemeAuthor = "ShrineFox";
             this.ThemeName = "MetroDarkBlue";
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.tableLayoutPanel_Container.ResumeLayout(false);
             this.tableLayoutPanel_Main.ResumeLayout(false);
             this.metroSetTabControl_GameProject.ResumeLayout(false);
@@ -430,6 +443,7 @@ namespace P_Studio
             this.tabPage_Project.ResumeLayout(false);
             this.tableLayoutPanel_Workspace.ResumeLayout(false);
             this.metroSetTabControl_Workspace.ResumeLayout(false);
+            this.tabPage_Asset.ResumeLayout(false);
             this.menuStrip_Main.ResumeLayout(false);
             this.menuStrip_Main.PerformLayout();
             this.metroSetContextMenuStrip_Game.ResumeLayout(false);
@@ -465,5 +479,6 @@ namespace P_Studio
         private MetroSet_UI.Child.MetroSetToolStripMenuItem metroSetToolStripMenuItem_Remove;
         private MetroSet_UI.Child.MetroSetToolStripMenuItem metroSetToolStripMenuItem_OpenAt2;
         private System.Windows.Forms.RichTextBox richTextBox_Status;
+        public static System.Windows.Forms.Panel panel_Asset;
     }
 }

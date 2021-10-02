@@ -13,7 +13,7 @@ namespace P_Studio
     public class Treeview
     {
         public static ImageList treeViewImageList = new ImageList();
-        public static List<string> excludedTreeViewTypes = new List<string>() { "bf", "bmd", "pac", "pak", "bin", "amd", "yml" };
+        public static List<string> excludedTreeViewTypes = new List<string>() { ".bf", ".bmd", ".pac", ".pak", ".bin", ".amd" };
         
         public static void SetupImageList()
         {
@@ -36,6 +36,7 @@ namespace P_Studio
             treeViewImageList.Images.Add(Properties.Resources.vector, transparentColor);
             treeViewImageList.Images.Add(Properties.Resources.cd, transparentColor);
             treeViewImageList.Images.Add(Properties.Resources.chart_organisation, transparentColor);
+            treeViewImageList.Images.Add(Properties.Resources.folder, transparentColor);
             treeViewImageList.Images.Add(Properties.Resources.page_white, transparentColor);
         }
 
@@ -44,9 +45,11 @@ namespace P_Studio
             switch (Path.GetExtension(file).ToLower())
             {
                 case ".adx":
+                case ".acx":
                 case ".acb":
                 case ".awb":
                 case ".wav":
+                case ".afs":
                     return 0;
                 case ".bf":
                     return 1;
@@ -104,19 +107,27 @@ namespace P_Studio
                     return 16;
                 case ".epl":
                     return 17;
-                default:
+                case ".folder":
                     return 18;
+                default:
+                    return 19;
             }
         }
 
         public static void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
         {
-            TreeNode curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, GetIconIndex(directoryInfo.FullName));
-
-            foreach (FileInfo file in directoryInfo.GetFiles())
-                curNode.Nodes.Add(file.FullName, file.Name);
+            string ext = directoryInfo.FullName;
+            if (Directory.Exists(ext))
+                ext += ".folder";
+            // Set icon
+            TreeNode curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, GetIconIndex(ext), GetIconIndex(ext));
+            // Add subdirectories
             foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
                 BuildTree(subdir, curNode.Nodes);
+            // Add files
+            foreach (FileInfo file in directoryInfo.GetFiles() // Get all files in directory except those with excluded extensions
+                .Where(x => !excludedTreeViewTypes.Any(y => x.FullName.ToLower().EndsWith(y))))
+                    curNode.Nodes.Add(file.FullName, file.Name, GetIconIndex(file.FullName), GetIconIndex(file.FullName));
         }
 
         public static void OpenLocation(string file)
@@ -131,7 +142,40 @@ namespace P_Studio
                 Process.Start(info);
             }
             else
-                Program.status.Update($"[ERROR] Couldn't open path to {Path.GetFileName(file)}.");
+                Program.status.Update($"[ERROR] Couldn't open path to \"{Path.GetFileName(file)}\".");
+        }
+    }
+
+    public static class TreeViewExtensions
+    {
+        public static List<string> GetExpansionState(this TreeNodeCollection nodes)
+        {
+            return nodes.Descendants()
+                        .Where(n => n.IsExpanded)
+                        .Select(n => n.FullPath)
+                        .ToList();
+        }
+
+        public static void SetExpansionState(this TreeNodeCollection nodes, List<string> savedExpansionState)
+        {
+            foreach (var node in nodes.Descendants()
+                                      .Where(n => savedExpansionState.Contains(n.FullPath)))
+            {
+                node.Expand();
+            }
+        }
+
+        public static IEnumerable<TreeNode> Descendants(this TreeNodeCollection c)
+        {
+            foreach (var node in c.OfType<TreeNode>())
+            {
+                yield return node;
+
+                foreach (var child in node.Nodes.Descendants())
+                {
+                    yield return child;
+                }
+            }
         }
     }
 }

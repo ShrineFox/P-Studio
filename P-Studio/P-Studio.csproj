@@ -88,6 +88,7 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools.cs" />
     <Compile Include="Treeview.cs" />
     <Compile Include="Unpacker.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
