@@ -14,6 +14,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsInput;
+using WindowsInput.Native;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -36,6 +38,7 @@ namespace P_Studio
             treeView_Game.ImageList = Treeview.treeViewImageList;
             treeView_Project.ImageList = Treeview.treeViewImageList;
             panelHandle = panel_Asset.Handle;
+            assetChanged = false;
         }
 
         /* Toolstrip Options */

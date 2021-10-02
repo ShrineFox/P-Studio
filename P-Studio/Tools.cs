@@ -17,6 +17,7 @@ namespace P_Studio
         {
             foreach (Process p in Process.GetProcessesByName(procName))
                 p.Kill();
+            PStudio.assetEditor = "";
         }
         public static void Mount(string exePath, string inputFile)
         {
@@ -66,7 +67,7 @@ namespace P_Studio
         [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
         [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr SetFocus(IntPtr hWnd);
+        public static extern IntPtr SetFocus(IntPtr hWnd);
         [DllImport("user32.dll")]
         public static extern int SetWindowLong(IntPtr hWnd, int nIndex, uint dwNewLong);
         [DllImport("user32.dll", SetLastError = true)]

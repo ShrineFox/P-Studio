@@ -18,26 +18,26 @@ namespace P_Studio
         public static void SetupImageList()
         {
             Color transparentColor = Color.FromArgb(60, 63, 65);
-            treeViewImageList.Images.Add(Properties.Resources.music, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.script_code_red, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.script_code, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.script_edit, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.page_white_text, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.script_gear, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.application_xp_terminal, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.database, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.table, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.package_green, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.world, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.image, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.picture, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.font, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.film, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.vector, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.cd, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.chart_organisation, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.folder, transparentColor);
-            treeViewImageList.Images.Add(Properties.Resources.page_white, transparentColor);
+            treeViewImageList.Images.Add(Properties.Resources.music);
+            treeViewImageList.Images.Add(Properties.Resources.script_code_red);
+            treeViewImageList.Images.Add(Properties.Resources.script_code);
+            treeViewImageList.Images.Add(Properties.Resources.script_edit);
+            treeViewImageList.Images.Add(Properties.Resources.page_white_text);
+            treeViewImageList.Images.Add(Properties.Resources.script_gear);
+            treeViewImageList.Images.Add(Properties.Resources.application_xp_terminal);
+            treeViewImageList.Images.Add(Properties.Resources.database);
+            treeViewImageList.Images.Add(Properties.Resources.table);
+            treeViewImageList.Images.Add(Properties.Resources.package_green);
+            treeViewImageList.Images.Add(Properties.Resources.world);
+            treeViewImageList.Images.Add(Properties.Resources.image);
+            treeViewImageList.Images.Add(Properties.Resources.picture);
+            treeViewImageList.Images.Add(Properties.Resources.font);
+            treeViewImageList.Images.Add(Properties.Resources.film);
+            treeViewImageList.Images.Add(Properties.Resources.vector);
+            treeViewImageList.Images.Add(Properties.Resources.cd);
+            treeViewImageList.Images.Add(Properties.Resources.chart_organisation);
+            treeViewImageList.Images.Add(Properties.Resources.folder);
+            treeViewImageList.Images.Add(Properties.Resources.page_white);
         }
 
         public static int GetIconIndex(string file)
