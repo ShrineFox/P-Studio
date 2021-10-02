@@ -38,7 +38,6 @@ namespace P_Studio
             treeView_Game.ImageList = Treeview.treeViewImageList;
             treeView_Project.ImageList = Treeview.treeViewImageList;
             panelHandle = panel_Asset.Handle;
-            assetChanged = false;
         }
 
         /* Toolstrip Options */
@@ -46,6 +45,7 @@ namespace P_Studio
         private void NewProject_Click(object sender, EventArgs e)
         {
             this.Text = $"P-Studio v0.1";
+            saveProjectToolStripMenuItem.Enabled = false;
             SettingsForm.settings = new SettingsForm.Settings();
             OpenSettingsForm();
         }
@@ -63,7 +63,6 @@ namespace P_Studio
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
             }
-
             LoadProject();
         }
 
@@ -90,9 +89,9 @@ namespace P_Studio
             if (SettingsForm.IsValid())
             {
                 this.Text = $"P-Studio v0.1 - {SettingsForm.settings.ProjectName}";
-                // Enable, select and load Project file view
                 Treeview_Project();
                 Treeview_Game();
+                saveProjectToolStripMenuItem.Enabled = true;
             }
         }
 
@@ -161,6 +160,100 @@ namespace P_Studio
                 Treeview.OpenLocation(file);
             }
             HideContextMenus();
+        }
+        private void SaveProjectAs_Click(object sender, EventArgs e)
+        {
+            if (SettingsForm.IsValid())
+            {
+                string originalProj = SettingsForm.settings.ProjectPath;
+                string projDir = Path.GetDirectoryName(originalProj);
+                string newName = "";
+                RenameForm rename = new RenameForm(Path.GetFileNameWithoutExtension(originalProj));
+                var result = rename.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    newName = rename.RenameText;
+                    string newProj = Path.Combine(Path.GetDirectoryName(projDir), Path.Combine(newName, newName + ".yml"));
+                    if (!Directory.Exists(Path.GetDirectoryName(newProj)))
+                    {
+                        SettingsForm.settings.ProjectName = newName;
+                        SettingsForm.settings.ProjectPath = newProj;
+                        Program.status.Update($"[INFO] Copying project files from \"{Path.GetFileNameWithoutExtension(originalProj)}\" to \"{Path.GetFileNameWithoutExtension(newProj)}\"");
+                        // Copy all project files to new directory
+                        binMerge.CopyEntireDirectory(new DirectoryInfo(projDir), new DirectoryInfo(Path.GetDirectoryName(newProj)), true);
+                        // Delete original project file copied with other project stuff
+                        File.Delete(Path.Combine(Path.GetDirectoryName(newProj), Path.GetFileName(originalProj)));
+                        // Save and reload new project
+                        SettingsForm.SaveSettings();
+                        LoadProject();
+                    }
+                    else
+                        Program.status.Update($"[ERROR] Failed to save project as \"{newName}\", directory already exists");
+                }
+            }
+        }
+
+        private void Copy_Click(object sender, EventArgs e)
+        {
+            if (treeView_Project.SelectedNode != null)
+            {
+                string originalName = treeView_Project.SelectedNode.Name;
+                if (File.Exists(originalName) || Directory.Exists(originalName))
+                {
+                    string dir = Path.GetDirectoryName(originalName);
+                    string newName = "";
+                    RenameForm rename = new RenameForm(Path.GetFileNameWithoutExtension(originalName));
+                    var result = rename.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        newName = Path.Combine(dir, rename.RenameText) + Path.GetExtension(originalName);
+                        if (File.Exists(originalName) && !File.Exists(newName))
+                        {
+                            File.Copy(originalName, newName);
+                            Program.status.Update($"[INFO] Copied \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\"");
+                        }
+                        else if (Directory.Exists(originalName) && !Directory.Exists(newName))
+                        {
+                            binMerge.CopyEntireDirectory(new DirectoryInfo(originalName), new DirectoryInfo(newName));
+                            Program.status.Update($"[INFO] Copied \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\"");
+                        }
+                        else
+                            Program.status.Update($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\", file already exists");
+                    }
+                    Treeview_Project();
+                }
+                else
+                    Program.status.Update($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\", file or folder does not exist");
+            }
+        }
+
+        private void Rename_Click(object sender, EventArgs e)
+        {
+            string originalName = treeView_Project.SelectedNode.Name;
+            if (treeView_Project.SelectedNode != null)
+            {
+                string dir = Path.GetDirectoryName(originalName);
+                string newName = "";
+                RenameForm rename = new RenameForm(Path.GetFileNameWithoutExtension(originalName));
+                var result = rename.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    newName = Path.Combine(dir, rename.RenameText) + Path.GetExtension(originalName);
+                    if (File.Exists(originalName) && !File.Exists(newName))
+                    {
+                        File.Move(originalName, newName);
+                        Program.status.Update($"[INFO] Renamed \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\"");
+                    }
+                    else if (Directory.Exists(originalName) && !Directory.Exists(newName))
+                    {
+                        Directory.Move(treeView_Project.SelectedNode.Name, newName);
+                        Program.status.Update($"[INFO] Renamed \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\"");
+                    }
+                    else
+                        Program.status.Update($"[ERROR] Failed to rename \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\", file already exists");
+                    Treeview_Project();
+                }
+            }
         }
 
         private void RemoveFromProject_Click(object sender, EventArgs e)
@@ -238,9 +331,17 @@ namespace P_Studio
                 // Hide add to project option if topmost two levels (Game/Archive) 
                 // to prevent copying entire game/archive's worth of data
                 if (treeView_Project.SelectedNode.Parent == null || treeView_Project.SelectedNode.Name.ToLower().EndsWith(".yml"))
+                {
+                    metroSetToolStripMenuItem_Copy.Visible = false;
+                    metroSetToolStripMenuItem_Rename.Visible = false;
                     metroSetToolStripMenuItem_Remove.Visible = false;
+                }
                 else
+                {
+                    metroSetToolStripMenuItem_Copy.Visible = true;
+                    metroSetToolStripMenuItem_Rename.Visible = true;
                     metroSetToolStripMenuItem_Remove.Visible = true;
+                }
                 metroSetContextMenuStrip_Project.Show(Cursor.Position);
             }
         }

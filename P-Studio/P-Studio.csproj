@@ -79,21 +79,27 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PStudio.cs">
+    <Compile Include="Forms\PStudio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PStudio.Designer.cs">
+    <Compile Include="Forms\PStudio.Designer.cs">
       <DependentUpon>PStudio.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForm.cs">
+    <Compile Include="Forms\RenameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForm.Designer.cs">
+    <Compile Include="Forms\RenameForm.Designer.cs">
+      <DependentUpon>RenameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tools.cs" />
-    <Compile Include="Treeview.cs" />
-    <Compile Include="Unpacker.cs" />
+    <Compile Include="Classes\Tools.cs" />
+    <Compile Include="Classes\Treeview.cs" />
+    <Compile Include="Classes\Unpacker.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -104,10 +110,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="PStudio.resx">
+    <EmbeddedResource Include="Forms\PStudio.resx">
       <DependentUpon>PStudio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForm.resx">
+    <EmbeddedResource Include="Forms\RenameForm.resx">
+      <DependentUpon>RenameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Dependencies\AtlusScriptCompiler\App.config">
@@ -1551,6 +1560,9 @@
     <None Include="Resources\add2.ico" />
     <None Include="Resources\folder_explore1.ico" />
     <None Include="Resources\delete1.ico" />
+    <None Include="Resources\textfield_rename1.ico" />
+    <None Include="Resources\page_copy1.ico" />
+    <None Include="Resources\disk_multiple1.ico" />
     <Content Include="Windows Logo.png" />
   </ItemGroup>
   <ItemGroup>

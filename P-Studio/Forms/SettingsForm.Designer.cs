@@ -36,6 +36,7 @@ namespace P_Studio
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.metroSetLabel_ProjectSettings = new MetroSet_UI.Controls.MetroSetLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.metroSetButton_Output = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetTextBox_Output = new MetroSet_UI.Controls.MetroSetTextBox();
             this.metroSetLabel_Output = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetLabel2 = new MetroSet_UI.Controls.MetroSetLabel();
@@ -44,18 +45,17 @@ namespace P_Studio
             this.tableLayoutPanel_GameSettings = new System.Windows.Forms.TableLayoutPanel();
             this.metroSetLabel_GameSettings = new MetroSet_UI.Controls.MetroSetLabel();
             this.tableLayoutPanel_GameSettingsInner = new System.Windows.Forms.TableLayoutPanel();
+            this.metroSetButton_Extracted = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetLabel_Game = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetComboBox_Game = new MetroSet_UI.Controls.MetroSetComboBox();
             this.metroSetRadioButton_Archive = new MetroSet_UI.Controls.MetroSetRadioButton();
             this.metroSetTextBox_Archive = new MetroSet_UI.Controls.MetroSetTextBox();
             this.metroSetRadioButton_Extracted = new MetroSet_UI.Controls.MetroSetRadioButton();
             this.metroSetTextBox_Extracted = new MetroSet_UI.Controls.MetroSetTextBox();
+            this.metroSetButton_Archive = new MetroSet_UI.Controls.MetroSetButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.metroSetButton_Cancel = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetButton_Save = new MetroSet_UI.Controls.MetroSetButton();
-            this.metroSetButton_Archive = new MetroSet_UI.Controls.MetroSetButton();
-            this.metroSetButton_Extracted = new MetroSet_UI.Controls.MetroSetButton();
-            this.metroSetButton_Output = new MetroSet_UI.Controls.MetroSetButton();
             this.tableLayoutPanel_Settings.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -188,6 +188,33 @@ namespace P_Studio
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(574, 44);
             this.tableLayoutPanel2.TabIndex = 27;
+            // 
+            // metroSetButton_Output
+            // 
+            this.metroSetButton_Output.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Output.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Output.DisabledForeColor = System.Drawing.Color.Gray;
+            this.metroSetButton_Output.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.metroSetButton_Output.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton_Output.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton_Output.HoverTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Output.IsDerivedStyle = true;
+            this.metroSetButton_Output.Location = new System.Drawing.Point(518, 5);
+            this.metroSetButton_Output.Name = "metroSetButton_Output";
+            this.metroSetButton_Output.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Output.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Output.NormalTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Output.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton_Output.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton_Output.PressTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Output.Size = new System.Drawing.Size(53, 32);
+            this.metroSetButton_Output.Style = MetroSet_UI.Enums.Style.Dark;
+            this.metroSetButton_Output.StyleManager = null;
+            this.metroSetButton_Output.TabIndex = 34;
+            this.metroSetButton_Output.Text = "...";
+            this.metroSetButton_Output.ThemeAuthor = "Narwin";
+            this.metroSetButton_Output.ThemeName = "MetroDark";
+            this.metroSetButton_Output.Click += new System.EventHandler(this.OutputPath_Click);
             // 
             // metroSetTextBox_Output
             // 
@@ -350,6 +377,35 @@ namespace P_Studio
             this.tableLayoutPanel_GameSettingsInner.Size = new System.Drawing.Size(574, 143);
             this.tableLayoutPanel_GameSettingsInner.TabIndex = 27;
             // 
+            // metroSetButton_Extracted
+            // 
+            this.metroSetButton_Extracted.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Extracted.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Extracted.DisabledForeColor = System.Drawing.Color.Gray;
+            this.metroSetButton_Extracted.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroSetButton_Extracted.Enabled = false;
+            this.metroSetButton_Extracted.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.metroSetButton_Extracted.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton_Extracted.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton_Extracted.HoverTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Extracted.IsDerivedStyle = true;
+            this.metroSetButton_Extracted.Location = new System.Drawing.Point(518, 108);
+            this.metroSetButton_Extracted.Name = "metroSetButton_Extracted";
+            this.metroSetButton_Extracted.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Extracted.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Extracted.NormalTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Extracted.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton_Extracted.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton_Extracted.PressTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Extracted.Size = new System.Drawing.Size(53, 32);
+            this.metroSetButton_Extracted.Style = MetroSet_UI.Enums.Style.Dark;
+            this.metroSetButton_Extracted.StyleManager = null;
+            this.metroSetButton_Extracted.TabIndex = 33;
+            this.metroSetButton_Extracted.Text = "...";
+            this.metroSetButton_Extracted.ThemeAuthor = "Narwin";
+            this.metroSetButton_Extracted.ThemeName = "MetroDark";
+            this.metroSetButton_Extracted.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtractedPath_Click);
+            // 
             // metroSetLabel_Game
             // 
             this.metroSetLabel_Game.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -431,7 +487,6 @@ namespace P_Studio
             this.metroSetTextBox_Archive.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.metroSetTextBox_Archive.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroSetTextBox_Archive.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroSetTextBox_Archive.Enabled = false;
             this.metroSetTextBox_Archive.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.metroSetTextBox_Archive.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.metroSetTextBox_Archive.Image = null;
@@ -483,9 +538,9 @@ namespace P_Studio
             this.metroSetTextBox_Extracted.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.metroSetTextBox_Extracted.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
             this.metroSetTextBox_Extracted.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
-            this.metroSetTextBox_Extracted.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.metroSetTextBox_Extracted.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.metroSetTextBox_Extracted.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.metroSetTextBox_Extracted.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.metroSetTextBox_Extracted.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroSetTextBox_Extracted.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroSetTextBox_Extracted.Enabled = false;
             this.metroSetTextBox_Extracted.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.metroSetTextBox_Extracted.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -507,6 +562,34 @@ namespace P_Studio
             this.metroSetTextBox_Extracted.UseSystemPasswordChar = false;
             this.metroSetTextBox_Extracted.WatermarkText = "";
             this.metroSetTextBox_Extracted.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtractedPath_Click);
+            // 
+            // metroSetButton_Archive
+            // 
+            this.metroSetButton_Archive.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Archive.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Archive.DisabledForeColor = System.Drawing.Color.Gray;
+            this.metroSetButton_Archive.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroSetButton_Archive.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.metroSetButton_Archive.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton_Archive.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton_Archive.HoverTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Archive.IsDerivedStyle = true;
+            this.metroSetButton_Archive.Location = new System.Drawing.Point(518, 68);
+            this.metroSetButton_Archive.Name = "metroSetButton_Archive";
+            this.metroSetButton_Archive.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Archive.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton_Archive.NormalTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Archive.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton_Archive.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton_Archive.PressTextColor = System.Drawing.Color.White;
+            this.metroSetButton_Archive.Size = new System.Drawing.Size(53, 34);
+            this.metroSetButton_Archive.Style = MetroSet_UI.Enums.Style.Dark;
+            this.metroSetButton_Archive.StyleManager = null;
+            this.metroSetButton_Archive.TabIndex = 32;
+            this.metroSetButton_Archive.Text = "...";
+            this.metroSetButton_Archive.ThemeAuthor = "Narwin";
+            this.metroSetButton_Archive.ThemeName = "MetroDark";
+            this.metroSetButton_Archive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ArchivePath_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -579,91 +662,6 @@ namespace P_Studio
             this.metroSetButton_Save.ThemeAuthor = "Narwin";
             this.metroSetButton_Save.ThemeName = "MetroDark";
             this.metroSetButton_Save.Click += new System.EventHandler(this.Save_Click);
-            // 
-            // metroSetButton_Archive
-            // 
-            this.metroSetButton_Archive.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Archive.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Archive.DisabledForeColor = System.Drawing.Color.Gray;
-            this.metroSetButton_Archive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroSetButton_Archive.Enabled = false;
-            this.metroSetButton_Archive.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.metroSetButton_Archive.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton_Archive.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton_Archive.HoverTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Archive.IsDerivedStyle = true;
-            this.metroSetButton_Archive.Location = new System.Drawing.Point(518, 68);
-            this.metroSetButton_Archive.Name = "metroSetButton_Archive";
-            this.metroSetButton_Archive.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Archive.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Archive.NormalTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Archive.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton_Archive.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton_Archive.PressTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Archive.Size = new System.Drawing.Size(53, 34);
-            this.metroSetButton_Archive.Style = MetroSet_UI.Enums.Style.Dark;
-            this.metroSetButton_Archive.StyleManager = null;
-            this.metroSetButton_Archive.TabIndex = 32;
-            this.metroSetButton_Archive.Text = "...";
-            this.metroSetButton_Archive.ThemeAuthor = "Narwin";
-            this.metroSetButton_Archive.ThemeName = "MetroDark";
-            this.metroSetButton_Archive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtractedPath_Click);
-            // 
-            // metroSetButton_Extracted
-            // 
-            this.metroSetButton_Extracted.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Extracted.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Extracted.DisabledForeColor = System.Drawing.Color.Gray;
-            this.metroSetButton_Extracted.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroSetButton_Extracted.Enabled = false;
-            this.metroSetButton_Extracted.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.metroSetButton_Extracted.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton_Extracted.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton_Extracted.HoverTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Extracted.IsDerivedStyle = true;
-            this.metroSetButton_Extracted.Location = new System.Drawing.Point(518, 108);
-            this.metroSetButton_Extracted.Name = "metroSetButton_Extracted";
-            this.metroSetButton_Extracted.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Extracted.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Extracted.NormalTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Extracted.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton_Extracted.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton_Extracted.PressTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Extracted.Size = new System.Drawing.Size(53, 32);
-            this.metroSetButton_Extracted.Style = MetroSet_UI.Enums.Style.Dark;
-            this.metroSetButton_Extracted.StyleManager = null;
-            this.metroSetButton_Extracted.TabIndex = 33;
-            this.metroSetButton_Extracted.Text = "...";
-            this.metroSetButton_Extracted.ThemeAuthor = "Narwin";
-            this.metroSetButton_Extracted.ThemeName = "MetroDark";
-            this.metroSetButton_Extracted.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtractedPath_Click);
-            // 
-            // metroSetButton_Output
-            // 
-            this.metroSetButton_Output.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Output.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Output.DisabledForeColor = System.Drawing.Color.Gray;
-            this.metroSetButton_Output.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.metroSetButton_Output.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton_Output.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton_Output.HoverTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Output.IsDerivedStyle = true;
-            this.metroSetButton_Output.Location = new System.Drawing.Point(518, 5);
-            this.metroSetButton_Output.Name = "metroSetButton_Output";
-            this.metroSetButton_Output.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Output.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton_Output.NormalTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Output.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton_Output.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton_Output.PressTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Output.Size = new System.Drawing.Size(53, 32);
-            this.metroSetButton_Output.Style = MetroSet_UI.Enums.Style.Dark;
-            this.metroSetButton_Output.StyleManager = null;
-            this.metroSetButton_Output.TabIndex = 34;
-            this.metroSetButton_Output.Text = "...";
-            this.metroSetButton_Output.ThemeAuthor = "Narwin";
-            this.metroSetButton_Output.ThemeName = "MetroDark";
-            this.metroSetButton_Output.Click += new System.EventHandler(this.OutputPath_Click);
             // 
             // SettingsForm
             // 

@@ -37,8 +37,9 @@ namespace P_Studio
             else
             {
                 // Use defaults and allow project name/game entry if no settingsPath exists
+                metroSetTextBox_ProjectName.Enabled = true;
                 metroSetComboBox_Game.Enabled = true;
-                metroSetComboBox_Game.Enabled = true;
+                metroSetComboBox_Game.SelectedIndex = 0;
             }
         }
 
@@ -48,7 +49,7 @@ namespace P_Studio
             UpdateSettings();
 
             // Make sure project path is valid and can be created
-            if (settings.ProjectName != "" && Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9]*$"))
+            if (settings.ProjectName != "" && Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9-_ .]*$"))
             {
                 // Set path and create project/output directory
                 settings.ProjectPath = Path.Combine(Path.Combine("Projects", settings.ProjectName), settings.ProjectName + ".yml");
@@ -62,22 +63,39 @@ namespace P_Studio
                     if (!settings.UseExtractedPath)
                     {
                         // Show message informing user extraction is about to take place
-                        MetroSet_UI.Forms.MetroSetMessageBox.Show(this, "Extracting archive, please be patient as this may take awhile.\nThis only needs to happen once.", "Extracting...",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // Extract ISO/CVM or PKG/CPK contents
-                        settings.ExtractedPath = ExtractArchive();
+                        // Extract ISO/CVM or PKG/CPK contents if not already extracted
+                        string defaultExtractPath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{settings.Game}";
+                        if (!binMerge.HasUnpackedFiles(defaultExtractPath, settings.Game))
+                        {
+                            MessageBox.Show(this, "Extracting archive, please be patient as this may take awhile.\nThis only needs to happen once.", "Extracting...",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ExtractArchive();
+                        }
+                        else
+                            Program.status.Update($"[INFO] Extracted {settings.Game} files already found, skipping...");
+                        settings.ExtractedPath = defaultExtractPath;
                         // Update settings now that extraction is done
                         settings.UseExtractedPath = true;
                         // Reflect settings updates in form
                         UpdateForm();
                         // Inform user extraction is complete and settings have changed
-                        MetroSet_UI.Forms.MetroSetMessageBox.Show(this, $"\nExtracted contents of {Path.GetFileName(settings.ArchivePath)} to:\n" +
+                        MessageBox.Show(this, $"\nExtracted contents of {Path.GetFileName(settings.ArchivePath)} to:\n" +
                             $"\"{settings.ExtractedPath}\"\n\nThis path will be used instead from now on.", "Extraction Complete!",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    // Save project YML file
-                    SaveSettings();
-                    this.DialogResult = DialogResult.OK;
+                    if (binMerge.HasUnpackedFiles(settings.ExtractedPath, settings.Game) && settings.UseExtractedPath)
+                    {
+                        // Save project YML file
+                        SaveSettings();
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, $"Extracted Path does not contain required extracted folders:\n" +
+                            $"\"{settings.ExtractedPath}\"", "Extraction Required!");
+                        settings.UseExtractedPath = false;
+                    }
                 }
                 else
                 {
@@ -86,7 +104,7 @@ namespace P_Studio
                         missingPath = $"Archive Path: {settings.ArchivePath}";
                     else if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
                         missingPath = $"Extracted Path: {settings.ExtractedPath}";
-                    MetroSet_UI.Forms.MetroSetMessageBox.Show(this, $"Specified path does not exist.\n{missingPath}",
+                    MessageBox.Show(this, $"Specified path does not exist.\n{missingPath}",
                         "Warning: Invalid Path",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
@@ -94,7 +112,7 @@ namespace P_Studio
             }
             else
             {
-                MetroSet_UI.Forms.MetroSetMessageBox.Show(this, "Project Name can't be empty,\n" +
+                MessageBox.Show(this, "Project Name can't be empty,\n" +
                     "and must only include alphanumeric characters!",
                     "Warning: Invalid Project Name",
                     MessageBoxButtons.OK,
@@ -124,13 +142,14 @@ namespace P_Studio
             metroSetTextBox_Output.Text = settings.OutputPath;
         }
 
-        private void SaveSettings()
+        public static void SaveSettings()
         {
             var serializer = new SerializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
             var yaml = serializer.Serialize(settings);
+            using (Tools.WaitForFile(settings.ProjectPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None)) { };
             File.WriteAllText(settings.ProjectPath, yaml);
 
-            MetroSet_UI.Forms.MetroSetMessageBox.Show(this, $"Saved project as \"{settings.ProjectName}\"!", "Project Saved",
+            MessageBox.Show(new SettingsForm(), $"Saved project as \"{settings.ProjectName}\"!", "Project Saved",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -154,11 +173,6 @@ namespace P_Studio
         {
             var deserializer = new DeserializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
             settings = deserializer.Deserialize<Settings>(File.ReadAllText(settings.ProjectPath));
-        }
-
-        private void ArchivePath_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void OutputPath_Click(object sender, EventArgs e)
@@ -191,7 +205,7 @@ namespace P_Studio
                 Program.status.Update("[ERROR] Failed to load project: invalid Extracted Path");
                 return false;
             }
-            if (settings.ProjectName == "" || !Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9]*$"))
+            if (settings.ProjectName == "" || !Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9-_ .]*$"))
             {
                 Program.status.Update("[ERROR] Failed to load project: invalid Project Name");
                 return false;

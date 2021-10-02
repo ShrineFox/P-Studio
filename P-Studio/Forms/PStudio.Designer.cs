@@ -49,13 +49,16 @@ namespace P_Studio
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroSetContextMenuStrip_Game = new MetroSet_UI.Controls.MetroSetContextMenuStrip();
-            this.metroSetToolStripMenuItem_Add = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
             this.metroSetToolStripMenuItem_OpenAt = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
+            this.metroSetToolStripMenuItem_Add = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
             this.metroSetContextMenuStrip_Project = new MetroSet_UI.Controls.MetroSetContextMenuStrip();
-            this.metroSetToolStripMenuItem_Remove = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
             this.metroSetToolStripMenuItem_OpenAt2 = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
+            this.metroSetToolStripMenuItem_Copy = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
+            this.metroSetToolStripMenuItem_Rename = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
+            this.metroSetToolStripMenuItem_Remove = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
             this.tableLayoutPanel_Container.SuspendLayout();
             this.tableLayoutPanel_Main.SuspendLayout();
             this.metroSetTabControl_GameProject.SuspendLayout();
@@ -146,14 +149,14 @@ namespace P_Studio
             this.metroSetTabControl_GameProject.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabControl_GameProject.Controls.Add(this.tabPage_Game);
             this.metroSetTabControl_GameProject.Controls.Add(this.tabPage_Project);
-            this.metroSetTabControl_GameProject.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetTabControl_GameProject.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroSetTabControl_GameProject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroSetTabControl_GameProject.HotTrack = true;
             this.metroSetTabControl_GameProject.IsDerivedStyle = true;
             this.metroSetTabControl_GameProject.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl_GameProject.Location = new System.Drawing.Point(3, 3);
             this.metroSetTabControl_GameProject.Name = "metroSetTabControl_GameProject";
-            this.metroSetTabControl_GameProject.SelectedIndex = 1;
+            this.metroSetTabControl_GameProject.SelectedIndex = 0;
             this.metroSetTabControl_GameProject.SelectedTextColor = System.Drawing.Color.White;
             this.metroSetTabControl_GameProject.Size = new System.Drawing.Size(278, 429);
             this.metroSetTabControl_GameProject.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -233,21 +236,19 @@ namespace P_Studio
             // 
             // metroSetTabControl_Workspace
             // 
-            this.metroSetTabControl_Workspace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroSetTabControl_Workspace.AnimateEasingType = MetroSet_UI.Enums.EasingType.CubeOut;
             this.metroSetTabControl_Workspace.AnimateTime = 100;
             this.metroSetTabControl_Workspace.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Asset);
             this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Scripting);
-            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Default;
+            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetTabControl_Workspace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroSetTabControl_Workspace.HotTrack = true;
             this.metroSetTabControl_Workspace.IsDerivedStyle = true;
             this.metroSetTabControl_Workspace.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl_Workspace.Location = new System.Drawing.Point(3, 3);
             this.metroSetTabControl_Workspace.Name = "metroSetTabControl_Workspace";
-            this.metroSetTabControl_Workspace.SelectedIndex = 0;
+            this.metroSetTabControl_Workspace.SelectedIndex = 1;
             this.metroSetTabControl_Workspace.SelectedTextColor = System.Drawing.Color.White;
             this.metroSetTabControl_Workspace.Size = new System.Drawing.Size(651, 358);
             this.metroSetTabControl_Workspace.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -318,6 +319,7 @@ namespace P_Studio
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
             this.loadProjectToolStripMenuItem,
+            this.saveProjectToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.fileToolStripMenuItem.Image = global::P_Studio.Properties.Resources.disk;
@@ -333,7 +335,7 @@ namespace P_Studio
             this.newProjectToolStripMenuItem.Image = global::P_Studio.Properties.Resources.add1;
             this.newProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject_Click);
             // 
@@ -344,9 +346,21 @@ namespace P_Studio
             this.loadProjectToolStripMenuItem.Image = global::P_Studio.Properties.Resources.folder_page;
             this.loadProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
+            // 
+            // saveProjectToolStripMenuItem
+            // 
+            this.saveProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.saveProjectToolStripMenuItem.Enabled = false;
+            this.saveProjectToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.saveProjectToolStripMenuItem.Image = global::P_Studio.Properties.Resources.disk_multiple;
+            this.saveProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveProjectToolStripMenuItem.Text = "Save Project As...";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectAs_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -355,7 +369,7 @@ namespace P_Studio
             this.settingsToolStripMenuItem.Image = global::P_Studio.Properties.Resources.table_gear;
             this.settingsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.Settings_Click);
             // 
@@ -364,24 +378,14 @@ namespace P_Studio
             this.metroSetContextMenuStrip_Game.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.metroSetContextMenuStrip_Game.IsDerivedStyle = true;
             this.metroSetContextMenuStrip_Game.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metroSetToolStripMenuItem_Add,
-            this.metroSetToolStripMenuItem_OpenAt});
+            this.metroSetToolStripMenuItem_OpenAt,
+            this.metroSetToolStripMenuItem_Add});
             this.metroSetContextMenuStrip_Game.Name = "metroSetContextMenuStrip_Game";
             this.metroSetContextMenuStrip_Game.Size = new System.Drawing.Size(175, 64);
             this.metroSetContextMenuStrip_Game.Style = MetroSet_UI.Enums.Style.Dark;
             this.metroSetContextMenuStrip_Game.StyleManager = null;
             this.metroSetContextMenuStrip_Game.ThemeAuthor = "Narwin";
             this.metroSetContextMenuStrip_Game.ThemeName = "MetroDark";
-            // 
-            // metroSetToolStripMenuItem_Add
-            // 
-            this.metroSetToolStripMenuItem_Add.AutoSize = false;
-            this.metroSetToolStripMenuItem_Add.Image = global::P_Studio.Properties.Resources.add1;
-            this.metroSetToolStripMenuItem_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.metroSetToolStripMenuItem_Add.Name = "metroSetToolStripMenuItem_Add";
-            this.metroSetToolStripMenuItem_Add.Size = new System.Drawing.Size(160, 30);
-            this.metroSetToolStripMenuItem_Add.Text = "Add to Project";
-            this.metroSetToolStripMenuItem_Add.Click += new System.EventHandler(this.AddToProject_Click);
             // 
             // metroSetToolStripMenuItem_OpenAt
             // 
@@ -394,29 +398,31 @@ namespace P_Studio
             this.metroSetToolStripMenuItem_OpenAt.Text = "Show Folder";
             this.metroSetToolStripMenuItem_OpenAt.Click += new System.EventHandler(this.OpenLocationGame_Click);
             // 
+            // metroSetToolStripMenuItem_Add
+            // 
+            this.metroSetToolStripMenuItem_Add.AutoSize = false;
+            this.metroSetToolStripMenuItem_Add.Image = global::P_Studio.Properties.Resources.add1;
+            this.metroSetToolStripMenuItem_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.metroSetToolStripMenuItem_Add.Name = "metroSetToolStripMenuItem_Add";
+            this.metroSetToolStripMenuItem_Add.Size = new System.Drawing.Size(160, 30);
+            this.metroSetToolStripMenuItem_Add.Text = "Add to Project";
+            this.metroSetToolStripMenuItem_Add.Click += new System.EventHandler(this.AddToProject_Click);
+            // 
             // metroSetContextMenuStrip_Project
             // 
             this.metroSetContextMenuStrip_Project.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.metroSetContextMenuStrip_Project.IsDerivedStyle = true;
             this.metroSetContextMenuStrip_Project.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metroSetToolStripMenuItem_Remove,
-            this.metroSetToolStripMenuItem_OpenAt2});
+            this.metroSetToolStripMenuItem_OpenAt2,
+            this.metroSetToolStripMenuItem_Copy,
+            this.metroSetToolStripMenuItem_Rename,
+            this.metroSetToolStripMenuItem_Remove});
             this.metroSetContextMenuStrip_Project.Name = "metroSetContextMenuStrip_Game";
-            this.metroSetContextMenuStrip_Project.Size = new System.Drawing.Size(161, 64);
+            this.metroSetContextMenuStrip_Project.Size = new System.Drawing.Size(161, 124);
             this.metroSetContextMenuStrip_Project.Style = MetroSet_UI.Enums.Style.Dark;
             this.metroSetContextMenuStrip_Project.StyleManager = null;
             this.metroSetContextMenuStrip_Project.ThemeAuthor = "Narwin";
             this.metroSetContextMenuStrip_Project.ThemeName = "MetroDark";
-            // 
-            // metroSetToolStripMenuItem_Remove
-            // 
-            this.metroSetToolStripMenuItem_Remove.AutoSize = false;
-            this.metroSetToolStripMenuItem_Remove.Image = global::P_Studio.Properties.Resources.delete;
-            this.metroSetToolStripMenuItem_Remove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.metroSetToolStripMenuItem_Remove.Name = "metroSetToolStripMenuItem_Remove";
-            this.metroSetToolStripMenuItem_Remove.Size = new System.Drawing.Size(160, 30);
-            this.metroSetToolStripMenuItem_Remove.Text = "Remove";
-            this.metroSetToolStripMenuItem_Remove.Click += new System.EventHandler(this.RemoveFromProject_Click);
             // 
             // metroSetToolStripMenuItem_OpenAt2
             // 
@@ -427,6 +433,40 @@ namespace P_Studio
             this.metroSetToolStripMenuItem_OpenAt2.Size = new System.Drawing.Size(160, 30);
             this.metroSetToolStripMenuItem_OpenAt2.Text = "Show Folder";
             this.metroSetToolStripMenuItem_OpenAt2.Click += new System.EventHandler(this.OpenLocationProject_Click);
+            // 
+            // metroSetToolStripMenuItem_Copy
+            // 
+            this.metroSetToolStripMenuItem_Copy.AutoSize = false;
+            this.metroSetToolStripMenuItem_Copy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.metroSetToolStripMenuItem_Copy.ForeColor = System.Drawing.Color.Silver;
+            this.metroSetToolStripMenuItem_Copy.Image = global::P_Studio.Properties.Resources.page_copy;
+            this.metroSetToolStripMenuItem_Copy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.metroSetToolStripMenuItem_Copy.Name = "metroSetToolStripMenuItem_Copy";
+            this.metroSetToolStripMenuItem_Copy.Size = new System.Drawing.Size(160, 30);
+            this.metroSetToolStripMenuItem_Copy.Text = "Copy";
+            this.metroSetToolStripMenuItem_Copy.Click += new System.EventHandler(this.Copy_Click);
+            // 
+            // metroSetToolStripMenuItem_Rename
+            // 
+            this.metroSetToolStripMenuItem_Rename.AutoSize = false;
+            this.metroSetToolStripMenuItem_Rename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.metroSetToolStripMenuItem_Rename.ForeColor = System.Drawing.Color.Silver;
+            this.metroSetToolStripMenuItem_Rename.Image = global::P_Studio.Properties.Resources.textfield_rename;
+            this.metroSetToolStripMenuItem_Rename.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.metroSetToolStripMenuItem_Rename.Name = "metroSetToolStripMenuItem_Rename";
+            this.metroSetToolStripMenuItem_Rename.Size = new System.Drawing.Size(160, 30);
+            this.metroSetToolStripMenuItem_Rename.Text = "Rename";
+            this.metroSetToolStripMenuItem_Rename.Click += new System.EventHandler(this.Rename_Click);
+            // 
+            // metroSetToolStripMenuItem_Remove
+            // 
+            this.metroSetToolStripMenuItem_Remove.AutoSize = false;
+            this.metroSetToolStripMenuItem_Remove.Image = global::P_Studio.Properties.Resources.delete;
+            this.metroSetToolStripMenuItem_Remove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.metroSetToolStripMenuItem_Remove.Name = "metroSetToolStripMenuItem_Remove";
+            this.metroSetToolStripMenuItem_Remove.Size = new System.Drawing.Size(160, 30);
+            this.metroSetToolStripMenuItem_Remove.Text = "Remove";
+            this.metroSetToolStripMenuItem_Remove.Click += new System.EventHandler(this.RemoveFromProject_Click);
             // 
             // PStudio
             // 
@@ -485,7 +525,7 @@ namespace P_Studio
         private System.Windows.Forms.MenuStrip menuStrip_Main;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private MetroSet_UI.Components.StyleManager styleManager;
         private MetroSet_UI.Controls.MetroSetContextMenuStrip metroSetContextMenuStrip_Game;
@@ -496,5 +536,8 @@ namespace P_Studio
         private MetroSet_UI.Child.MetroSetToolStripMenuItem metroSetToolStripMenuItem_OpenAt2;
         private System.Windows.Forms.RichTextBox richTextBox_Status;
         public System.Windows.Forms.Panel panel_Asset;
+        private MetroSet_UI.Child.MetroSetToolStripMenuItem metroSetToolStripMenuItem_Rename;
+        private MetroSet_UI.Child.MetroSetToolStripMenuItem metroSetToolStripMenuItem_Copy;
+        private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
     }
 }
