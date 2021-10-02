@@ -1,6 +1,7 @@
 ﻿using MetroSet_UI.Controls;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,7 @@ namespace P_Studio
     public partial class PStudio : MetroSet_UI.Forms.MetroSetForm
     {
         public static IntPtr panelHandle;
+        public static IntPtr assetEditorHandle;
         public static int formWidth;
         public static int formHeight;
         public static string assetEditor = "";
@@ -264,14 +266,10 @@ namespace P_Studio
         /* Resize windows within panel */
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            int formWidth = Width;
-            int formHeight = Height;
-            if (Tools.sessions.Count > 0)
-            {
-                var pHandle = (Process)Tools.sessions[0];
-                if (pHandle != null)
-                    Tools.MoveWindow(pHandle.MainWindowHandle, 0, 0, Width, Height, true);
-            }
+            int formWidth = panel_Asset.Width;
+            int formHeight = panel_Asset.Height;
+            if (assetEditorHandle != null)
+                Tools.MoveWindow(assetEditorHandle, 0, 0, formWidth, formHeight, true);
         }
     }
 

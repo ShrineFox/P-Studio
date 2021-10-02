@@ -17,38 +17,46 @@ namespace P_Studio
         {
             foreach (Process p in Process.GetProcessesByName(procName))
                 p.Kill();
-            sessions.Clear();
         }
         public static void Mount(string exePath, string inputFile)
         {
-            string processName = Path.GetFileNameWithoutExtension(exePath);
-            PStudio.assetEditor = processName;
-            // Close existing process
-            CloseProcess(processName);
-            // Load Program
-            Process process = new Process();
-            process.StartInfo.FileName = exePath;
-            process.StartInfo.Arguments = inputFile;
-            process.Start();
-            sessions.Add(processName, process);
-            Thread.Sleep(2000);
-            process.WaitForInputIdle();
-            // Add program to form and focus on it
-            SetParent(process.MainWindowHandle, PStudio.panelHandle);
-            SetParent(process.MainWindowHandle, PStudio.panelHandle);
-            ShowWindow(process.MainWindowHandle, SW_MINIMIZE);
-            SetForegroundWindow(process.MainWindowHandle);
-            SetFocus(process.MainWindowHandle);
-            MoveWindow(process.MainWindowHandle, 0, 0, PStudio.formWidth, PStudio.formHeight, true);
-            IntPtr HMENU = GetMenu(process.MainWindowHandle);
-            int count = GetMenuItemCount(HMENU);
-            for (int i = 0; i < count; i++)
-                RemoveMenu(HMENU, 0, (MF_BYPOSITION | MF_REMOVE));
-            DrawMenuBar(process.MainWindowHandle);
-            SetWindowLong(process.MainWindowHandle, GWL_STYLE, WS_VISIBLE);
-            ShowWindow(process.MainWindowHandle, SW_MAXIMIZE);
-            SetForegroundWindow(process.MainWindowHandle);
-            SetFocus(process.MainWindowHandle);
+            if (File.Exists(exePath))
+            {
+                string processName = Path.GetFileNameWithoutExtension(exePath);
+                PStudio.assetEditor = processName;
+                // Close existing process
+                CloseProcess(processName);
+                // Load Program
+                Process process = new Process();
+                process.StartInfo.FileName = exePath;
+                process.StartInfo.Arguments = inputFile;
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                process.Start();
+                Thread.Sleep(1000);
+                process.WaitForInputIdle();
+                // Add program to form and focus on it
+                PStudio.assetEditorHandle = process.MainWindowHandle;
+                SetParent(process.MainWindowHandle, PStudio.panelHandle);
+                SetParent(process.MainWindowHandle, PStudio.panelHandle);
+                ShowWindow(process.MainWindowHandle, SW_MINIMIZE);
+                SetForegroundWindow(process.MainWindowHandle);
+                SetFocus(process.MainWindowHandle);
+                MoveWindow(process.MainWindowHandle, 0, 0, PStudio.formWidth, PStudio.formHeight, true);
+                IntPtr HMENU = GetMenu(process.MainWindowHandle);
+                int count = GetMenuItemCount(HMENU);
+                for (int i = 0; i < count; i++)
+                    RemoveMenu(HMENU, 0, (MF_BYPOSITION | MF_REMOVE));
+                DrawMenuBar(process.MainWindowHandle);
+                SetWindowLong(process.MainWindowHandle, GWL_STYLE, WS_VISIBLE);
+                ShowWindow(process.MainWindowHandle, SW_MAXIMIZE);
+                SetForegroundWindow(process.MainWindowHandle);
+                SetFocus(process.MainWindowHandle);
+                Program.status.Update($"[INFO] Loaded \"{Path.GetFileName(inputFile)}\" with {processName}");
+            }
+            else
+            {
+                Program.status.Update($"[ERROR] Could not find program at path: \"{exePath}\"");
+            }
         }
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -84,6 +92,5 @@ namespace P_Studio
         public static uint MF_BYPOSITION = 0x400;
         public static uint MF_REMOVE = 0x1000;
         const uint WS_VISIBLE = 0x10000000;
-        public static Hashtable sessions = new Hashtable();
     }
 }
