@@ -41,26 +41,35 @@ namespace P_Studio
                 p.Kill();
             PStudio.assetEditor = "";
         }
-        public static void Mount(string exePath, string inputFile)
+        public static void Mount(string exePath, string inputFile, IntPtr panel)
         {
             if (File.Exists(exePath))
             {
-                string processName = Path.GetFileNameWithoutExtension(exePath);
+                string processName = Path.GetFileName(exePath);
                 PStudio.assetEditor = processName;
                 // Close existing process
                 CloseProcess(processName);
                 // Load Program
                 Process process = new Process();
                 process.StartInfo.FileName = exePath;
-                process.StartInfo.Arguments = inputFile;
+                // Add .flow/.msg pair to commandline args
+                if (Path.GetExtension(inputFile).ToLower().Equals(".flow") && File.Exists(inputFile.Replace(".flow", ".msg")))
+                    process.StartInfo.Arguments += $"\"{inputFile.Replace(".flow", ".msg")}\" ";
+                if (Path.GetExtension(inputFile).ToLower().Equals(".msg") && File.Exists(inputFile.Replace(".msg", ".flow")))
+                    process.StartInfo.Arguments += $"\"{inputFile.Replace(".msg", ".flow")}\" ";
+                // Add initial input file
+                process.StartInfo.Arguments += $"\"{inputFile}\"";
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 process.Start();
                 Thread.Sleep(1000);
                 process.WaitForInputIdle();
                 // Add program to form and focus on it
-                PStudio.assetEditorHandle = process.MainWindowHandle;
-                SetParent(process.MainWindowHandle, PStudio.panelHandle);
-                SetParent(process.MainWindowHandle, PStudio.panelHandle);
+                if (processName == "Amicitia.exe")
+                    PStudio.assetEditorHandle = process.MainWindowHandle;
+                else if (processName == "notepad++.exe")
+                    PStudio.scriptEditorHandle = process.MainWindowHandle;
+                SetParent(process.MainWindowHandle, panel);
+                SetParent(process.MainWindowHandle, panel);
                 ShowWindow(process.MainWindowHandle, SW_MINIMIZE);
                 SetForegroundWindow(process.MainWindowHandle);
                 SetFocus(process.MainWindowHandle);

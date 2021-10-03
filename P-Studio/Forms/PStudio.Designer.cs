@@ -59,6 +59,7 @@ namespace P_Studio
             this.metroSetToolStripMenuItem_Copy = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
             this.metroSetToolStripMenuItem_Rename = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
             this.metroSetToolStripMenuItem_Remove = new MetroSet_UI.Child.MetroSetToolStripMenuItem();
+            this.panel_Scripting = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_Container.SuspendLayout();
             this.tableLayoutPanel_Main.SuspendLayout();
             this.metroSetTabControl_GameProject.SuspendLayout();
@@ -67,6 +68,7 @@ namespace P_Studio
             this.tableLayoutPanel_Workspace.SuspendLayout();
             this.metroSetTabControl_Workspace.SuspendLayout();
             this.tabPage_Asset.SuspendLayout();
+            this.tabPage_Scripting.SuspendLayout();
             this.menuStrip_Main.SuspendLayout();
             this.metroSetContextMenuStrip_Game.SuspendLayout();
             this.metroSetContextMenuStrip_Project.SuspendLayout();
@@ -241,7 +243,7 @@ namespace P_Studio
             this.metroSetTabControl_Workspace.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Asset);
             this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Scripting);
-            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroSetTabControl_Workspace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroSetTabControl_Workspace.HotTrack = true;
             this.metroSetTabControl_Workspace.IsDerivedStyle = true;
@@ -282,6 +284,7 @@ namespace P_Studio
             // tabPage_Scripting
             // 
             this.tabPage_Scripting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.tabPage_Scripting.Controls.Add(this.panel_Scripting);
             this.tabPage_Scripting.Location = new System.Drawing.Point(4, 42);
             this.tabPage_Scripting.Name = "tabPage_Scripting";
             this.tabPage_Scripting.Size = new System.Drawing.Size(643, 312);
@@ -335,7 +338,7 @@ namespace P_Studio
             this.newProjectToolStripMenuItem.Image = global::P_Studio.Properties.Resources.add1;
             this.newProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject_Click);
             // 
@@ -346,7 +349,7 @@ namespace P_Studio
             this.loadProjectToolStripMenuItem.Image = global::P_Studio.Properties.Resources.folder_page;
             this.loadProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
             // 
@@ -358,7 +361,7 @@ namespace P_Studio
             this.saveProjectToolStripMenuItem.Image = global::P_Studio.Properties.Resources.disk_multiple;
             this.saveProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.saveProjectToolStripMenuItem.Text = "Save Project As...";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectAs_Click);
             // 
@@ -369,7 +372,7 @@ namespace P_Studio
             this.settingsToolStripMenuItem.Image = global::P_Studio.Properties.Resources.table_gear;
             this.settingsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.Settings_Click);
             // 
@@ -468,6 +471,14 @@ namespace P_Studio
             this.metroSetToolStripMenuItem_Remove.Text = "Remove";
             this.metroSetToolStripMenuItem_Remove.Click += new System.EventHandler(this.RemoveFromProject_Click);
             // 
+            // panel_Scripting
+            // 
+            this.panel_Scripting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_Scripting.Location = new System.Drawing.Point(0, 0);
+            this.panel_Scripting.Name = "panel_Scripting";
+            this.panel_Scripting.Size = new System.Drawing.Size(643, 312);
+            this.panel_Scripting.TabIndex = 3;
+            // 
             // PStudio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
@@ -500,6 +511,7 @@ namespace P_Studio
             this.tableLayoutPanel_Workspace.ResumeLayout(false);
             this.metroSetTabControl_Workspace.ResumeLayout(false);
             this.tabPage_Asset.ResumeLayout(false);
+            this.tabPage_Scripting.ResumeLayout(false);
             this.menuStrip_Main.ResumeLayout(false);
             this.menuStrip_Main.PerformLayout();
             this.metroSetContextMenuStrip_Game.ResumeLayout(false);
@@ -539,5 +551,6 @@ namespace P_Studio
         private MetroSet_UI.Child.MetroSetToolStripMenuItem metroSetToolStripMenuItem_Rename;
         private MetroSet_UI.Child.MetroSetToolStripMenuItem metroSetToolStripMenuItem_Copy;
         private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
+        public System.Windows.Forms.Panel panel_Scripting;
     }
 }

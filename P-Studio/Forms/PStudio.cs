@@ -23,8 +23,10 @@ namespace P_Studio
 {
     public partial class PStudio : MetroSet_UI.Forms.MetroSetForm
     {
-        public static IntPtr panelHandle;
+        public static IntPtr assetPanelHandle;
         public static IntPtr assetEditorHandle;
+        public static IntPtr scriptingPanelHandle;
+        public static IntPtr scriptEditorHandle;
         public static int formWidth;
         public static int formHeight;
         public static string assetEditor = "";
@@ -37,7 +39,8 @@ namespace P_Studio
             menuStrip_Main.Renderer = r;
             treeView_Game.ImageList = Treeview.treeViewImageList;
             treeView_Project.ImageList = Treeview.treeViewImageList;
-            panelHandle = panel_Asset.Handle;
+            assetPanelHandle = panel_Asset.Handle;
+            scriptingPanelHandle = panel_Scripting.Handle;
         }
 
         /* Toolstrip Options */
@@ -300,7 +303,16 @@ namespace P_Studio
                     case ".amd":
                     case ".pac":
                     case ".pak":
-                        Tools.Mount(".\\Dependencies\\Amicitia\\Amicitia.exe", treeView_Project.SelectedNode.Name);
+                        Tools.Mount(".\\Dependencies\\Amicitia\\Amicitia.exe", treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        break;
+                    case ".flow":
+                    case ".msg":
+                    case ".json":
+                    case ".txt":
+                    case ".yml":
+                    case ".bat":
+                    case ".xml":
+                        Tools.Mount(".\\Dependencies\\notepad++\\notepad++.exe", treeView_Project.SelectedNode.Name, scriptingPanelHandle);
                         break;
                     default:
                         break;
@@ -374,6 +386,8 @@ namespace P_Studio
             int formHeight = panel_Asset.Height;
             if (assetEditorHandle != null)
                 Tools.MoveWindow(assetEditorHandle, 0, 0, formWidth, formHeight, true);
+            if (scriptEditorHandle != null)
+                Tools.MoveWindow(scriptEditorHandle, 0, 0, formWidth, formHeight, true);
         }
     }
 
