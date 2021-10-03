@@ -46,6 +46,8 @@ namespace P_Studio
             if (File.Exists(exePath))
             {
                 string processName = Path.GetFileName(exePath);
+                if (processName == "Amicitia.exe")
+                    processName = "Amicitia";
                 PStudio.assetEditor = processName;
                 // Close existing process
                 CloseProcess(processName);
@@ -64,7 +66,7 @@ namespace P_Studio
                 Thread.Sleep(1000);
                 process.WaitForInputIdle();
                 // Add program to form and focus on it
-                if (processName == "Amicitia.exe")
+                if (processName == "Amicitia")
                     PStudio.assetEditorHandle = process.MainWindowHandle;
                 else if (processName == "notepad++.exe")
                     PStudio.scriptEditorHandle = process.MainWindowHandle;
