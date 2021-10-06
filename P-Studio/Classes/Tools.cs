@@ -46,11 +46,15 @@ namespace P_Studio
             if (File.Exists(exePath))
             {
                 string processName = Path.GetFileName(exePath);
-                if (processName == "Amicitia.exe")
-                    processName = "Amicitia";
                 PStudio.assetEditor = processName;
                 // Close existing process
-                CloseProcess(processName);
+                if (processName == "Amicitia.exe" || processName == "GFDStudio.exe")
+                {
+                    CloseProcess("Amicitia");
+                    CloseProcess("GFDStudio");
+                }
+                else if (processName == "Notepad++.exe")
+                    CloseProcess("Notepad++");
                 // Load Program
                 Process process = new Process();
                 process.StartInfo.FileName = exePath;
@@ -63,13 +67,21 @@ namespace P_Studio
                 process.StartInfo.Arguments += $"\"{inputFile}\"";
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 process.Start();
-                Thread.Sleep(1000);
+                Thread.Sleep(1200);
                 process.WaitForInputIdle();
                 // Add program to form and focus on it
-                if (processName == "Amicitia")
+                if (processName == "Amicitia.exe")
+                {
                     PStudio.assetEditorHandle = process.MainWindowHandle;
+                }
+                else if (processName == "GFDStudio.exe")
+                {
+                    PStudio.assetEditorHandle = process.MainWindowHandle;
+                }
                 else if (processName == "notepad++.exe")
+                {
                     PStudio.scriptEditorHandle = process.MainWindowHandle;
+                }
                 SetParent(process.MainWindowHandle, panel);
                 SetParent(process.MainWindowHandle, panel);
                 ShowWindow(process.MainWindowHandle, SW_MINIMIZE);

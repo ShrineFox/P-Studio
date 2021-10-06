@@ -30,17 +30,20 @@ namespace P_Studio
         public static int formWidth;
         public static int formHeight;
         public static string assetEditor = "";
+        public static bool collapsed;
         public PStudio()
         {
             InitializeComponent();
             Program.status = new Status(this.richTextBox_Status);
             Program.status.Update("Create a new project or load an existing one to get started.");
+            metroSetTabControl_Workspace.SelectedIndex = 0;
             ToolStripManager.Renderer = r;
             menuStrip_Main.Renderer = r;
             treeView_Game.ImageList = Treeview.treeViewImageList;
             treeView_Project.ImageList = Treeview.treeViewImageList;
             assetPanelHandle = panel_Asset.Handle;
             scriptingPanelHandle = panel_Scripting.Handle;
+            collapsed = false;
         }
 
         /* Toolstrip Options */
@@ -51,6 +54,7 @@ namespace P_Studio
             saveProjectToolStripMenuItem.Enabled = false;
             SettingsForm.settings = new SettingsForm.Settings();
             OpenSettingsForm();
+            metroSetTabControl_GameProject.SelectedIndex = 0;
         }
 
         private void Settings_Click(object sender, EventArgs e)
@@ -85,6 +89,7 @@ namespace P_Studio
                 SettingsForm.settings = deserializer.Deserialize<SettingsForm.Settings>(File.ReadAllText(dialog.FileName));
                 LoadProject();
             }
+            metroSetTabControl_GameProject.SelectedIndex = 1;
         }
 
         private void LoadProject()
@@ -107,7 +112,6 @@ namespace P_Studio
             if (Directory.Exists(Path.GetDirectoryName(SettingsForm.settings.ProjectPath)))
                 Treeview.BuildTree(new DirectoryInfo(Path.GetDirectoryName(SettingsForm.settings.ProjectPath)), treeView_Project.Nodes);
             treeView_Project.Nodes.SetExpansionState(projectExpansionState);
-
         }
 
         private void Treeview_Game()
@@ -287,6 +291,13 @@ namespace P_Studio
         /* Load program in asset viewer and load selected file */
         private void ProjectNode_DoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            List<string> processList = new List<string>() 
+            { 
+                ".\\Dependencies\\Amicitia\\Amicitia.exe",
+                ".\\Dependencies\\GFDStudio\\GFDStudio.exe",
+                ".\\Dependencies\\notepad++\\notepad++.exe"
+            };
+
             if (e.Button == MouseButtons.Left)
             {
                 treeView_Project.SelectedNode = e.Node;
@@ -303,7 +314,22 @@ namespace P_Studio
                     case ".amd":
                     case ".pac":
                     case ".pak":
-                        Tools.Mount(".\\Dependencies\\Amicitia\\Amicitia.exe", treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        Tools.Mount(processList[0], treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        metroSetTabControl_Workspace.SelectedIndex = 0;
+                        break;
+                    case ".gmd":
+                    case ".gfs":
+                    case ".gap":
+                    case ".gnf":
+                    case ".gtxd":
+                    case ".gmtd":
+                    case ".gmt":
+                    case ".ganm":
+                    case ".gmod":
+                    case ".dds":
+                    case ".epl":
+                        Tools.Mount(processList[1], treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        metroSetTabControl_Workspace.SelectedIndex = 0;
                         break;
                     case ".flow":
                     case ".msg":
@@ -312,7 +338,8 @@ namespace P_Studio
                     case ".yml":
                     case ".bat":
                     case ".xml":
-                        Tools.Mount(".\\Dependencies\\notepad++\\notepad++.exe", treeView_Project.SelectedNode.Name, scriptingPanelHandle);
+                        Tools.Mount(processList[2], treeView_Project.SelectedNode.Name, scriptingPanelHandle);
+                        metroSetTabControl_Workspace.SelectedIndex = 1;
                         break;
                     default:
                         break;
@@ -389,6 +416,27 @@ namespace P_Studio
             if (scriptEditorHandle != null)
                 Tools.MoveWindow(scriptEditorHandle, 0, 0, formWidth, formHeight, true);
         }
+
+        private void ShowHide_Click(object sender, EventArgs e)
+        {
+            if (!collapsed)
+            {
+                tableLayoutPanel_Main.ColumnStyles[0].SizeType = SizeType.AutoSize;
+                tableLayoutPanel_Main.HideColumns(new int[] { 0 });
+                tableLayoutPanel_Workspace.HideRows(new int[] { 1 });
+                metroSetButton_ShowHide.Text = "»";
+                collapsed = true;
+            }
+            else
+            {
+                tableLayoutPanel_Main.ShowColumns(new int[] { 0 });
+                tableLayoutPanel_Workspace.ShowRows(new int[] { 1 });
+                tableLayoutPanel_Main.ColumnStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel_Main.ColumnStyles[0].Width = 28f;
+                metroSetButton_ShowHide.Text = "«";
+                collapsed = false;
+            }
+        }
     }
 
     /* Append to Status Text from other classes and forms */
@@ -405,6 +453,35 @@ namespace P_Studio
             rtb.Text += "\n" + msg;
             rtb.SelectionStart = rtb.Text.Length;
             rtb.ScrollToCaret();
+        }
+    }
+
+    /* Toggle TableLayoutPanel rows/columns that are set to autosize */
+    public static class TableLayoutPanelExtensions
+    {
+        public static void HideRows(this TableLayoutPanel panel, params int[] rowNumbers)
+        {
+            foreach (Control c in panel.Controls)
+                if (rowNumbers.Contains(panel.GetRow(c)))
+                    c.Visible = false;
+        }
+        public static void ShowRows(this TableLayoutPanel panel, params int[] rowNumbers)
+        {
+            foreach (Control c in panel.Controls)
+                if (rowNumbers.Contains(panel.GetRow(c)))
+                    c.Visible = true;
+        }
+        public static void HideColumns(this TableLayoutPanel panel, params int[] colNumbers)
+        {
+            foreach (Control c in panel.Controls)
+                if (colNumbers.Contains(panel.GetColumn(c)))
+                    c.Visible = false;
+        }
+        public static void ShowColumns(this TableLayoutPanel panel, params int[] colNumbers)
+        {
+            foreach (Control c in panel.Controls)
+                if (colNumbers.Contains(panel.GetColumn(c)))
+                    c.Visible = true;
         }
     }
 }
