@@ -1563,6 +1563,20 @@
     <None Include="Resources\textfield_rename1.ico" />
     <None Include="Resources\page_copy1.ico" />
     <None Include="Resources\disk_multiple1.ico" />
+    <None Include="Resources\application_go1.ico" />
+    <None Include="Resources\application_xp_terminal1.ico" />
+    <None Include="Resources\folder_go1.ico" />
+    <None Include="Resources\package1.ico" />
+    <None Include="Resources\package_go1.ico" />
+    <None Include="Resources\arrow_divide1.ico" />
+    <None Include="Resources\arrow_join1.ico" />
+    <None Include="Resources\chart_organisation1.ico" />
+    <None Include="Resources\asterisk_yellow1.ico" />
+    <None Include="Resources\folder_add1.ico" />
+    <None Include="Resources\page_add1.ico" />
+    <None Include="Resources\script_add1.ico" />
+    <None Include="Resources\page_white_add1.ico" />
+    <None Include="Resources\note_go1.ico" />
     <Content Include="Windows Logo.png" />
   </ItemGroup>
   <ItemGroup>

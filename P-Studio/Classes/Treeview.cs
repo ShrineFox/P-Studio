@@ -14,7 +14,10 @@ namespace P_Studio
     {
         public static ImageList treeViewImageList = new ImageList();
         public static List<string> excludedTreeViewTypes = new List<string>() { ".bf", ".bmd", ".pac", ".pak", ".bin", ".amd" };
-        
+        public static List<string> unpackTreeViewTypes = new List<string>() { ".pac", ".pak", ".bin", ".amd", ".afs", ".acb", ".awb" };
+        public static List<string> compileTreeViewTypes = new List<string>() { ".flow", ".msg" };
+        public static List<string> decompileTreeViewTypes = new List<string>() { ".bf", ".bmd" };
+
         public static void SetupImageList()
         {
             Color transparentColor = Color.FromArgb(60, 63, 65);

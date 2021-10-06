@@ -34,6 +34,8 @@ namespace P_Studio
         public PStudio()
         {
             InitializeComponent();
+            Tools.OpenAll();
+            Tools.CloseAll();
             Program.status = new Status(this.richTextBox_Status);
             Program.status.Update("Create a new project or load an existing one to get started.");
             metroSetTabControl_Workspace.SelectedIndex = 0;
@@ -291,13 +293,6 @@ namespace P_Studio
         /* Load program in asset viewer and load selected file */
         private void ProjectNode_DoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            List<string> processList = new List<string>() 
-            { 
-                ".\\Dependencies\\Amicitia\\Amicitia.exe",
-                ".\\Dependencies\\GFDStudio\\GFDStudio.exe",
-                ".\\Dependencies\\notepad++\\notepad++.exe"
-            };
-
             if (e.Button == MouseButtons.Left)
             {
                 treeView_Project.SelectedNode = e.Node;
@@ -314,7 +309,7 @@ namespace P_Studio
                     case ".amd":
                     case ".pac":
                     case ".pak":
-                        Tools.Mount(processList[0], treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        Tools.Mount(Program.processList[0], treeView_Project.SelectedNode.Name, assetPanelHandle);
                         metroSetTabControl_Workspace.SelectedIndex = 0;
                         break;
                     case ".gmd":
@@ -328,7 +323,7 @@ namespace P_Studio
                     case ".gmod":
                     case ".dds":
                     case ".epl":
-                        Tools.Mount(processList[1], treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        Tools.Mount(Program.processList[1], treeView_Project.SelectedNode.Name, assetPanelHandle);
                         metroSetTabControl_Workspace.SelectedIndex = 0;
                         break;
                     case ".flow":
@@ -338,7 +333,7 @@ namespace P_Studio
                     case ".yml":
                     case ".bat":
                     case ".xml":
-                        Tools.Mount(processList[2], treeView_Project.SelectedNode.Name, scriptingPanelHandle);
+                        Tools.Mount(Program.processList[2], treeView_Project.SelectedNode.Name, scriptingPanelHandle);
                         metroSetTabControl_Workspace.SelectedIndex = 1;
                         break;
                     default:
@@ -352,12 +347,21 @@ namespace P_Studio
         {
             if (e.Button == MouseButtons.Right)
             {
+                metroSetToolStripMenuItem_Add.Visible = true;
+                metroSetToolStripMenuItem_ExpandGame.Visible = true;
+                metroSetToolStripMenuItem_CollapseGame.Visible = true;
+
                 treeView_Game.SelectedNode = e.Node;
                 // Prevent deleting entire project or project settings file
                 if (treeView_Game.SelectedNode.Parent == null || treeView_Game.SelectedNode.Parent.Parent == null)
                     metroSetToolStripMenuItem_Add.Visible = false;
-                else
-                    metroSetToolStripMenuItem_Add.Visible = true;
+                // Hide expand/collapse if not folder
+                if (treeView_Game.SelectedNode.ImageIndex != 18)
+                {
+                    metroSetToolStripMenuItem_ExpandGame.Visible = false;
+                    metroSetToolStripMenuItem_CollapseGame.Visible = false;
+                }
+                    
                 metroSetContextMenuStrip_Game.Show(Cursor.Position);
             }
 
@@ -366,6 +370,18 @@ namespace P_Studio
         {
             if (e.Button == MouseButtons.Right)
             {
+                metroSetToolStripMenuItem_Copy.Visible = true;
+                metroSetToolStripMenuItem_Rename.Visible = true;
+                metroSetToolStripMenuItem_Remove.Visible = true;
+                metroSetToolStripMenuItem_ExpandProj.Visible = true;
+                metroSetToolStripMenuItem_CollapseProj.Visible = true;
+                metroSetToolStripMenuItem_New.Visible = true;
+                metroSetToolStripMenuItem_RepackAs.Visible = true;
+                metroSetToolStripMenuItem_Replace.Visible = true;
+                metroSetToolStripMenuItem_Unpack.Visible = true;
+                metroSetToolStripMenuItem_Compile.Visible = true;
+                metroSetToolStripMenuItem_Decompile.Visible = true;
+
                 treeView_Project.SelectedNode = e.Node;
                 // Hide add to project option if topmost two levels (Game/Archive) 
                 // to prevent copying entire game/archive's worth of data
@@ -375,12 +391,22 @@ namespace P_Studio
                     metroSetToolStripMenuItem_Rename.Visible = false;
                     metroSetToolStripMenuItem_Remove.Visible = false;
                 }
-                else
+                // Hide (de)compile, new, repack, replace & expand/collapse, unpack
+                if (!Treeview.decompileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
+                    metroSetToolStripMenuItem_Decompile.Visible = false;
+                if (!Treeview.compileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
+                    metroSetToolStripMenuItem_Compile.Visible = false;
+                if (treeView_Project.SelectedNode.ImageIndex != 18)
                 {
-                    metroSetToolStripMenuItem_Copy.Visible = true;
-                    metroSetToolStripMenuItem_Rename.Visible = true;
-                    metroSetToolStripMenuItem_Remove.Visible = true;
+                    metroSetToolStripMenuItem_ExpandProj.Visible = false;
+                    metroSetToolStripMenuItem_CollapseProj.Visible = false;
+                    metroSetToolStripMenuItem_New.Visible = false;
+                    metroSetToolStripMenuItem_RepackAs.Visible = false;
                 }
+                else
+                    metroSetToolStripMenuItem_Replace.Visible = false;
+                if (!Treeview.unpackTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
+                    metroSetToolStripMenuItem_Unpack.Visible = false;
                 metroSetContextMenuStrip_Project.Show(Cursor.Position);
             }
         }
@@ -417,6 +443,7 @@ namespace P_Studio
                 Tools.MoveWindow(scriptEditorHandle, 0, 0, formWidth, formHeight, true);
         }
 
+        /* Toggle file browser and log */
         private void ShowHide_Click(object sender, EventArgs e)
         {
             if (!collapsed)

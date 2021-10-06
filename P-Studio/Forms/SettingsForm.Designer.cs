@@ -53,6 +53,8 @@ namespace P_Studio
             this.metroSetRadioButton_Extracted = new MetroSet_UI.Controls.MetroSetRadioButton();
             this.metroSetTextBox_Extracted = new MetroSet_UI.Controls.MetroSetTextBox();
             this.metroSetButton_Archive = new MetroSet_UI.Controls.MetroSetButton();
+            this.metroSetCheckBox_DecompileScripts = new MetroSet_UI.Controls.MetroSetCheckBox();
+            this.metroSetCheckBox_ExtractPAC = new MetroSet_UI.Controls.MetroSetCheckBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.metroSetButton_Cancel = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetButton_Save = new MetroSet_UI.Controls.MetroSetButton();
@@ -359,21 +361,24 @@ namespace P_Studio
             this.tableLayoutPanel_GameSettingsInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel_GameSettingsInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tableLayoutPanel_GameSettingsInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetButton_Extracted, 2, 2);
+            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetButton_Extracted, 2, 3);
             this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetLabel_Game, 0, 0);
             this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetComboBox_Game, 1, 0);
             this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetRadioButton_Archive, 0, 1);
             this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetTextBox_Archive, 1, 1);
-            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetRadioButton_Extracted, 0, 2);
-            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetTextBox_Extracted, 1, 2);
+            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetRadioButton_Extracted, 0, 3);
+            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetTextBox_Extracted, 1, 3);
             this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetButton_Archive, 2, 1);
+            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetCheckBox_DecompileScripts, 1, 2);
+            this.tableLayoutPanel_GameSettingsInner.Controls.Add(this.metroSetCheckBox_ExtractPAC, 0, 2);
             this.tableLayoutPanel_GameSettingsInner.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel_GameSettingsInner.Location = new System.Drawing.Point(3, 49);
             this.tableLayoutPanel_GameSettingsInner.Name = "tableLayoutPanel_GameSettingsInner";
-            this.tableLayoutPanel_GameSettingsInner.RowCount = 3;
-            this.tableLayoutPanel_GameSettingsInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.90476F));
-            this.tableLayoutPanel_GameSettingsInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.09524F));
-            this.tableLayoutPanel_GameSettingsInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel_GameSettingsInner.RowCount = 4;
+            this.tableLayoutPanel_GameSettingsInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel_GameSettingsInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel_GameSettingsInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel_GameSettingsInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel_GameSettingsInner.Size = new System.Drawing.Size(574, 143);
             this.tableLayoutPanel_GameSettingsInner.TabIndex = 27;
             // 
@@ -411,7 +416,7 @@ namespace P_Studio
             this.metroSetLabel_Game.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.metroSetLabel_Game.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.metroSetLabel_Game.IsDerivedStyle = true;
-            this.metroSetLabel_Game.Location = new System.Drawing.Point(136, 21);
+            this.metroSetLabel_Game.Location = new System.Drawing.Point(136, 6);
             this.metroSetLabel_Game.Name = "metroSetLabel_Game";
             this.metroSetLabel_Game.Size = new System.Drawing.Size(61, 23);
             this.metroSetLabel_Game.Style = MetroSet_UI.Enums.Style.Dark;
@@ -443,7 +448,7 @@ namespace P_Studio
             this.metroSetComboBox_Game.Items.AddRange(new object[] {
             "Persona 3 FES",
             "Persona 4"});
-            this.metroSetComboBox_Game.Location = new System.Drawing.Point(203, 19);
+            this.metroSetComboBox_Game.Location = new System.Drawing.Point(203, 4);
             this.metroSetComboBox_Game.Name = "metroSetComboBox_Game";
             this.metroSetComboBox_Game.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.metroSetComboBox_Game.SelectedItemForeColor = System.Drawing.Color.White;
@@ -466,7 +471,7 @@ namespace P_Studio
             this.metroSetRadioButton_Archive.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.metroSetRadioButton_Archive.Group = 0;
             this.metroSetRadioButton_Archive.IsDerivedStyle = true;
-            this.metroSetRadioButton_Archive.Location = new System.Drawing.Point(38, 76);
+            this.metroSetRadioButton_Archive.Location = new System.Drawing.Point(38, 44);
             this.metroSetRadioButton_Archive.Name = "metroSetRadioButton_Archive";
             this.metroSetRadioButton_Archive.Size = new System.Drawing.Size(159, 17);
             this.metroSetRadioButton_Archive.Style = MetroSet_UI.Enums.Style.Dark;
@@ -492,12 +497,12 @@ namespace P_Studio
             this.metroSetTextBox_Archive.Image = null;
             this.metroSetTextBox_Archive.IsDerivedStyle = true;
             this.metroSetTextBox_Archive.Lines = null;
-            this.metroSetTextBox_Archive.Location = new System.Drawing.Point(203, 70);
+            this.metroSetTextBox_Archive.Location = new System.Drawing.Point(203, 38);
             this.metroSetTextBox_Archive.MaxLength = 32767;
             this.metroSetTextBox_Archive.Multiline = false;
             this.metroSetTextBox_Archive.Name = "metroSetTextBox_Archive";
             this.metroSetTextBox_Archive.ReadOnly = true;
-            this.metroSetTextBox_Archive.Size = new System.Drawing.Size(309, 30);
+            this.metroSetTextBox_Archive.Size = new System.Drawing.Size(309, 29);
             this.metroSetTextBox_Archive.Style = MetroSet_UI.Enums.Style.Dark;
             this.metroSetTextBox_Archive.StyleManager = null;
             this.metroSetTextBox_Archive.TabIndex = 27;
@@ -574,7 +579,7 @@ namespace P_Studio
             this.metroSetButton_Archive.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.metroSetButton_Archive.HoverTextColor = System.Drawing.Color.White;
             this.metroSetButton_Archive.IsDerivedStyle = true;
-            this.metroSetButton_Archive.Location = new System.Drawing.Point(518, 68);
+            this.metroSetButton_Archive.Location = new System.Drawing.Point(518, 38);
             this.metroSetButton_Archive.Name = "metroSetButton_Archive";
             this.metroSetButton_Archive.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.metroSetButton_Archive.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -582,7 +587,7 @@ namespace P_Studio
             this.metroSetButton_Archive.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.metroSetButton_Archive.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.metroSetButton_Archive.PressTextColor = System.Drawing.Color.White;
-            this.metroSetButton_Archive.Size = new System.Drawing.Size(53, 34);
+            this.metroSetButton_Archive.Size = new System.Drawing.Size(53, 29);
             this.metroSetButton_Archive.Style = MetroSet_UI.Enums.Style.Dark;
             this.metroSetButton_Archive.StyleManager = null;
             this.metroSetButton_Archive.TabIndex = 32;
@@ -590,6 +595,56 @@ namespace P_Studio
             this.metroSetButton_Archive.ThemeAuthor = "Narwin";
             this.metroSetButton_Archive.ThemeName = "MetroDark";
             this.metroSetButton_Archive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ArchivePath_Click);
+            // 
+            // metroSetCheckBox_DecompileScripts
+            // 
+            this.metroSetCheckBox_DecompileScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroSetCheckBox_DecompileScripts.BackColor = System.Drawing.Color.Transparent;
+            this.metroSetCheckBox_DecompileScripts.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.metroSetCheckBox_DecompileScripts.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.metroSetCheckBox_DecompileScripts.Checked = false;
+            this.metroSetCheckBox_DecompileScripts.CheckSignColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetCheckBox_DecompileScripts.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
+            this.metroSetCheckBox_DecompileScripts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetCheckBox_DecompileScripts.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            this.metroSetCheckBox_DecompileScripts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.metroSetCheckBox_DecompileScripts.IsDerivedStyle = true;
+            this.metroSetCheckBox_DecompileScripts.Location = new System.Drawing.Point(203, 73);
+            this.metroSetCheckBox_DecompileScripts.Name = "metroSetCheckBox_DecompileScripts";
+            this.metroSetCheckBox_DecompileScripts.SignStyle = MetroSet_UI.Enums.SignStyle.Sign;
+            this.metroSetCheckBox_DecompileScripts.Size = new System.Drawing.Size(159, 16);
+            this.metroSetCheckBox_DecompileScripts.Style = MetroSet_UI.Enums.Style.Dark;
+            this.metroSetCheckBox_DecompileScripts.StyleManager = null;
+            this.metroSetCheckBox_DecompileScripts.TabIndex = 35;
+            this.metroSetCheckBox_DecompileScripts.Text = "Decompile Scripts";
+            this.metroSetCheckBox_DecompileScripts.ThemeAuthor = "Narwin";
+            this.metroSetCheckBox_DecompileScripts.ThemeName = "MetroDark";
+            // 
+            // metroSetCheckBox_ExtractPAC
+            // 
+            this.metroSetCheckBox_ExtractPAC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroSetCheckBox_ExtractPAC.BackColor = System.Drawing.Color.Transparent;
+            this.metroSetCheckBox_ExtractPAC.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.metroSetCheckBox_ExtractPAC.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.metroSetCheckBox_ExtractPAC.Checked = false;
+            this.metroSetCheckBox_ExtractPAC.CheckSignColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetCheckBox_ExtractPAC.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
+            this.metroSetCheckBox_ExtractPAC.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetCheckBox_ExtractPAC.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            this.metroSetCheckBox_ExtractPAC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.metroSetCheckBox_ExtractPAC.IsDerivedStyle = true;
+            this.metroSetCheckBox_ExtractPAC.Location = new System.Drawing.Point(70, 73);
+            this.metroSetCheckBox_ExtractPAC.Name = "metroSetCheckBox_ExtractPAC";
+            this.metroSetCheckBox_ExtractPAC.SignStyle = MetroSet_UI.Enums.SignStyle.Sign;
+            this.metroSetCheckBox_ExtractPAC.Size = new System.Drawing.Size(127, 16);
+            this.metroSetCheckBox_ExtractPAC.Style = MetroSet_UI.Enums.Style.Dark;
+            this.metroSetCheckBox_ExtractPAC.StyleManager = null;
+            this.metroSetCheckBox_ExtractPAC.TabIndex = 36;
+            this.metroSetCheckBox_ExtractPAC.Text = "Extract PACs";
+            this.metroSetCheckBox_ExtractPAC.ThemeAuthor = "Narwin";
+            this.metroSetCheckBox_ExtractPAC.ThemeName = "MetroDark";
             // 
             // tableLayoutPanel3
             // 
@@ -721,5 +776,7 @@ namespace P_Studio
         private MetroSet_UI.Controls.MetroSetButton metroSetButton_Archive;
         private MetroSet_UI.Controls.MetroSetButton metroSetButton_Extracted;
         private MetroSet_UI.Controls.MetroSetButton metroSetButton_Output;
+        private MetroSet_UI.Controls.MetroSetCheckBox metroSetCheckBox_DecompileScripts;
+        private MetroSet_UI.Controls.MetroSetCheckBox metroSetCheckBox_ExtractPAC;
     }
 }
