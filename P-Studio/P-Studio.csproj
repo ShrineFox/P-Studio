@@ -1,0 +1,1587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{587A0511-2C46-4049-9849-CCDDCDE707C5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>P_Studio</RootNamespace>
+    <AssemblyName>P-Studio</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>pstudio.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DarkUI, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DarkUI.2.0.2\lib\DarkUI.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroSet UI, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroSet_UI.2.0.0\lib\net45\MetroSet UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.1.1.2\lib\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Sensors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.1.1.2\lib\Microsoft.WindowsAPICodePack.Sensors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.1.1.2\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.1.1.2\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
+      <HintPath>..\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.11.2.1\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\PStudio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PStudio.Designer.cs">
+      <DependentUpon>PStudio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RenameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RenameForm.Designer.cs">
+      <DependentUpon>RenameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Tools.cs" />
+    <Compile Include="Classes\Treeview.cs" />
+    <Compile Include="Classes\Unpacker.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Forms\PStudio.resx">
+      <DependentUpon>PStudio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RenameForm.resx">
+      <DependentUpon>RenameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Dependencies\AtlusScriptCompiler\App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\AtlusFlowScriptExtractor.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\AtlusMessageScriptExtractor.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\AtlusScriptCompiler.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Charsets\P3.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Charsets\P4.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Charsets\P4_Spanish.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Charsets\P5.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Charsets\P5R_EFIGS.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Charsets\P5_Chinese.tsv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\DigitalDevilSaga.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\DigitalDevilSaga\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\DigitalDevilSaga\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\DigitalDevilSaga\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\DigitalDevilSaga\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Nocturne.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Nocturne\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Nocturne\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Nocturne\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Nocturne\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3FES.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3FES\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3FES\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3FES\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3FES\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\Modules\AI\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\Modules\Event\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\Modules\Facility\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\Modules\Field\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3Portable\Modules\Shared\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona3\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\AI\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\AI\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Event\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Facility\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Field\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Net\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4\Modules\AI\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4\Modules\AI\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4\Modules\Event\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4\Modules\Field\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\Modules\AI\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\Modules\Facility\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\Modules\Field\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\Modules\Net\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5Royal\Modules\Social\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\AI\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\AI\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Custom\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Custom\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Facility\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Field\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Field\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Net\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\Persona5\Modules\Social\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Battle\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Camp\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Dungeon\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Event\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Facility\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Map\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Script\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Window\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\DigitalDevilSaga.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\DigitalDevilSaga\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\DigitalDevilSaga\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\DigitalDevilSaga\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\DigitalDevilSaga\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Nocturne.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Nocturne\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Nocturne\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Nocturne\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Nocturne\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4\Modules\AI\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4\Modules\AI\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4\Modules\Event\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona4\Modules\Field\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\FlowScriptModules.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\MessageScriptLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\AI\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\AI\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\Common\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\Common\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\Facility\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\Field\Enums.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\Field\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\Net\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dependencies\PM1MessageScriptEditor\Libraries\Persona5\Modules\Social\Functions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dependencies\7z\7z.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\7z\7z.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\Antlr4.Runtime.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\Antlr4.Runtime.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\AtlusFlowScriptExtractor.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\AtlusMessageScriptExtractor.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\AtlusScriptCompiler.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\AtlusScriptLibrary.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\AtlusScriptCompiler\Newtonsoft.Json.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\PAKPack\AtlusFileSystemLibrary.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\PAKPack\PAKPack.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\PM1MessageScriptEditor\Antlr4.Runtime.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\PM1MessageScriptEditor\AtlusScriptLibrary.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\PM1MessageScriptEditor\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\PM1MessageScriptEditor\PM1MessageScriptEditor.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="license.txt" />
+    <Content Include="pstudio.ico" />
+    <None Include="Resources\application_double.ico" />
+    <None Include="Resources\application_edit.ico" />
+    <None Include="Resources\application_error.ico" />
+    <None Include="Resources\application_form.ico" />
+    <None Include="Resources\application_form_add.ico" />
+    <None Include="Resources\application_form_delete.ico" />
+    <None Include="Resources\application_form_edit.ico" />
+    <None Include="Resources\application_form_magnify.ico" />
+    <None Include="Resources\application_get.ico" />
+    <None Include="Resources\application_go.ico" />
+    <None Include="Resources\application_home.ico" />
+    <None Include="Resources\application_key.ico" />
+    <None Include="Resources\application_lightning.ico" />
+    <None Include="Resources\application_link.ico" />
+    <None Include="Resources\application_osx.ico" />
+    <None Include="Resources\application_osx_terminal.ico" />
+    <None Include="Resources\application_put.ico" />
+    <None Include="Resources\application_side_boxes.ico" />
+    <None Include="Resources\application_side_contract.ico" />
+    <None Include="Resources\application_side_expand.ico" />
+    <None Include="Resources\application_side_list.ico" />
+    <None Include="Resources\application_side_tree.ico" />
+    <None Include="Resources\application_split.ico" />
+    <None Include="Resources\application_tile_horizontal.ico" />
+    <None Include="Resources\application_tile_vertical.ico" />
+    <None Include="Resources\application_view_columns.ico" />
+    <None Include="Resources\application_view_detail.ico" />
+    <None Include="Resources\application_view_gallery.ico" />
+    <None Include="Resources\application_view_icons.ico" />
+    <None Include="Resources\application_view_list.ico" />
+    <None Include="Resources\application_view_tile.ico" />
+    <None Include="Resources\application_xp.ico" />
+    <None Include="Resources\application_xp_terminal.ico" />
+    <None Include="Resources\arrow_branch.ico" />
+    <None Include="Resources\arrow_divide.ico" />
+    <None Include="Resources\arrow_down.ico" />
+    <None Include="Resources\arrow_in.ico" />
+    <None Include="Resources\arrow_inout.ico" />
+    <None Include="Resources\arrow_join.ico" />
+    <None Include="Resources\arrow_left.ico" />
+    <None Include="Resources\arrow_merge.ico" />
+    <None Include="Resources\arrow_out.ico" />
+    <None Include="Resources\arrow_redo.ico" />
+    <None Include="Resources\arrow_refresh.ico" />
+    <None Include="Resources\arrow_refresh_small.ico" />
+    <None Include="Resources\arrow_right.ico" />
+    <None Include="Resources\arrow_rotate_anticlockwise.ico" />
+    <None Include="Resources\arrow_rotate_clockwise.ico" />
+    <None Include="Resources\arrow_switch.ico" />
+    <None Include="Resources\arrow_turn_left.ico" />
+    <None Include="Resources\arrow_turn_right.ico" />
+    <None Include="Resources\arrow_undo.ico" />
+    <None Include="Resources\arrow_up.ico" />
+    <None Include="Resources\asterisk_orange.ico" />
+    <None Include="Resources\asterisk_yellow.ico" />
+    <None Include="Resources\attach.ico" />
+    <None Include="Resources\award_star_add.ico" />
+    <None Include="Resources\award_star_bronze_1.ico" />
+    <None Include="Resources\award_star_bronze_2.ico" />
+    <None Include="Resources\award_star_bronze_3.ico" />
+    <None Include="Resources\award_star_delete.ico" />
+    <None Include="Resources\award_star_gold_1.ico" />
+    <None Include="Resources\award_star_gold_2.ico" />
+    <None Include="Resources\award_star_gold_3.ico" />
+    <None Include="Resources\award_star_silver_1.ico" />
+    <None Include="Resources\award_star_silver_2.ico" />
+    <None Include="Resources\award_star_silver_3.ico" />
+    <None Include="Resources\basket.ico" />
+    <None Include="Resources\basket_add.ico" />
+    <None Include="Resources\basket_delete.ico" />
+    <None Include="Resources\basket_edit.ico" />
+    <None Include="Resources\basket_error.ico" />
+    <None Include="Resources\basket_go.ico" />
+    <None Include="Resources\basket_put.ico" />
+    <None Include="Resources\basket_remove.ico" />
+    <None Include="Resources\bell.ico" />
+    <None Include="Resources\bell_add.ico" />
+    <None Include="Resources\bell_delete.ico" />
+    <None Include="Resources\bell_error.ico" />
+    <None Include="Resources\bell_go.ico" />
+    <None Include="Resources\bell_link.ico" />
+    <None Include="Resources\bin.ico" />
+    <None Include="Resources\bin_closed.ico" />
+    <None Include="Resources\bin_empty.ico" />
+    <None Include="Resources\bomb.ico" />
+    <None Include="Resources\book.ico" />
+    <None Include="Resources\book_add.ico" />
+    <None Include="Resources\book_addresses.ico" />
+    <None Include="Resources\book_delete.ico" />
+    <None Include="Resources\book_edit.ico" />
+    <None Include="Resources\book_error.ico" />
+    <None Include="Resources\book_go.ico" />
+    <None Include="Resources\book_key.ico" />
+    <None Include="Resources\book_link.ico" />
+    <None Include="Resources\book_next.ico" />
+    <None Include="Resources\book_open.ico" />
+    <None Include="Resources\book_previous.ico" />
+    <None Include="Resources\box.ico" />
+    <None Include="Resources\brick.ico" />
+    <None Include="Resources\brick_add.ico" />
+    <None Include="Resources\brick_delete.ico" />
+    <None Include="Resources\brick_edit.ico" />
+    <None Include="Resources\brick_error.ico" />
+    <None Include="Resources\brick_go.ico" />
+    <None Include="Resources\brick_link.ico" />
+    <None Include="Resources\bricks.ico" />
+    <None Include="Resources\briefcase.ico" />
+    <None Include="Resources\bug.ico" />
+    <None Include="Resources\bug_add.ico" />
+    <None Include="Resources\bug_delete.ico" />
+    <None Include="Resources\bug_edit.ico" />
+    <None Include="Resources\bug_error.ico" />
+    <None Include="Resources\bug_go.ico" />
+    <None Include="Resources\bug_link.ico" />
+    <None Include="Resources\building.ico" />
+    <None Include="Resources\building_add.ico" />
+    <None Include="Resources\building_delete.ico" />
+    <None Include="Resources\building_edit.ico" />
+    <None Include="Resources\building_error.ico" />
+    <None Include="Resources\building_go.ico" />
+    <None Include="Resources\building_key.ico" />
+    <None Include="Resources\building_link.ico" />
+    <None Include="Resources\bullet_add.ico" />
+    <None Include="Resources\bullet_arrow_bottom.ico" />
+    <None Include="Resources\bullet_arrow_down.ico" />
+    <None Include="Resources\bullet_arrow_top.ico" />
+    <None Include="Resources\bullet_arrow_up.ico" />
+    <None Include="Resources\bullet_black.ico" />
+    <None Include="Resources\bullet_blue.ico" />
+    <None Include="Resources\bullet_delete.ico" />
+    <None Include="Resources\bullet_disk.ico" />
+    <None Include="Resources\bullet_error.ico" />
+    <None Include="Resources\bullet_feed.ico" />
+    <None Include="Resources\bullet_go.ico" />
+    <None Include="Resources\bullet_green.ico" />
+    <None Include="Resources\bullet_key.ico" />
+    <None Include="Resources\bullet_orange.ico" />
+    <None Include="Resources\bullet_picture.ico" />
+    <None Include="Resources\bullet_pink.ico" />
+    <None Include="Resources\bullet_purple.ico" />
+    <None Include="Resources\bullet_red.ico" />
+    <None Include="Resources\bullet_star.ico" />
+    <None Include="Resources\bullet_toggle_minus.ico" />
+    <None Include="Resources\bullet_toggle_plus.ico" />
+    <None Include="Resources\bullet_white.ico" />
+    <None Include="Resources\bullet_wrench.ico" />
+    <None Include="Resources\bullet_yellow.ico" />
+    <None Include="Resources\cake.ico" />
+    <None Include="Resources\calculator.ico" />
+    <None Include="Resources\calculator_add.ico" />
+    <None Include="Resources\calculator_delete.ico" />
+    <None Include="Resources\calculator_edit.ico" />
+    <None Include="Resources\calculator_error.ico" />
+    <None Include="Resources\calculator_link.ico" />
+    <None Include="Resources\calendar.ico" />
+    <None Include="Resources\calendar_add.ico" />
+    <None Include="Resources\calendar_delete.ico" />
+    <None Include="Resources\calendar_edit.ico" />
+    <None Include="Resources\calendar_link.ico" />
+    <None Include="Resources\calendar_view_day.ico" />
+    <None Include="Resources\calendar_view_month.ico" />
+    <None Include="Resources\calendar_view_week.ico" />
+    <None Include="Resources\camera.ico" />
+    <None Include="Resources\camera_add.ico" />
+    <None Include="Resources\camera_delete.ico" />
+    <None Include="Resources\camera_edit.ico" />
+    <None Include="Resources\camera_error.ico" />
+    <None Include="Resources\camera_go.ico" />
+    <None Include="Resources\camera_link.ico" />
+    <None Include="Resources\camera_small.ico" />
+    <None Include="Resources\cancel.ico" />
+    <None Include="Resources\car.ico" />
+    <None Include="Resources\car_add.ico" />
+    <None Include="Resources\car_delete.ico" />
+    <None Include="Resources\cart.ico" />
+    <None Include="Resources\cart_add.ico" />
+    <None Include="Resources\cart_delete.ico" />
+    <None Include="Resources\cart_edit.ico" />
+    <None Include="Resources\cart_error.ico" />
+    <None Include="Resources\cart_go.ico" />
+    <None Include="Resources\cart_put.ico" />
+    <None Include="Resources\cart_remove.ico" />
+    <None Include="Resources\cd.ico" />
+    <None Include="Resources\cd_add.ico" />
+    <None Include="Resources\cd_burn.ico" />
+    <None Include="Resources\cd_delete.ico" />
+    <None Include="Resources\cd_edit.ico" />
+    <None Include="Resources\cd_eject.ico" />
+    <None Include="Resources\cd_go.ico" />
+    <None Include="Resources\chart_bar.ico" />
+    <None Include="Resources\chart_bar_add.ico" />
+    <None Include="Resources\chart_bar_delete.ico" />
+    <None Include="Resources\chart_bar_edit.ico" />
+    <None Include="Resources\chart_bar_error.ico" />
+    <None Include="Resources\chart_bar_link.ico" />
+    <None Include="Resources\chart_curve.ico" />
+    <None Include="Resources\chart_curve_add.ico" />
+    <None Include="Resources\chart_curve_delete.ico" />
+    <None Include="Resources\chart_curve_edit.ico" />
+    <None Include="Resources\chart_curve_error.ico" />
+    <None Include="Resources\chart_curve_go.ico" />
+    <None Include="Resources\chart_curve_link.ico" />
+    <None Include="Resources\chart_line.ico" />
+    <None Include="Resources\chart_line_add.ico" />
+    <None Include="Resources\chart_line_delete.ico" />
+    <None Include="Resources\chart_line_edit.ico" />
+    <None Include="Resources\chart_line_error.ico" />
+    <None Include="Resources\chart_line_link.ico" />
+    <None Include="Resources\chart_organisation.ico" />
+    <None Include="Resources\chart_organisation_add.ico" />
+    <None Include="Resources\chart_organisation_delete.ico" />
+    <None Include="Resources\chart_pie.ico" />
+    <None Include="Resources\chart_pie_add.ico" />
+    <None Include="Resources\chart_pie_delete.ico" />
+    <None Include="Resources\chart_pie_edit.ico" />
+    <None Include="Resources\chart_pie_error.ico" />
+    <None Include="Resources\chart_pie_link.ico" />
+    <None Include="Resources\clock.ico" />
+    <None Include="Resources\clock_add.ico" />
+    <None Include="Resources\clock_delete.ico" />
+    <None Include="Resources\clock_edit.ico" />
+    <None Include="Resources\clock_error.ico" />
+    <None Include="Resources\clock_go.ico" />
+    <None Include="Resources\clock_link.ico" />
+    <None Include="Resources\clock_pause.ico" />
+    <None Include="Resources\clock_play.ico" />
+    <None Include="Resources\clock_red.ico" />
+    <None Include="Resources\clock_stop.ico" />
+    <None Include="Resources\cog.ico" />
+    <None Include="Resources\cog_add.ico" />
+    <None Include="Resources\cog_delete.ico" />
+    <None Include="Resources\cog_edit.ico" />
+    <None Include="Resources\cog_error.ico" />
+    <None Include="Resources\cog_go.ico" />
+    <None Include="Resources\coins.ico" />
+    <None Include="Resources\coins_add.ico" />
+    <None Include="Resources\coins_delete.ico" />
+    <None Include="Resources\color_swatch.ico" />
+    <None Include="Resources\color_wheel.ico" />
+    <None Include="Resources\comment.ico" />
+    <None Include="Resources\comment_add.ico" />
+    <None Include="Resources\comment_delete.ico" />
+    <None Include="Resources\comment_edit.ico" />
+    <None Include="Resources\comments.ico" />
+    <None Include="Resources\comments_add.ico" />
+    <None Include="Resources\comments_delete.ico" />
+    <None Include="Resources\compress.ico" />
+    <None Include="Resources\computer.ico" />
+    <None Include="Resources\computer_add.ico" />
+    <None Include="Resources\computer_delete.ico" />
+    <None Include="Resources\computer_edit.ico" />
+    <None Include="Resources\computer_error.ico" />
+    <None Include="Resources\computer_go.ico" />
+    <None Include="Resources\computer_key.ico" />
+    <None Include="Resources\computer_link.ico" />
+    <None Include="Resources\connect.ico" />
+    <None Include="Resources\contrast.ico" />
+    <None Include="Resources\contrast_decrease.ico" />
+    <None Include="Resources\contrast_high.ico" />
+    <None Include="Resources\contrast_increase.ico" />
+    <None Include="Resources\contrast_low.ico" />
+    <None Include="Resources\control_eject.ico" />
+    <None Include="Resources\control_eject_blue.ico" />
+    <None Include="Resources\control_end.ico" />
+    <None Include="Resources\control_end_blue.ico" />
+    <None Include="Resources\control_equalizer.ico" />
+    <None Include="Resources\control_equalizer_blue.ico" />
+    <None Include="Resources\control_fastforward.ico" />
+    <None Include="Resources\control_fastforward_blue.ico" />
+    <None Include="Resources\control_pause.ico" />
+    <None Include="Resources\control_pause_blue.ico" />
+    <None Include="Resources\control_play.ico" />
+    <None Include="Resources\control_play_blue.ico" />
+    <None Include="Resources\control_repeat.ico" />
+    <None Include="Resources\control_repeat_blue.ico" />
+    <None Include="Resources\control_rewind.ico" />
+    <None Include="Resources\control_rewind_blue.ico" />
+    <None Include="Resources\control_start.ico" />
+    <None Include="Resources\control_start_blue.ico" />
+    <None Include="Resources\control_stop.ico" />
+    <None Include="Resources\control_stop_blue.ico" />
+    <None Include="Resources\controller.ico" />
+    <None Include="Resources\controller_add.ico" />
+    <None Include="Resources\controller_delete.ico" />
+    <None Include="Resources\controller_error.ico" />
+    <None Include="Resources\creditcards.ico" />
+    <None Include="Resources\cross.ico" />
+    <None Include="Resources\css.ico" />
+    <None Include="Resources\css_add.ico" />
+    <None Include="Resources\css_delete.ico" />
+    <None Include="Resources\css_go.ico" />
+    <None Include="Resources\css_valid.ico" />
+    <None Include="Resources\cup.ico" />
+    <None Include="Resources\cup_add.ico" />
+    <None Include="Resources\cup_delete.ico" />
+    <None Include="Resources\cup_edit.ico" />
+    <None Include="Resources\cup_error.ico" />
+    <None Include="Resources\cup_go.ico" />
+    <None Include="Resources\cup_key.ico" />
+    <None Include="Resources\cup_link.ico" />
+    <None Include="Resources\cursor.ico" />
+    <None Include="Resources\cut.ico" />
+    <None Include="Resources\cut_red.ico" />
+    <None Include="Resources\database.ico" />
+    <None Include="Resources\database_add.ico" />
+    <None Include="Resources\database_connect.ico" />
+    <None Include="Resources\database_delete.ico" />
+    <None Include="Resources\database_edit.ico" />
+    <None Include="Resources\database_error.ico" />
+    <None Include="Resources\database_gear.ico" />
+    <None Include="Resources\database_go.ico" />
+    <None Include="Resources\database_key.ico" />
+    <None Include="Resources\database_lightning.ico" />
+    <None Include="Resources\database_link.ico" />
+    <None Include="Resources\database_refresh.ico" />
+    <None Include="Resources\database_save.ico" />
+    <None Include="Resources\database_table.ico" />
+    <None Include="Resources\date.ico" />
+    <None Include="Resources\date_add.ico" />
+    <None Include="Resources\date_delete.ico" />
+    <None Include="Resources\date_edit.ico" />
+    <None Include="Resources\date_error.ico" />
+    <None Include="Resources\date_go.ico" />
+    <None Include="Resources\date_link.ico" />
+    <None Include="Resources\date_magnify.ico" />
+    <None Include="Resources\date_next.ico" />
+    <None Include="Resources\date_previous.ico" />
+    <None Include="Resources\delete.ico" />
+    <None Include="Resources\disconnect.ico" />
+    <None Include="Resources\disk.ico" />
+    <None Include="Resources\disk_multiple.ico" />
+    <None Include="Resources\door.ico" />
+    <None Include="Resources\door_in.ico" />
+    <None Include="Resources\door_open.ico" />
+    <None Include="Resources\door_out.ico" />
+    <None Include="Resources\drink.ico" />
+    <None Include="Resources\drink_empty.ico" />
+    <None Include="Resources\drive.ico" />
+    <None Include="Resources\drive_add.ico" />
+    <None Include="Resources\drive_burn.ico" />
+    <None Include="Resources\drive_cd.ico" />
+    <None Include="Resources\drive_cd_empty.ico" />
+    <None Include="Resources\drive_delete.ico" />
+    <None Include="Resources\drive_disk.ico" />
+    <None Include="Resources\drive_edit.ico" />
+    <None Include="Resources\drive_error.ico" />
+    <None Include="Resources\drive_go.ico" />
+    <None Include="Resources\drive_key.ico" />
+    <None Include="Resources\drive_link.ico" />
+    <None Include="Resources\drive_magnify.ico" />
+    <None Include="Resources\drive_network.ico" />
+    <None Include="Resources\drive_rename.ico" />
+    <None Include="Resources\drive_user.ico" />
+    <None Include="Resources\drive_web.ico" />
+    <None Include="Resources\dvd.ico" />
+    <None Include="Resources\dvd_add.ico" />
+    <None Include="Resources\dvd_delete.ico" />
+    <None Include="Resources\dvd_edit.ico" />
+    <None Include="Resources\dvd_error.ico" />
+    <None Include="Resources\dvd_go.ico" />
+    <None Include="Resources\dvd_key.ico" />
+    <None Include="Resources\dvd_link.ico" />
+    <None Include="Resources\email.ico" />
+    <None Include="Resources\email_add.ico" />
+    <None Include="Resources\email_attach.ico" />
+    <None Include="Resources\email_delete.ico" />
+    <None Include="Resources\email_edit.ico" />
+    <None Include="Resources\email_error.ico" />
+    <None Include="Resources\email_go.ico" />
+    <None Include="Resources\email_link.ico" />
+    <None Include="Resources\email_open.ico" />
+    <None Include="Resources\email_open_image.ico" />
+    <None Include="Resources\emoticon_evilgrin.ico" />
+    <None Include="Resources\emoticon_grin.ico" />
+    <None Include="Resources\emoticon_happy.ico" />
+    <None Include="Resources\emoticon_smile.ico" />
+    <None Include="Resources\emoticon_surprised.ico" />
+    <None Include="Resources\emoticon_tongue.ico" />
+    <None Include="Resources\emoticon_unhappy.ico" />
+    <None Include="Resources\emoticon_waii.ico" />
+    <None Include="Resources\emoticon_wink.ico" />
+    <None Include="Resources\error.ico" />
+    <None Include="Resources\error_add.ico" />
+    <None Include="Resources\error_delete.ico" />
+    <None Include="Resources\error_go.ico" />
+    <None Include="Resources\exclamation.ico" />
+    <None Include="Resources\eye.ico" />
+    <None Include="Resources\feed.ico" />
+    <None Include="Resources\feed_add.ico" />
+    <None Include="Resources\feed_delete.ico" />
+    <None Include="Resources\feed_disk.ico" />
+    <None Include="Resources\feed_edit.ico" />
+    <None Include="Resources\feed_error.ico" />
+    <None Include="Resources\feed_go.ico" />
+    <None Include="Resources\feed_key.ico" />
+    <None Include="Resources\feed_link.ico" />
+    <None Include="Resources\feed_magnify.ico" />
+    <None Include="Resources\female.ico" />
+    <None Include="Resources\film.ico" />
+    <None Include="Resources\film_add.ico" />
+    <None Include="Resources\film_delete.ico" />
+    <None Include="Resources\film_edit.ico" />
+    <None Include="Resources\film_error.ico" />
+    <None Include="Resources\film_go.ico" />
+    <None Include="Resources\film_key.ico" />
+    <None Include="Resources\film_link.ico" />
+    <None Include="Resources\film_save.ico" />
+    <None Include="Resources\find.ico" />
+    <None Include="Resources\flag_blue.ico" />
+    <None Include="Resources\flag_green.ico" />
+    <None Include="Resources\flag_orange.ico" />
+    <None Include="Resources\flag_pink.ico" />
+    <None Include="Resources\flag_purple.ico" />
+    <None Include="Resources\flag_red.ico" />
+    <None Include="Resources\flag_yellow.ico" />
+    <None Include="Resources\folder.ico" />
+    <None Include="Resources\folder_add.ico" />
+    <None Include="Resources\folder_bell.ico" />
+    <None Include="Resources\folder_brick.ico" />
+    <None Include="Resources\folder_bug.ico" />
+    <None Include="Resources\folder_camera.ico" />
+    <None Include="Resources\folder_database.ico" />
+    <None Include="Resources\folder_delete.ico" />
+    <None Include="Resources\folder_edit.ico" />
+    <None Include="Resources\folder_error.ico" />
+    <None Include="Resources\folder_explore.ico" />
+    <None Include="Resources\folder_feed.ico" />
+    <None Include="Resources\folder_find.ico" />
+    <None Include="Resources\folder_go.ico" />
+    <None Include="Resources\folder_heart.ico" />
+    <None Include="Resources\folder_image.ico" />
+    <None Include="Resources\folder_key.ico" />
+    <None Include="Resources\folder_lightbulb.ico" />
+    <None Include="Resources\folder_link.ico" />
+    <None Include="Resources\folder_magnify.ico" />
+    <None Include="Resources\folder_page.ico" />
+    <None Include="Resources\folder_page_white.ico" />
+    <None Include="Resources\folder_palette.ico" />
+    <None Include="Resources\folder_picture.ico" />
+    <None Include="Resources\folder_star.ico" />
+    <None Include="Resources\folder_table.ico" />
+    <None Include="Resources\folder_user.ico" />
+    <None Include="Resources\folder_wrench.ico" />
+    <None Include="Resources\font.ico" />
+    <None Include="Resources\font_add.ico" />
+    <None Include="Resources\font_delete.ico" />
+    <None Include="Resources\font_go.ico" />
+    <None Include="Resources\group.ico" />
+    <None Include="Resources\group_add.ico" />
+    <None Include="Resources\group_delete.ico" />
+    <None Include="Resources\group_edit.ico" />
+    <None Include="Resources\group_error.ico" />
+    <None Include="Resources\group_gear.ico" />
+    <None Include="Resources\group_go.ico" />
+    <None Include="Resources\group_key.ico" />
+    <None Include="Resources\group_link.ico" />
+    <None Include="Resources\heart.ico" />
+    <None Include="Resources\heart_add.ico" />
+    <None Include="Resources\heart_delete.ico" />
+    <None Include="Resources\help.ico" />
+    <None Include="Resources\hourglass.ico" />
+    <None Include="Resources\hourglass_add.ico" />
+    <None Include="Resources\hourglass_delete.ico" />
+    <None Include="Resources\hourglass_go.ico" />
+    <None Include="Resources\hourglass_link.ico" />
+    <None Include="Resources\house.ico" />
+    <None Include="Resources\house_go.ico" />
+    <None Include="Resources\house_link.ico" />
+    <None Include="Resources\html.ico" />
+    <None Include="Resources\html_add.ico" />
+    <None Include="Resources\html_delete.ico" />
+    <None Include="Resources\html_go.ico" />
+    <None Include="Resources\html_valid.ico" />
+    <None Include="Resources\image.ico" />
+    <None Include="Resources\image_add.ico" />
+    <None Include="Resources\image_delete.ico" />
+    <None Include="Resources\image_edit.ico" />
+    <None Include="Resources\image_link.ico" />
+    <None Include="Resources\images.ico" />
+    <None Include="Resources\information.ico" />
+    <None Include="Resources\ipod.ico" />
+    <None Include="Resources\ipod_cast.ico" />
+    <None Include="Resources\ipod_cast_add.ico" />
+    <None Include="Resources\ipod_cast_delete.ico" />
+    <None Include="Resources\ipod_sound.ico" />
+    <None Include="Resources\joystick.ico" />
+    <None Include="Resources\joystick_add.ico" />
+    <None Include="Resources\joystick_delete.ico" />
+    <None Include="Resources\joystick_error.ico" />
+    <None Include="Resources\key.ico" />
+    <None Include="Resources\key_add.ico" />
+    <None Include="Resources\key_delete.ico" />
+    <None Include="Resources\key_go.ico" />
+    <None Include="Resources\keyboard.ico" />
+    <None Include="Resources\keyboard_add.ico" />
+    <None Include="Resources\keyboard_delete.ico" />
+    <None Include="Resources\keyboard_magnify.ico" />
+    <None Include="Resources\layers.ico" />
+    <None Include="Resources\layout.ico" />
+    <None Include="Resources\layout_add.ico" />
+    <None Include="Resources\layout_content.ico" />
+    <None Include="Resources\layout_delete.ico" />
+    <None Include="Resources\layout_edit.ico" />
+    <None Include="Resources\layout_error.ico" />
+    <None Include="Resources\layout_header.ico" />
+    <None Include="Resources\layout_link.ico" />
+    <None Include="Resources\layout_sidebar.ico" />
+    <None Include="Resources\lightbulb.ico" />
+    <None Include="Resources\lightbulb_add.ico" />
+    <None Include="Resources\lightbulb_delete.ico" />
+    <None Include="Resources\lightbulb_off.ico" />
+    <None Include="Resources\lightning.ico" />
+    <None Include="Resources\lightning_add.ico" />
+    <None Include="Resources\lightning_delete.ico" />
+    <None Include="Resources\lightning_go.ico" />
+    <None Include="Resources\link.ico" />
+    <None Include="Resources\link_add.ico" />
+    <None Include="Resources\link_break.ico" />
+    <None Include="Resources\link_delete.ico" />
+    <None Include="Resources\link_edit.ico" />
+    <None Include="Resources\link_error.ico" />
+    <None Include="Resources\link_go.ico" />
+    <None Include="Resources\lock.ico" />
+    <None Include="Resources\lock_add.ico" />
+    <None Include="Resources\lock_break.ico" />
+    <None Include="Resources\lock_delete.ico" />
+    <None Include="Resources\lock_edit.ico" />
+    <None Include="Resources\lock_go.ico" />
+    <None Include="Resources\lock_open.ico" />
+    <None Include="Resources\lorry.ico" />
+    <None Include="Resources\lorry_add.ico" />
+    <None Include="Resources\lorry_delete.ico" />
+    <None Include="Resources\lorry_error.ico" />
+    <None Include="Resources\lorry_flatbed.ico" />
+    <None Include="Resources\lorry_go.ico" />
+    <None Include="Resources\lorry_link.ico" />
+    <None Include="Resources\magifier_zoom_out.ico" />
+    <None Include="Resources\magnifier.ico" />
+    <None Include="Resources\magnifier_zoom_in.ico" />
+    <None Include="Resources\male.ico" />
+    <None Include="Resources\map.ico" />
+    <None Include="Resources\map_add.ico" />
+    <None Include="Resources\map_delete.ico" />
+    <None Include="Resources\map_edit.ico" />
+    <None Include="Resources\map_go.ico" />
+    <None Include="Resources\map_magnify.ico" />
+    <None Include="Resources\medal_bronze_1.ico" />
+    <None Include="Resources\medal_bronze_2.ico" />
+    <None Include="Resources\medal_bronze_3.ico" />
+    <None Include="Resources\medal_bronze_add.ico" />
+    <None Include="Resources\medal_bronze_delete.ico" />
+    <None Include="Resources\medal_gold_1.ico" />
+    <None Include="Resources\medal_gold_2.ico" />
+    <None Include="Resources\medal_gold_3.ico" />
+    <None Include="Resources\medal_gold_add.ico" />
+    <None Include="Resources\medal_gold_delete.ico" />
+    <None Include="Resources\medal_silver_1.ico" />
+    <None Include="Resources\medal_silver_2.ico" />
+    <None Include="Resources\medal_silver_3.ico" />
+    <None Include="Resources\medal_silver_add.ico" />
+    <None Include="Resources\medal_silver_delete.ico" />
+    <None Include="Resources\money.ico" />
+    <None Include="Resources\money_add.ico" />
+    <None Include="Resources\money_delete.ico" />
+    <None Include="Resources\money_dollar.ico" />
+    <None Include="Resources\money_euro.ico" />
+    <None Include="Resources\money_pound.ico" />
+    <None Include="Resources\money_yen.ico" />
+    <None Include="Resources\monitor.ico" />
+    <None Include="Resources\monitor_add.ico" />
+    <None Include="Resources\monitor_delete.ico" />
+    <None Include="Resources\monitor_edit.ico" />
+    <None Include="Resources\monitor_error.ico" />
+    <None Include="Resources\monitor_go.ico" />
+    <None Include="Resources\monitor_lightning.ico" />
+    <None Include="Resources\monitor_link.ico" />
+    <None Include="Resources\mouse.ico" />
+    <None Include="Resources\mouse_add.ico" />
+    <None Include="Resources\mouse_delete.ico" />
+    <None Include="Resources\mouse_error.ico" />
+    <None Include="Resources\music.ico" />
+    <None Include="Resources\new.ico" />
+    <None Include="Resources\newspaper.ico" />
+    <None Include="Resources\newspaper_add.ico" />
+    <None Include="Resources\newspaper_delete.ico" />
+    <None Include="Resources\newspaper_go.ico" />
+    <None Include="Resources\newspaper_link.ico" />
+    <None Include="Resources\note.ico" />
+    <None Include="Resources\note_add.ico" />
+    <None Include="Resources\note_delete.ico" />
+    <None Include="Resources\note_edit.ico" />
+    <None Include="Resources\note_error.ico" />
+    <None Include="Resources\note_go.ico" />
+    <None Include="Resources\overlays.ico" />
+    <None Include="Resources\package.ico" />
+    <None Include="Resources\package_add.ico" />
+    <None Include="Resources\package_delete.ico" />
+    <None Include="Resources\package_go.ico" />
+    <None Include="Resources\package_green.ico" />
+    <None Include="Resources\package_link.ico" />
+    <None Include="Resources\page.ico" />
+    <None Include="Resources\page_add.ico" />
+    <None Include="Resources\page_attach.ico" />
+    <None Include="Resources\page_code.ico" />
+    <None Include="Resources\page_copy.ico" />
+    <None Include="Resources\page_delete.ico" />
+    <None Include="Resources\page_edit.ico" />
+    <None Include="Resources\page_error.ico" />
+    <None Include="Resources\page_excel.ico" />
+    <None Include="Resources\page_find.ico" />
+    <None Include="Resources\page_gear.ico" />
+    <None Include="Resources\page_go.ico" />
+    <None Include="Resources\page_green.ico" />
+    <None Include="Resources\page_key.ico" />
+    <None Include="Resources\page_lightning.ico" />
+    <None Include="Resources\page_link.ico" />
+    <None Include="Resources\page_paintbrush.ico" />
+    <None Include="Resources\page_paste.ico" />
+    <None Include="Resources\page_red.ico" />
+    <None Include="Resources\page_refresh.ico" />
+    <None Include="Resources\page_save.ico" />
+    <None Include="Resources\page_white.ico" />
+    <None Include="Resources\page_white_acrobat.ico" />
+    <None Include="Resources\page_white_actionscript.ico" />
+    <None Include="Resources\page_white_add.ico" />
+    <None Include="Resources\page_white_c.ico" />
+    <None Include="Resources\page_white_camera.ico" />
+    <None Include="Resources\page_white_cd.ico" />
+    <None Include="Resources\page_white_code.ico" />
+    <None Include="Resources\page_white_code_red.ico" />
+    <None Include="Resources\page_white_coldfusion.ico" />
+    <None Include="Resources\page_white_compressed.ico" />
+    <None Include="Resources\page_white_copy.ico" />
+    <None Include="Resources\page_white_cplusplus.ico" />
+    <None Include="Resources\page_white_csharp.ico" />
+    <None Include="Resources\page_white_cup.ico" />
+    <None Include="Resources\page_white_database.ico" />
+    <None Include="Resources\page_white_delete.ico" />
+    <None Include="Resources\page_white_dvd.ico" />
+    <None Include="Resources\page_white_edit.ico" />
+    <None Include="Resources\page_white_error.ico" />
+    <None Include="Resources\page_white_excel.ico" />
+    <None Include="Resources\page_white_find.ico" />
+    <None Include="Resources\page_white_flash.ico" />
+    <None Include="Resources\page_white_freehand.ico" />
+    <None Include="Resources\page_white_gear.ico" />
+    <None Include="Resources\page_white_get.ico" />
+    <None Include="Resources\page_white_go.ico" />
+    <None Include="Resources\page_white_h.ico" />
+    <None Include="Resources\page_white_horizontal.ico" />
+    <None Include="Resources\page_white_key.ico" />
+    <None Include="Resources\page_white_lightning.ico" />
+    <None Include="Resources\page_white_link.ico" />
+    <None Include="Resources\page_white_magnify.ico" />
+    <None Include="Resources\page_white_medal.ico" />
+    <None Include="Resources\page_white_office.ico" />
+    <None Include="Resources\page_white_paint.ico" />
+    <None Include="Resources\page_white_paintbrush.ico" />
+    <None Include="Resources\page_white_paste.ico" />
+    <None Include="Resources\page_white_php.ico" />
+    <None Include="Resources\page_white_picture.ico" />
+    <None Include="Resources\page_white_powerpoint.ico" />
+    <None Include="Resources\page_white_put.ico" />
+    <None Include="Resources\page_white_ruby.ico" />
+    <None Include="Resources\page_white_stack.ico" />
+    <None Include="Resources\page_white_star.ico" />
+    <None Include="Resources\page_white_swoosh.ico" />
+    <None Include="Resources\page_white_text.ico" />
+    <None Include="Resources\page_white_text_width.ico" />
+    <None Include="Resources\page_white_tux.ico" />
+    <None Include="Resources\page_white_vector.ico" />
+    <None Include="Resources\page_white_visualstudio.ico" />
+    <None Include="Resources\page_white_width.ico" />
+    <None Include="Resources\page_white_word.ico" />
+    <None Include="Resources\page_white_world.ico" />
+    <None Include="Resources\page_white_wrench.ico" />
+    <None Include="Resources\page_white_zip.ico" />
+    <None Include="Resources\page_word.ico" />
+    <None Include="Resources\page_world.ico" />
+    <None Include="Resources\paintbrush.ico" />
+    <None Include="Resources\paintcan.ico" />
+    <None Include="Resources\palette.ico" />
+    <None Include="Resources\paste_plain.ico" />
+    <None Include="Resources\paste_word.ico" />
+    <None Include="Resources\pencil.ico" />
+    <None Include="Resources\pencil_add.ico" />
+    <None Include="Resources\pencil_delete.ico" />
+    <None Include="Resources\pencil_go.ico" />
+    <None Include="Resources\phone.ico" />
+    <None Include="Resources\phone_add.ico" />
+    <None Include="Resources\phone_delete.ico" />
+    <None Include="Resources\phone_sound.ico" />
+    <None Include="Resources\photo.ico" />
+    <None Include="Resources\photo_add.ico" />
+    <None Include="Resources\photo_delete.ico" />
+    <None Include="Resources\photo_link.ico" />
+    <None Include="Resources\photos.ico" />
+    <None Include="Resources\picture.ico" />
+    <None Include="Resources\picture_add.ico" />
+    <None Include="Resources\picture_delete.ico" />
+    <None Include="Resources\picture_edit.ico" />
+    <None Include="Resources\picture_empty.ico" />
+    <None Include="Resources\picture_error.ico" />
+    <None Include="Resources\picture_go.ico" />
+    <None Include="Resources\picture_key.ico" />
+    <None Include="Resources\picture_link.ico" />
+    <None Include="Resources\picture_save.ico" />
+    <None Include="Resources\pictures.ico" />
+    <None Include="Resources\pilcrow.ico" />
+    <None Include="Resources\pill.ico" />
+    <None Include="Resources\pill_add.ico" />
+    <None Include="Resources\pill_delete.ico" />
+    <None Include="Resources\pill_go.ico" />
+    <None Include="Resources\plugin.ico" />
+    <None Include="Resources\plugin_add.ico" />
+    <None Include="Resources\plugin_delete.ico" />
+    <None Include="Resources\plugin_disabled.ico" />
+    <None Include="Resources\plugin_edit.ico" />
+    <None Include="Resources\plugin_error.ico" />
+    <None Include="Resources\plugin_go.ico" />
+    <None Include="Resources\plugin_link.ico" />
+    <None Include="Resources\printer.ico" />
+    <None Include="Resources\printer_add.ico" />
+    <None Include="Resources\printer_delete.ico" />
+    <None Include="Resources\printer_empty.ico" />
+    <None Include="Resources\printer_error.ico" />
+    <None Include="Resources\rainbow.ico" />
+    <None Include="Resources\report.ico" />
+    <None Include="Resources\report_add.ico" />
+    <None Include="Resources\report_delete.ico" />
+    <None Include="Resources\report_disk.ico" />
+    <None Include="Resources\report_edit.ico" />
+    <None Include="Resources\report_go.ico" />
+    <None Include="Resources\report_key.ico" />
+    <None Include="Resources\report_link.ico" />
+    <None Include="Resources\report_magnify.ico" />
+    <None Include="Resources\report_picture.ico" />
+    <None Include="Resources\report_user.ico" />
+    <None Include="Resources\report_word.ico" />
+    <None Include="Resources\resultset_first.ico" />
+    <None Include="Resources\resultset_last.ico" />
+    <None Include="Resources\resultset_next.ico" />
+    <None Include="Resources\resultset_previous.ico" />
+    <None Include="Resources\rosette.ico" />
+    <None Include="Resources\rss.ico" />
+    <None Include="Resources\rss_add.ico" />
+    <None Include="Resources\rss_delete.ico" />
+    <None Include="Resources\rss_go.ico" />
+    <None Include="Resources\rss_valid.ico" />
+    <None Include="Resources\ruby.ico" />
+    <None Include="Resources\ruby_add.ico" />
+    <None Include="Resources\ruby_delete.ico" />
+    <None Include="Resources\ruby_gear.ico" />
+    <None Include="Resources\ruby_get.ico" />
+    <None Include="Resources\ruby_go.ico" />
+    <None Include="Resources\ruby_key.ico" />
+    <None Include="Resources\ruby_link.ico" />
+    <None Include="Resources\ruby_put.ico" />
+    <None Include="Resources\script.ico" />
+    <None Include="Resources\script_add.ico" />
+    <None Include="Resources\script_code.ico" />
+    <None Include="Resources\script_code_red.ico" />
+    <None Include="Resources\script_delete.ico" />
+    <None Include="Resources\script_edit.ico" />
+    <None Include="Resources\script_error.ico" />
+    <None Include="Resources\script_gear.ico" />
+    <None Include="Resources\script_go.ico" />
+    <None Include="Resources\script_key.ico" />
+    <None Include="Resources\script_lightning.ico" />
+    <None Include="Resources\script_link.ico" />
+    <None Include="Resources\script_palette.ico" />
+    <None Include="Resources\script_save.ico" />
+    <None Include="Resources\server.ico" />
+    <None Include="Resources\server_add.ico" />
+    <None Include="Resources\server_chart.ico" />
+    <None Include="Resources\server_compressed.ico" />
+    <None Include="Resources\server_connect.ico" />
+    <None Include="Resources\server_database.ico" />
+    <None Include="Resources\server_delete.ico" />
+    <None Include="Resources\server_edit.ico" />
+    <None Include="Resources\server_error.ico" />
+    <None Include="Resources\server_go.ico" />
+    <None Include="Resources\server_key.ico" />
+    <None Include="Resources\server_lightning.ico" />
+    <None Include="Resources\server_link.ico" />
+    <None Include="Resources\server_uncompressed.ico" />
+    <None Include="Resources\shading.ico" />
+    <None Include="Resources\shape_align_bottom.ico" />
+    <None Include="Resources\shape_align_center.ico" />
+    <None Include="Resources\shape_align_left.ico" />
+    <None Include="Resources\shape_align_middle.ico" />
+    <None Include="Resources\shape_align_right.ico" />
+    <None Include="Resources\shape_align_top.ico" />
+    <None Include="Resources\shape_flip_horizontal.ico" />
+    <None Include="Resources\shape_flip_vertical.ico" />
+    <None Include="Resources\shape_group.ico" />
+    <None Include="Resources\shape_handles.ico" />
+    <None Include="Resources\shape_move_back.ico" />
+    <None Include="Resources\shape_move_backwards.ico" />
+    <None Include="Resources\shape_move_forwards.ico" />
+    <None Include="Resources\shape_move_front.ico" />
+    <None Include="Resources\shape_rotate_anticlockwise.ico" />
+    <None Include="Resources\shape_rotate_clockwise.ico" />
+    <None Include="Resources\shape_square.ico" />
+    <None Include="Resources\shape_square_add.ico" />
+    <None Include="Resources\shape_square_delete.ico" />
+    <None Include="Resources\shape_square_edit.ico" />
+    <None Include="Resources\shape_square_error.ico" />
+    <None Include="Resources\shape_square_go.ico" />
+    <None Include="Resources\shape_square_key.ico" />
+    <None Include="Resources\shape_square_link.ico" />
+    <None Include="Resources\shape_ungroup.ico" />
+    <None Include="Resources\shield.ico" />
+    <None Include="Resources\shield_add.ico" />
+    <None Include="Resources\shield_delete.ico" />
+    <None Include="Resources\shield_go.ico" />
+    <None Include="Resources\sitemap.ico" />
+    <None Include="Resources\sitemap_color.ico" />
+    <None Include="Resources\sound.ico" />
+    <None Include="Resources\sound_add.ico" />
+    <None Include="Resources\sound_delete.ico" />
+    <None Include="Resources\sound_low.ico" />
+    <None Include="Resources\sound_mute.ico" />
+    <None Include="Resources\sound_none.ico" />
+    <None Include="Resources\spellcheck.ico" />
+    <None Include="Resources\sport_8ball.ico" />
+    <None Include="Resources\sport_basketball.ico" />
+    <None Include="Resources\sport_football.ico" />
+    <None Include="Resources\sport_golf.ico" />
+    <None Include="Resources\sport_raquet.ico" />
+    <None Include="Resources\sport_shuttlecock.ico" />
+    <None Include="Resources\sport_soccer.ico" />
+    <None Include="Resources\sport_tennis.ico" />
+    <None Include="Resources\star.ico" />
+    <None Include="Resources\status_away.ico" />
+    <None Include="Resources\status_busy.ico" />
+    <None Include="Resources\status_offline.ico" />
+    <None Include="Resources\status_online.ico" />
+    <None Include="Resources\stop.ico" />
+    <None Include="Resources\style.ico" />
+    <None Include="Resources\style_add.ico" />
+    <None Include="Resources\style_delete.ico" />
+    <None Include="Resources\style_edit.ico" />
+    <None Include="Resources\style_go.ico" />
+    <None Include="Resources\sum.ico" />
+    <None Include="Resources\tab.ico" />
+    <None Include="Resources\tab_add.ico" />
+    <None Include="Resources\tab_delete.ico" />
+    <None Include="Resources\tab_edit.ico" />
+    <None Include="Resources\tab_go.ico" />
+    <None Include="Resources\table.ico" />
+    <None Include="Resources\table_add.ico" />
+    <None Include="Resources\table_delete.ico" />
+    <None Include="Resources\table_edit.ico" />
+    <None Include="Resources\table_error.ico" />
+    <None Include="Resources\table_gear.ico" />
+    <None Include="Resources\table_go.ico" />
+    <None Include="Resources\table_key.ico" />
+    <None Include="Resources\table_lightning.ico" />
+    <None Include="Resources\table_link.ico" />
+    <None Include="Resources\table_multiple.ico" />
+    <None Include="Resources\table_refresh.ico" />
+    <None Include="Resources\table_relationship.ico" />
+    <None Include="Resources\table_row_delete.ico" />
+    <None Include="Resources\table_row_insert.ico" />
+    <None Include="Resources\table_save.ico" />
+    <None Include="Resources\table_sort.ico" />
+    <None Include="Resources\tag.ico" />
+    <None Include="Resources\tag_blue.ico" />
+    <None Include="Resources\tag_blue_add.ico" />
+    <None Include="Resources\tag_blue_delete.ico" />
+    <None Include="Resources\tag_blue_edit.ico" />
+    <None Include="Resources\tag_green.ico" />
+    <None Include="Resources\tag_orange.ico" />
+    <None Include="Resources\tag_pink.ico" />
+    <None Include="Resources\tag_purple.ico" />
+    <None Include="Resources\tag_red.ico" />
+    <None Include="Resources\tag_yellow.ico" />
+    <None Include="Resources\telephone.ico" />
+    <None Include="Resources\telephone_add.ico" />
+    <None Include="Resources\telephone_delete.ico" />
+    <None Include="Resources\telephone_edit.ico" />
+    <None Include="Resources\telephone_error.ico" />
+    <None Include="Resources\telephone_go.ico" />
+    <None Include="Resources\telephone_key.ico" />
+    <None Include="Resources\telephone_link.ico" />
+    <None Include="Resources\television.ico" />
+    <None Include="Resources\television_add.ico" />
+    <None Include="Resources\television_delete.ico" />
+    <None Include="Resources\text_align_center.ico" />
+    <None Include="Resources\text_align_justify.ico" />
+    <None Include="Resources\text_align_left.ico" />
+    <None Include="Resources\text_align_right.ico" />
+    <None Include="Resources\text_allcaps.ico" />
+    <None Include="Resources\text_bold.ico" />
+    <None Include="Resources\text_columns.ico" />
+    <None Include="Resources\text_dropcaps.ico" />
+    <None Include="Resources\text_heading_1.ico" />
+    <None Include="Resources\text_heading_2.ico" />
+    <None Include="Resources\text_heading_3.ico" />
+    <None Include="Resources\text_heading_4.ico" />
+    <None Include="Resources\text_heading_5.ico" />
+    <None Include="Resources\text_heading_6.ico" />
+    <None Include="Resources\text_horizontalrule.ico" />
+    <None Include="Resources\text_indent.ico" />
+    <None Include="Resources\text_indent_remove.ico" />
+    <None Include="Resources\text_italic.ico" />
+    <None Include="Resources\text_kerning.ico" />
+    <None Include="Resources\text_letter_omega.ico" />
+    <None Include="Resources\text_letterspacing.ico" />
+    <None Include="Resources\text_linespacing.ico" />
+    <None Include="Resources\text_list_bullets.ico" />
+    <None Include="Resources\text_list_numbers.ico" />
+    <None Include="Resources\text_lowercase.ico" />
+    <None Include="Resources\text_padding_bottom.ico" />
+    <None Include="Resources\text_padding_left.ico" />
+    <None Include="Resources\text_padding_right.ico" />
+    <None Include="Resources\text_padding_top.ico" />
+    <None Include="Resources\text_replace.ico" />
+    <None Include="Resources\text_signature.ico" />
+    <None Include="Resources\text_smallcaps.ico" />
+    <None Include="Resources\text_strikethrough.ico" />
+    <None Include="Resources\text_subscript.ico" />
+    <None Include="Resources\text_superscript.ico" />
+    <None Include="Resources\text_underline.ico" />
+    <None Include="Resources\text_uppercase.ico" />
+    <None Include="Resources\textfield.ico" />
+    <None Include="Resources\textfield_add.ico" />
+    <None Include="Resources\textfield_delete.ico" />
+    <None Include="Resources\textfield_key.ico" />
+    <None Include="Resources\textfield_rename.ico" />
+    <None Include="Resources\thumb_down.ico" />
+    <None Include="Resources\thumb_up.ico" />
+    <None Include="Resources\tick.ico" />
+    <None Include="Resources\time.ico" />
+    <None Include="Resources\time_add.ico" />
+    <None Include="Resources\time_delete.ico" />
+    <None Include="Resources\time_go.ico" />
+    <None Include="Resources\timeline_marker.ico" />
+    <None Include="Resources\transmit.ico" />
+    <None Include="Resources\transmit_add.ico" />
+    <None Include="Resources\transmit_blue.ico" />
+    <None Include="Resources\transmit_delete.ico" />
+    <None Include="Resources\transmit_edit.ico" />
+    <None Include="Resources\transmit_error.ico" />
+    <None Include="Resources\transmit_go.ico" />
+    <None Include="Resources\tux.ico" />
+    <None Include="Resources\user.ico" />
+    <None Include="Resources\user_add.ico" />
+    <None Include="Resources\user_comment.ico" />
+    <None Include="Resources\user_delete.ico" />
+    <None Include="Resources\user_edit.ico" />
+    <None Include="Resources\user_female.ico" />
+    <None Include="Resources\user_go.ico" />
+    <None Include="Resources\user_gray.ico" />
+    <None Include="Resources\user_green.ico" />
+    <None Include="Resources\user_orange.ico" />
+    <None Include="Resources\user_red.ico" />
+    <None Include="Resources\user_suit.ico" />
+    <None Include="Resources\vcard.ico" />
+    <None Include="Resources\vcard_add.ico" />
+    <None Include="Resources\vcard_delete.ico" />
+    <None Include="Resources\vcard_edit.ico" />
+    <None Include="Resources\vector.ico" />
+    <None Include="Resources\vector_add.ico" />
+    <None Include="Resources\vector_delete.ico" />
+    <None Include="Resources\wand.ico" />
+    <None Include="Resources\weather_clouds.ico" />
+    <None Include="Resources\weather_cloudy.ico" />
+    <None Include="Resources\weather_lightning.ico" />
+    <None Include="Resources\weather_rain.ico" />
+    <None Include="Resources\weather_snow.ico" />
+    <None Include="Resources\weather_sun.ico" />
+    <None Include="Resources\webcam.ico" />
+    <None Include="Resources\webcam_add.ico" />
+    <None Include="Resources\webcam_delete.ico" />
+    <None Include="Resources\webcam_error.ico" />
+    <None Include="Resources\world.ico" />
+    <None Include="Resources\world_add.ico" />
+    <None Include="Resources\world_delete.ico" />
+    <None Include="Resources\world_edit.ico" />
+    <None Include="Resources\world_go.ico" />
+    <None Include="Resources\world_link.ico" />
+    <None Include="Resources\wrench.ico" />
+    <None Include="Resources\wrench_orange.ico" />
+    <None Include="Resources\xhtml.ico" />
+    <None Include="Resources\xhtml_add.ico" />
+    <None Include="Resources\xhtml_delete.ico" />
+    <None Include="Resources\xhtml_go.ico" />
+    <None Include="Resources\xhtml_valid.ico" />
+    <None Include="Resources\zoom.ico" />
+    <None Include="Resources\zoom_in.ico" />
+    <None Include="Resources\zoom_out.ico" />
+    <None Include="Resources\accept.ico" />
+    <None Include="Resources\add.ico" />
+    <None Include="Resources\anchor.ico" />
+    <None Include="Resources\application.ico" />
+    <None Include="Resources\application_add.ico" />
+    <None Include="Resources\application_cascade.ico" />
+    <None Include="Resources\application_delete.ico" />
+    <None Include="Resources\disk1.ico" />
+    <None Include="Resources\add1.ico" />
+    <None Include="Resources\folder_page1.ico" />
+    <None Include="Resources\table_gear1.ico" />
+    <None Include="Resources\add2.ico" />
+    <None Include="Resources\folder_explore1.ico" />
+    <None Include="Resources\delete1.ico" />
+    <None Include="Resources\textfield_rename1.ico" />
+    <None Include="Resources\page_copy1.ico" />
+    <None Include="Resources\disk_multiple1.ico" />
+    <None Include="Resources\application_go1.ico" />
+    <None Include="Resources\application_xp_terminal1.ico" />
+    <None Include="Resources\folder_go1.ico" />
+    <None Include="Resources\package1.ico" />
+    <None Include="Resources\package_go1.ico" />
+    <None Include="Resources\arrow_divide1.ico" />
+    <None Include="Resources\arrow_join1.ico" />
+    <None Include="Resources\chart_organisation1.ico" />
+    <None Include="Resources\asterisk_yellow1.ico" />
+    <None Include="Resources\folder_add1.ico" />
+    <None Include="Resources\page_add1.ico" />
+    <None Include="Resources\script_add1.ico" />
+    <None Include="Resources\page_white_add1.ico" />
+    <None Include="Resources\note_go1.ico" />
+    <Content Include="Windows Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Calendar\" />
+    <Folder Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Unknown\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
