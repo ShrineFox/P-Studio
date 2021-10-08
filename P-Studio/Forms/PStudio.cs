@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -34,8 +35,7 @@ namespace P_Studio
         public PStudio()
         {
             InitializeComponent();
-            Tools.OpenAll();
-            Tools.CloseAll();
+            Tools.CloseAll(); Tools.OpenAll(); Tools.CloseAll();
             Program.status = new Status(this.richTextBox_Status);
             Program.status.Update("Create a new project or load an existing one to get started.");
             metroSetTabControl_Workspace.SelectedIndex = 0;
@@ -48,8 +48,8 @@ namespace P_Studio
             collapsed = false;
         }
 
-        /* Toolstrip Options */
-
+        #region ToolstripOptions
+        /* Toolstrip Options*/
         private void NewProject_Click(object sender, EventArgs e)
         {
             this.Text = $"P-Studio v0.1";
@@ -105,6 +105,40 @@ namespace P_Studio
             }
         }
 
+        private void SaveProjectAs_Click(object sender, EventArgs e)
+        {
+            if (SettingsForm.IsValid())
+            {
+                string originalProj = SettingsForm.settings.ProjectPath;
+                string projDir = Path.GetDirectoryName(originalProj);
+                string newName = "";
+                RenameForm rename = new RenameForm(Path.GetFileNameWithoutExtension(originalProj));
+                var result = rename.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    newName = rename.RenameText;
+                    string newProj = Path.Combine(Path.GetDirectoryName(projDir), Path.Combine(newName, newName + ".yml"));
+                    if (!Directory.Exists(Path.GetDirectoryName(newProj)))
+                    {
+                        SettingsForm.settings.ProjectName = newName;
+                        SettingsForm.settings.ProjectPath = newProj;
+                        Program.status.Update($"[INFO] Copying project files from \"{Path.GetFileNameWithoutExtension(originalProj)}\" to \"{Path.GetFileNameWithoutExtension(newProj)}\"");
+                        // Copy all project files to new directory
+                        Unpacker.CopyEntireDirectory(new DirectoryInfo(projDir), new DirectoryInfo(Path.GetDirectoryName(newProj)), true);
+                        // Delete original project file copied with other project stuff
+                        File.Delete(Path.Combine(Path.GetDirectoryName(newProj), Path.GetFileName(originalProj)));
+                        // Save and reload new project
+                        SettingsForm.SaveSettings();
+                        LoadProject();
+                    }
+                    else
+                        Program.status.Update($"[ERROR] Failed to save project as \"{newName}\", directory already exists");
+                }
+            }
+        }
+        #endregion
+
+        #region TreeViewEvents
         /* Treeview setup */
         private void Treeview_Project()
         {
@@ -126,14 +160,13 @@ namespace P_Studio
         }
 
         /* Treeview Events */
-
         private void AddToProject_Click(object sender, EventArgs e)
         {
             if (treeView_Game.SelectedNode != null)
             {
                 string file = treeView_Game.SelectedNode.Name;
                 if (Directory.Exists(file))
-                    binMerge.CopyEntireDirectory(new DirectoryInfo(file), new DirectoryInfo(file.Replace(SettingsForm.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(SettingsForm.settings.ProjectPath)))));
+                    Unpacker.CopyEntireDirectory(new DirectoryInfo(file), new DirectoryInfo(file.Replace(SettingsForm.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(SettingsForm.settings.ProjectPath)))));
                 else if (File.Exists(file))
                 {
                     string copiedFile = file.Replace(SettingsForm.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(SettingsForm.settings.ProjectPath)));
@@ -170,37 +203,6 @@ namespace P_Studio
             }
             HideContextMenus();
         }
-        private void SaveProjectAs_Click(object sender, EventArgs e)
-        {
-            if (SettingsForm.IsValid())
-            {
-                string originalProj = SettingsForm.settings.ProjectPath;
-                string projDir = Path.GetDirectoryName(originalProj);
-                string newName = "";
-                RenameForm rename = new RenameForm(Path.GetFileNameWithoutExtension(originalProj));
-                var result = rename.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    newName = rename.RenameText;
-                    string newProj = Path.Combine(Path.GetDirectoryName(projDir), Path.Combine(newName, newName + ".yml"));
-                    if (!Directory.Exists(Path.GetDirectoryName(newProj)))
-                    {
-                        SettingsForm.settings.ProjectName = newName;
-                        SettingsForm.settings.ProjectPath = newProj;
-                        Program.status.Update($"[INFO] Copying project files from \"{Path.GetFileNameWithoutExtension(originalProj)}\" to \"{Path.GetFileNameWithoutExtension(newProj)}\"");
-                        // Copy all project files to new directory
-                        binMerge.CopyEntireDirectory(new DirectoryInfo(projDir), new DirectoryInfo(Path.GetDirectoryName(newProj)), true);
-                        // Delete original project file copied with other project stuff
-                        File.Delete(Path.Combine(Path.GetDirectoryName(newProj), Path.GetFileName(originalProj)));
-                        // Save and reload new project
-                        SettingsForm.SaveSettings();
-                        LoadProject();
-                    }
-                    else
-                        Program.status.Update($"[ERROR] Failed to save project as \"{newName}\", directory already exists");
-                }
-            }
-        }
 
         private void Copy_Click(object sender, EventArgs e)
         {
@@ -223,7 +225,7 @@ namespace P_Studio
                         }
                         else if (Directory.Exists(originalName) && !Directory.Exists(newName))
                         {
-                            binMerge.CopyEntireDirectory(new DirectoryInfo(originalName), new DirectoryInfo(newName));
+                            Unpacker.CopyEntireDirectory(new DirectoryInfo(originalName), new DirectoryInfo(newName));
                             Program.status.Update($"[INFO] Copied \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\"");
                         }
                         else
@@ -297,7 +299,7 @@ namespace P_Studio
             {
                 treeView_Project.SelectedNode = e.Node;
                 var ext = Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower();
-                switch(ext)
+                switch (ext)
                 {
                     case ".acx":
                     case ".rmd":
@@ -347,22 +349,23 @@ namespace P_Studio
         {
             if (e.Button == MouseButtons.Right)
             {
-                metroSetToolStripMenuItem_Add.Visible = true;
-                metroSetToolStripMenuItem_ExpandGame.Visible = true;
-                metroSetToolStripMenuItem_CollapseGame.Visible = true;
+                ToolStripMenuItem_Add.Visible = true;
+                ToolStripMenuItem_ExpandGame.Visible = true;
+                ToolStripMenuItem_CollapseGame.Visible = true;
 
                 treeView_Game.SelectedNode = e.Node;
+
                 // Prevent deleting entire project or project settings file
                 if (treeView_Game.SelectedNode.Parent == null || treeView_Game.SelectedNode.Parent.Parent == null)
-                    metroSetToolStripMenuItem_Add.Visible = false;
+                    ToolStripMenuItem_Add.Visible = false;
                 // Hide expand/collapse if not folder
                 if (treeView_Game.SelectedNode.ImageIndex != 18)
                 {
-                    metroSetToolStripMenuItem_ExpandGame.Visible = false;
-                    metroSetToolStripMenuItem_CollapseGame.Visible = false;
+                    ToolStripMenuItem_ExpandGame.Visible = false;
+                    ToolStripMenuItem_CollapseGame.Visible = false;
                 }
-                    
-                metroSetContextMenuStrip_Game.Show(Cursor.Position);
+
+                contextMenuStrip_Game.Show(Cursor.Position);
             }
 
         }
@@ -370,52 +373,84 @@ namespace P_Studio
         {
             if (e.Button == MouseButtons.Right)
             {
-                metroSetToolStripMenuItem_Copy.Visible = true;
-                metroSetToolStripMenuItem_Rename.Visible = true;
-                metroSetToolStripMenuItem_Remove.Visible = true;
-                metroSetToolStripMenuItem_ExpandProj.Visible = true;
-                metroSetToolStripMenuItem_CollapseProj.Visible = true;
-                metroSetToolStripMenuItem_New.Visible = true;
-                metroSetToolStripMenuItem_RepackAs.Visible = true;
-                metroSetToolStripMenuItem_Replace.Visible = true;
-                metroSetToolStripMenuItem_Unpack.Visible = true;
-                metroSetToolStripMenuItem_Compile.Visible = true;
-                metroSetToolStripMenuItem_Decompile.Visible = true;
+                ToolStripMenuItem_Copy.Visible = true;
+                ToolStripMenuItem_Rename.Visible = true;
+                ToolStripMenuItem_Remove.Visible = true;
+                ToolStripMenuItem_ExpandProj.Visible = true;
+                ToolStripMenuItem_CollapseProj.Visible = true;
+                ToolStripMenuItem_New.Visible = true;
+                ToolStripMenuItem_RepackAs.Visible = true;
+                ToolStripMenuItem_Replace.Visible = true;
+                ToolStripMenuItem_Unpack.Visible = true;
+                ToolStripMenuItem_Compile.Visible = true;
+                ToolStripMenuItem_Decompile.Visible = true;
 
                 treeView_Project.SelectedNode = e.Node;
                 // Hide add to project option if topmost two levels (Game/Archive) 
                 // to prevent copying entire game/archive's worth of data
                 if (treeView_Project.SelectedNode.Parent == null || treeView_Project.SelectedNode.Name.ToLower().EndsWith(".yml"))
                 {
-                    metroSetToolStripMenuItem_Copy.Visible = false;
-                    metroSetToolStripMenuItem_Rename.Visible = false;
-                    metroSetToolStripMenuItem_Remove.Visible = false;
+                    ToolStripMenuItem_Copy.Visible = false;
+                    ToolStripMenuItem_Rename.Visible = false;
+                    ToolStripMenuItem_Remove.Visible = false;
                 }
                 // Hide (de)compile, new, repack, replace & expand/collapse, unpack
                 if (!Treeview.decompileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
-                    metroSetToolStripMenuItem_Decompile.Visible = false;
+                    ToolStripMenuItem_Decompile.Visible = false;
                 if (!Treeview.compileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
-                    metroSetToolStripMenuItem_Compile.Visible = false;
+                    ToolStripMenuItem_Compile.Visible = false;
                 if (treeView_Project.SelectedNode.ImageIndex != 18)
                 {
-                    metroSetToolStripMenuItem_ExpandProj.Visible = false;
-                    metroSetToolStripMenuItem_CollapseProj.Visible = false;
-                    metroSetToolStripMenuItem_New.Visible = false;
-                    metroSetToolStripMenuItem_RepackAs.Visible = false;
+                    ToolStripMenuItem_ExpandProj.Visible = false;
+                    ToolStripMenuItem_CollapseProj.Visible = false;
+                    ToolStripMenuItem_New.Visible = false;
+                    ToolStripMenuItem_RepackAs.Visible = false;
                 }
                 else
-                    metroSetToolStripMenuItem_Replace.Visible = false;
+                    ToolStripMenuItem_Replace.Visible = false;
                 if (!Treeview.unpackTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
-                    metroSetToolStripMenuItem_Unpack.Visible = false;
-                metroSetContextMenuStrip_Project.Show(Cursor.Position);
+                    ToolStripMenuItem_Unpack.Visible = false;
+                contextMenuStrip_Project.Show(Cursor.Position);
+            }
+        }
+
+        /* Toggle file browser and log */
+        private void ShowHide_Click(object sender, EventArgs e)
+        {
+            if (!collapsed)
+            {
+                tableLayoutPanel_Main.ColumnStyles[0].SizeType = SizeType.AutoSize;
+                tableLayoutPanel_Main.HideColumns(new int[] { 0 });
+                tableLayoutPanel_Workspace.HideRows(new int[] { 1 });
+                metroSetButton_ShowHide.Text = "»";
+                collapsed = true;
+            }
+            else
+            {
+                tableLayoutPanel_Main.ShowColumns(new int[] { 0 });
+                tableLayoutPanel_Workspace.ShowRows(new int[] { 1 });
+                tableLayoutPanel_Main.ColumnStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel_Main.ColumnStyles[0].Width = 28f;
+                metroSetButton_ShowHide.Text = "«";
+                collapsed = false;
             }
         }
         private void HideContextMenus()
         {
-            metroSetContextMenuStrip_Project.Hide();
-            metroSetContextMenuStrip_Game.Hide();
+            contextMenuStrip_Project.Hide();
+            contextMenuStrip_Game.Hide();
         }
 
+        /* Dump Menustrip Items */
+        private void DumpTextures_Click(object sender, EventArgs e)
+        {
+            string unpackedDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{SettingsForm.settings.Game}";
+            if (Unpacker.IsDumpReady(true))
+                Unpacker.DumpTextures(unpackedDir, SettingsForm.settings.Game);
+        }
+        #endregion
+
+        #region Rendering
         /* Improve menustrip rendering for dark theme */
         ToolStripProfessionalRenderer r =
             new ToolStripProfessionalRenderer(new MyColorTable(Color.FromArgb(255, 20, 20, 20)));
@@ -442,28 +477,8 @@ namespace P_Studio
             if (scriptEditorHandle != null)
                 Tools.MoveWindow(scriptEditorHandle, 0, 0, formWidth, formHeight, true);
         }
+        #endregion
 
-        /* Toggle file browser and log */
-        private void ShowHide_Click(object sender, EventArgs e)
-        {
-            if (!collapsed)
-            {
-                tableLayoutPanel_Main.ColumnStyles[0].SizeType = SizeType.AutoSize;
-                tableLayoutPanel_Main.HideColumns(new int[] { 0 });
-                tableLayoutPanel_Workspace.HideRows(new int[] { 1 });
-                metroSetButton_ShowHide.Text = "»";
-                collapsed = true;
-            }
-            else
-            {
-                tableLayoutPanel_Main.ShowColumns(new int[] { 0 });
-                tableLayoutPanel_Workspace.ShowRows(new int[] { 1 });
-                tableLayoutPanel_Main.ColumnStyles[0].SizeType = SizeType.Percent;
-                tableLayoutPanel_Main.ColumnStyles[0].Width = 28f;
-                metroSetButton_ShowHide.Text = "«";
-                collapsed = false;
-            }
-        }
     }
 
     /* Append to Status Text from other classes and forms */

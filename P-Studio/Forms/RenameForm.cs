@@ -22,7 +22,7 @@ namespace P_Studio
         {
             InitializeComponent();
             OriginalName = text;
-            this.metroSetTextBox_NewName.Text = text + "_Copy";
+            this.metroSetTextBox_NewName.Text = text;
         }
 
         private void Save_Click(object sender, EventArgs e)

@@ -608,6 +608,7 @@ namespace P_Studio
             this.metroSetCheckBox_DecompileScripts.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
             this.metroSetCheckBox_DecompileScripts.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroSetCheckBox_DecompileScripts.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            this.metroSetCheckBox_DecompileScripts.Enabled = false;
             this.metroSetCheckBox_DecompileScripts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.metroSetCheckBox_DecompileScripts.IsDerivedStyle = true;
             this.metroSetCheckBox_DecompileScripts.Location = new System.Drawing.Point(203, 73);
@@ -633,6 +634,7 @@ namespace P_Studio
             this.metroSetCheckBox_ExtractPAC.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
             this.metroSetCheckBox_ExtractPAC.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroSetCheckBox_ExtractPAC.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            this.metroSetCheckBox_ExtractPAC.Enabled = false;
             this.metroSetCheckBox_ExtractPAC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.metroSetCheckBox_ExtractPAC.IsDerivedStyle = true;
             this.metroSetCheckBox_ExtractPAC.Location = new System.Drawing.Point(70, 73);

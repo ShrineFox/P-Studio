@@ -12,8 +12,9 @@ namespace P_Studio
 {
     public class Treeview
     {
+        #region Icons
+        /* Set up Treeview icons */
         public static ImageList treeViewImageList = new ImageList();
-        public static List<string> excludedTreeViewTypes = new List<string>() { ".bf", ".bmd", ".pac", ".pak", ".bin", ".amd" };
         public static List<string> unpackTreeViewTypes = new List<string>() { ".pac", ".pak", ".bin", ".amd", ".afs", ".acb", ".awb" };
         public static List<string> compileTreeViewTypes = new List<string>() { ".flow", ".msg" };
         public static List<string> decompileTreeViewTypes = new List<string>() { ".bf", ".bmd" };
@@ -116,6 +117,7 @@ namespace P_Studio
                     return 19;
             }
         }
+        #endregion
 
         public static void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
         {
@@ -128,9 +130,8 @@ namespace P_Studio
             foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
                 BuildTree(subdir, curNode.Nodes);
             // Add files
-            foreach (FileInfo file in directoryInfo.GetFiles() // Get all files in directory except those with excluded extensions
-                .Where(x => !excludedTreeViewTypes.Any(y => x.FullName.ToLower().EndsWith(y))))
-                    curNode.Nodes.Add(file.FullName, file.Name, GetIconIndex(file.FullName), GetIconIndex(file.FullName));
+            foreach (FileInfo file in directoryInfo.GetFiles()) // Get all files in directory except those with excluded extensions
+                curNode.Nodes.Add(file.FullName, file.Name, GetIconIndex(file.FullName), GetIconIndex(file.FullName));
         }
 
         public static void OpenLocation(string file)

@@ -1,4 +1,10 @@
-﻿using System;
+﻿using AmicitiaLibrary.Graphics.RenderWare;
+using AmicitiaLibrary.Graphics.SPD;
+using AmicitiaLibrary.Graphics.SPR;
+using AmicitiaLibrary.Graphics.TMX;
+using GFDLibrary;
+using GFDLibrary.Textures;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,7 +20,8 @@ namespace P_Studio
 {
     public static class Unpacker
     {
-        // P3F, P4
+        #region Persona34
+        // Persona 3 FES & Persona 4 Game Unpacker
         public static void UnzipISO(string iso, string game)
         {
             if (!File.Exists(iso))
@@ -61,8 +68,10 @@ namespace P_Studio
             }
             FileIOWrapper.Delete(cvm);
         }
+        #endregion
 
-        // P4G
+        #region Persona4G
+        /* Persona 4 Golden Game Unpacker */
         public static void Unpack(string directory, string cpk)
         {
             string game = "Persona 4 Golden";
@@ -140,8 +149,10 @@ namespace P_Studio
 
             Program.status.Update("[INFO] Finished unpacking base files!");
         }
+        #endregion
 
-
+        #region CPKGame
+        /* CPK Game Unpacker */
         public static void UnpackCPK(string directory, string game)
         {
             if (!Directory.Exists(directory))
@@ -241,56 +252,371 @@ namespace P_Studio
             ExtractWantedFiles($@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}", game);
             Program.status.Update($"[INFO] Finished unpacking base files!");
         }
+        #endregion
 
-        public static void ExtractWantedFiles(string directory, string game)
-        {
-            if (!Directory.Exists(directory))
-                return;
-
-            // Extract BIN/PAC contents
-            var archives = Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
-                .Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak"));
-            foreach (string archive in archives)
+        #region Utilities
+        /* Utilities */
+            #region Misc
+            /* Miscellaenous Utilities */
+            public static void ExtractWantedFiles(string directory, string game)
             {
-                Program.status.Update($"[INFO] Unpacking archive: {archive.Substring(directory.Length)}");
-                binMerge.PAKPackCMD($"unpack \"{archive}\"");
+                if (!Directory.Exists(directory))
+                    return;
 
-                // Search the location of the unpacked container for wanted files
-                string outputDir = Path.Combine(Path.GetDirectoryName(archive), Path.GetFileNameWithoutExtension(archive));
-                foreach (string outputFile in Directory.EnumerateFiles(outputDir, "*.*", SearchOption.AllDirectories)
-                    .Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak")))
-                        ExtractWantedFiles(outputFile, game);
+                // Extract BIN/PAC contents
+                if (SettingsForm.settings.ExtractPACs)
+                    ExtractPACs(directory, game);
+                else
+                    Program.status.Update("[INFO] Skipping PAC extraction");
+
+                // Decompile .BF/.BMD
+                if (SettingsForm.settings.DecompileScripts)
+                    DecompileScripts(directory, game);
+                else
+                    Program.status.Update("[INFO] Skipping BF/BMD decompilation");
+
+                Program.status.Update($"[INFO] Finished unpacking {game} files!");
             }
 
-            // Decompile .BF/.BMD
-            var scripts = Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
-                .Where(s => s.ToLower().EndsWith(".bf") || s.ToLower().EndsWith(".bmd"));
+            public static bool IsDumpReady(bool needsPACfiles)
             {
-                foreach (string script in scripts)
+                // If project is valid...
+                if (SettingsForm.IsValid())
                 {
-                    string encodingArg = "";
-                    string libraryArg = "";
+                    string defaultExtractPath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{SettingsForm.settings.Game}";
 
-                    if (game == "Persona 3 FES")
-                        encodingArg = "-Encoding P3";
-                    else if (game == "Persona 4")
-                        encodingArg = "-Encoding P4";
-
-                    if (script.ToLower().EndsWith(".bf"))
+                    // Extract archive if you haven't already
+                    if (!Unpacker.HasUnpackedFiles(defaultExtractPath, SettingsForm.settings.Game))
                     {
-                        if (game == "Persona 3 FES")
-                            libraryArg = "-Library P3F";
-                        else if (game == "Persona 4")
-                            libraryArg = "-Library P4";
+                        DialogResult result = MessageBox.Show("You need to unpack an ISO/PKG first!\n\n" +
+                            "Would you like to do that now? This may take awhile.", "Unpack Archive?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        if (result != DialogResult.OK)
+                        {
+                            Program.status.Update("[INFO] Dump cancelled by user, no extracted files found for selected game.");
+                            return false;
+                        }
                     }
 
-                    Program.status.Update($"[INFO] Decompiling script: {script.Substring(directory.Length)}");
-                    binMerge.CompilerCMD($"\"{script}\" -Decompile {encodingArg} {libraryArg}");
+                    // Extract PAC files if required and you haven't already extracted them
+                    if (needsPACfiles && !Unpacker.HasUnpackedPACs(defaultExtractPath, SettingsForm.settings.Game))
+                        {
+                            DialogResult result = MessageBox.Show("You need to unpack all PAC files first!\n\n" +
+                                "Would you like to do that now? This may take awhile.", "Unpack Files?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            if (result != DialogResult.OK)
+                            {
+                                Program.status.Update("[INFO] Dump cancelled by user, no extracted files found for selected game.");
+                                return false;
+                            }
+                            Unpacker.ExtractPACs(defaultExtractPath, SettingsForm.settings.Game);
+                        }
+                    }
+                Program.status.Update("[INFO] Beginning to dump, please be patient as this may take awhile...");
+                return true;
+            }
+
+            public static bool HasUnpackedFiles(string unpackedDir, string game)
+            {
+                if (game == "Persona 3 FES" || game == "Persona 4")
+                    if (Directory.GetDirectories(unpackedDir).Any(x => x.ToUpper().Contains("DATA")) &&
+                        Directory.GetDirectories(unpackedDir).Any(x => x.ToUpper().Contains("BTL")) &&
+                        Directory.GetDirectories(unpackedDir).Any(x => x.ToUpper().Contains("BGM")))
+                        return true;
+                return false;
+            }
+
+            public static bool HasUnpackedPACs(string unpackedDir, string game)
+            {
+                switch (game)
+                {
+                    case "Persona 3 FES":
+                        if (Directory.GetDirectories(unpackedDir, "*", SearchOption.AllDirectories).Any(x => x.Contains("AGS_PER_EFC0_09_00")))
+                            return true;
+                        break;
+                    case "Persona 4":
+                        if (Directory.GetDirectories(unpackedDir, "*", SearchOption.AllDirectories).Any(x => x.Contains("E20A")))
+                            return true;
+                        break;
+                    default:
+                        return false;
+                }
+
+                return false;
+            }
+
+            public static bool HasDecompiledScripts(string unpackedDir, string game)
+            {
+                if (Directory.GetDirectories(unpackedDir, "*", SearchOption.AllDirectories).Any(x => Directory.GetFiles(x).Contains(".flow")))
+                    return true;
+                return false;
+            }
+
+            public static void CopyEntireDirectory(DirectoryInfo source, DirectoryInfo target, bool overwiteFiles = true)
+            {
+                if (!source.Exists) return;
+                if (!target.Exists) target.Create();
+
+                Parallel.ForEach(source.GetDirectories(), (sourceChildDirectory) =>
+                    CopyEntireDirectory(sourceChildDirectory, new DirectoryInfo(Path.Combine(target.FullName, sourceChildDirectory.Name))));
+
+                Parallel.ForEach(source.GetFiles(), sourceFile =>
+                    sourceFile.CopyTo(Path.Combine(target.FullName, sourceFile.Name), overwiteFiles));
+            }
+
+            public static void DeleteDirectory(string path)
+            {
+
+                foreach (string directory in Directory.GetDirectories(path))
+                {
+                    DeleteDirectory(directory);
+                }
+                try
+                {
+                    Directory.Delete(path, true);
+                }
+                catch (IOException)
+                {
+                    Directory.Delete(path, true);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    Directory.Delete(path, true);
+                }
+            }
+        #endregion
+
+            #region Extraction
+            public static void ExtractPACs(string directory, string game)
+            {
+                var archives = Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
+                    .Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak"));
+                foreach (string archive in archives)
+                {
+                    Program.status.Update($"[INFO] Unpacking archive: {archive.Substring(directory.Length)}");
+                    Unpacker.PAKPackCMD($"unpack \"{archive}\"");
+
+                    // Search the location of the unpacked container for wanted files
+                    string outputDir = Path.Combine(Path.GetDirectoryName(archive), Path.GetFileNameWithoutExtension(archive));
+                    foreach (string outputFile in Directory.EnumerateFiles(outputDir, "*.*", SearchOption.AllDirectories)
+                        .Where(s => s.ToLower().EndsWith(".arc") || s.ToLower().EndsWith(".bin") || s.ToLower().EndsWith(".pac") || s.ToLower().EndsWith(".pak")))
+                        ExtractWantedFiles(outputFile, game);
                 }
             }
 
-            Program.status.Update($"[INFO] Finished unpacking {game} files!");
-        }
+            public static void DecompileScripts(string directory, string game)
+            {
+                var scripts = Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
+                    .Where(s => s.ToLower().EndsWith(".bf") || s.ToLower().EndsWith(".bmd"));
+                {
+                    foreach (string script in scripts)
+                    {
+                        string encodingArg = "";
+                        string libraryArg = "";
+
+                        if (game == "Persona 3 FES")
+                            encodingArg = "-Encoding P3";
+                        else if (game == "Persona 4")
+                            encodingArg = "-Encoding P4";
+
+                        if (script.ToLower().EndsWith(".bf"))
+                        {
+                            if (game == "Persona 3 FES")
+                                libraryArg = "-Library P3F";
+                            else if (game == "Persona 4")
+                                libraryArg = "-Library P4";
+                        }
+
+                        Program.status.Update($"[INFO] Decompiling script: {script.Substring(directory.Length)}");
+                        Unpacker.CompilerCMD($"\"{script}\" -Decompile {encodingArg} {libraryArg}");
+                    }
+                }
+            }
+
+            public static void DumpTextures(string directory, string game)
+            {
+                string outputDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{SettingsForm.settings.Game}\Textures";
+                Directory.CreateDirectory(outputDir);
+                foreach (var file in Directory.GetFiles(directory, "*", SearchOption.AllDirectories))
+                {
+                    string outputDest = Path.Combine(outputDir, Path.Combine(Path.GetDirectoryName(file).Replace(directory, ""), Path.GetFileNameWithoutExtension(file)));
+                    switch (Path.GetExtension(file).ToLower())
+                    {
+                        case ".rmd":
+                        case ".rws":
+                            ExtractRMD(file, outputDest);
+                            break;
+                        case ".gmd":
+                        case ".gfs":
+                            ExtractGMD(file, outputDest);
+                            break;
+                        case (".gmo"):
+                            //ExtractGMO(file, outputDest);
+                            break;
+                        case (".epl"):
+                        case (".bed"):
+                            if (game == "Persona 5")
+                                ExtractEPL(file, outputDest);
+                            break;
+                        case (".cpk"):
+                            //ExtractCPK(file, outputDest);
+                            break;
+                        case (".spr"):
+                            ExtractSPR(file, outputDest);
+                            break;
+                        case (".spd"):
+                            ExtractSPD(file, outputDest);
+                            break;
+                        case (".tmx"):
+                            ExtractTMX(file, outputDest);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            private static void ExtractGMD(string file, string outputDest)
+            {
+                var gmd = Resource.Load<ModelPack>(file);
+                if (gmd.Textures != null)
+                    foreach (var texture in gmd.Textures.Textures)
+                    {
+                        Directory.CreateDirectory(outputDest);
+
+                        var bitmap = TextureDecoder.Decode(texture);
+                        bitmap.Save(Path.Combine(outputDest, Path.ChangeExtension(texture.Name, "png")));
+                        Program.status.Update($"[INFO] Extracted texture: {texture.Name}.png");
+                    }
+            }
+
+            private static void ExtractEPL(string file, string outputDest)
+            {
+                Directory.CreateDirectory(outputDest);
+                string copiedFile = Path.Combine(outputDest, Path.GetFileName(file));
+                File.Copy(file, copiedFile);
+
+                Unpacker.EPLInjectorCMD(copiedFile);
+                File.Delete(copiedFile);
+
+                foreach (var gmd in Directory.GetFiles(outputDest, "*.gmd", SearchOption.AllDirectories))
+                    ExtractGMD(gmd, outputDest);
+            }
+
+            private static void ExtractSPD(string file, string outputDest)
+            {
+                SpdFile spd = new SpdFile(file);
+                foreach (var texture in spd.Textures)
+                {
+                    Directory.CreateDirectory(outputDest);
+
+                    var bitmap = texture.GetBitmap();
+                    bitmap.Save(Path.Combine(outputDest, texture.Description + ".png"));
+                    Program.status.Update($"[INFO] Extracted texture: {texture.Description}.png");
+                }
+            }
+
+            private static void ExtractSPR(string file, string outputDest)
+            {
+                SprFile spr = SprFile.Load(file);
+                int i = 0;
+                foreach (TmxFile tmx in spr.Textures)
+                {
+                    Directory.CreateDirectory(outputDest);
+
+                    var bitmap = tmx.GetBitmap();
+                    bitmap.Save(Path.Combine(outputDest, Path.ChangeExtension(file + "_" + i, "png")));
+                    Program.status.Update($"[INFO] Extracted texture {i} from: {Path.GetFileName(file)}");
+                    i++;
+                }
+            }
+
+            private static void ExtractTMX(string file, string outputDest)
+            {
+                Directory.CreateDirectory(outputDest);
+
+                TmxFile tmx = new TmxFile(file);
+
+                var bitmap = tmx.GetBitmap();
+                bitmap.Save(Path.Combine(outputDest, Path.ChangeExtension(Path.GetFileName(file), "png")));
+                Program.status.Update($"[INFO] Converted texture: \"{Path.GetFileNameWithoutExtension(file)}.png\"");
+            }
+
+            private static void ExtractRMD(string file, string outputDest)
+            {
+                RmdScene rmd = new RmdScene(file);
+                foreach (RwTextureNativeNode texture in rmd.TextureDictionary.Textures)
+                {
+                    Directory.CreateDirectory(outputDest);
+
+                    var bitmap = texture.GetBitmap();
+                    bitmap.Save(Path.Combine(outputDest, Path.ChangeExtension(texture.Name, "png")));
+                    Program.status.Update($"[INFO] Extracted texture: \"{texture.Name}\"");
+                }
+            }
+            #endregion
+
+            #region CommandPrompt
+            // Use PAKPack command
+            public static void PAKPackCMD(string args)
+            {
+                string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\PAKPack\PAKPack.exe";
+
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.CreateNoWindow = true;
+                startInfo.UseShellExecute = false;
+                startInfo.FileName = $"\"{exePath}\"";
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                startInfo.Arguments = args;
+                using (Process process = new Process())
+                {
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    process.WaitForExit();
+                }
+            }
+
+            // Use PAKPack command
+            public static void CompilerCMD(string args)
+            {
+                string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\AtlusScriptCompiler\AtlusScriptCompiler.exe";
+
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.CreateNoWindow = true;
+                startInfo.UseShellExecute = false;
+                startInfo.FileName = $"\"{exePath}\"";
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                startInfo.Arguments = args;
+                using (Process process = new Process())
+                {
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    process.WaitForExit();
+                }
+            }
+
+            // Use EPLInjector
+            public static void EPLInjectorCMD(string args)
+            {
+                string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\EPLInjector\p5eplinjector.exe";
+
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.CreateNoWindow = true;
+                startInfo.UseShellExecute = false;
+                startInfo.FileName = $"\"{exePath}\"";
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                startInfo.Arguments = args;
+                using (Process process = new Process())
+                {
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    process.WaitForExit();
+                }
+            }
+            #endregion
+        #endregion
+
     }
 
     public static class FileIOWrapper
@@ -346,142 +672,6 @@ namespace P_Studio
         public static DateTime GetLastWriteTime(string input)
         {
             return File.GetLastWriteTime($@"\\?\{input}");
-        }
-    }
-
-    public static class binMerge
-    {
-        // Use PAKPack command
-        public static void PAKPackCMD(string args)
-        {
-            string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\PAKPack\PAKPack.exe";
-
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.CreateNoWindow = true;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = $"\"{exePath}\"";
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = args;
-            using (Process process = new Process())
-            {
-                process.StartInfo = startInfo;
-                process.Start();
-
-                process.WaitForExit();
-            }
-        }
-
-        // Use PAKPack command
-        public static void CompilerCMD(string args)
-        {
-            string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\AtlusScriptCompiler\AtlusScriptCompiler.exe";
-
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.CreateNoWindow = true;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = $"\"{exePath}\"";
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = args;
-            using (Process process = new Process())
-            {
-                process.StartInfo = startInfo;
-                process.Start();
-
-                process.WaitForExit();
-            }
-        }
-
-        public static List<string> getFileContents(string path)
-        {
-            string exePath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Dependencies\PAKPack\PAKPack.exe";
-
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.CreateNoWindow = true;
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.FileName = $"\"{exePath}\"";
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = $"list \"{path}\"";
-            List<string> contents = new List<string>();
-            using (Process process = new Process())
-            {
-                process.StartInfo = startInfo;
-                process.Start();
-                while (!process.StandardOutput.EndOfStream)
-                {
-                    string line = process.StandardOutput.ReadLine();
-                    if (!line.Contains(" "))
-                    {
-                        contents.Add(line);
-                    }
-                }
-                process.WaitForExit();
-            }
-            return contents;
-        }
-
-        private static int commonPrefixUtil(String str1, String str2)
-        {
-            String result = "";
-            int n1 = str1.Length,
-                n2 = str2.Length;
-
-            // Compare str1 and str2  
-            for (int i = 0, j = 0;
-                     i <= n1 - 1 && j <= n2 - 1;
-                     i++, j++)
-            {
-                if (!str1[i].ToString().Equals(str2[j].ToString(), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    break;
-                }
-                result += str1[i];
-            }
-
-            return result.Length;
-        }
-
-        public static void DeleteDirectory(string path)
-        {
-
-            foreach (string directory in Directory.GetDirectories(path))
-            {
-                DeleteDirectory(directory);
-            }
-            try
-            {
-                Directory.Delete(path, true);
-            }
-            catch (IOException)
-            {
-                Directory.Delete(path, true);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                Directory.Delete(path, true);
-            }
-        }
-
-        public static bool HasUnpackedFiles(string unpackedDir, string game)
-        {
-            if (game == "Persona 3 FES" || game == "Persona 4")
-                if (Directory.GetDirectories(unpackedDir).Any(x => x.ToUpper().Contains("DATA")) &&
-                    Directory.GetDirectories(unpackedDir).Any(x => x.ToUpper().Contains("BTL")) &&
-                    Directory.GetDirectories(unpackedDir).Any(x => x.ToUpper().Contains("BGM")))
-                    return true;
-            return false;
-        }
-
-        public static void CopyEntireDirectory(DirectoryInfo source, DirectoryInfo target, bool overwiteFiles = true)
-        {
-            if (!source.Exists) return;
-            if (!target.Exists) target.Create();
-
-            Parallel.ForEach(source.GetDirectories(), (sourceChildDirectory) =>
-                CopyEntireDirectory(sourceChildDirectory, new DirectoryInfo(Path.Combine(target.FullName, sourceChildDirectory.Name))));
-
-            Parallel.ForEach(source.GetFiles(), sourceFile =>
-                sourceFile.CopyTo(Path.Combine(target.FullName, sourceFile.Name), overwiteFiles));
         }
     }
 }

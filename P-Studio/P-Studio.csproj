@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>P_Studio</RootNamespace>
     <AssemblyName>P-Studio</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,13 +33,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>pstudio.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AmicitiaLibrary">
+      <HintPath>..\..\Amicitia\Build\Debug\netstandard2.0\AmicitiaLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="DarkUI, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DarkUI.2.0.2\lib\DarkUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GFDLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GFD-Studio\GFDStudio\bin\Debug\netcoreapp5.0-windows\GFDLibrary.dll</HintPath>
     </Reference>
     <Reference Include="MetroSet UI, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroSet_UI.2.0.0\lib\net45\MetroSet UI.dll</HintPath>
@@ -60,6 +70,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -398,6 +411,9 @@
     <None Include="Dependencies\AtlusScriptCompiler\Libraries\PersonaQ2\Modules\Window\Functions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Dependencies\GFDLibrary\GFDLibrary.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Dependencies\PM1MessageScriptEditor\Libraries\DigitalDevilSaga.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -509,6 +525,12 @@
     <Content Include="Dependencies\7z\7z.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Dependencies\GFDLibrary\AssimpNet.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\AssimpNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dependencies\AtlusScriptCompiler\Antlr4.Runtime.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -533,6 +555,27 @@
     <Content Include="Dependencies\AtlusScriptCompiler\Newtonsoft.Json.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Dependencies\GFDLibrary\CSharpImageLibrary.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\CSharpImageLibrary.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\CSharpImageLibrary.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\GFDLibrary.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\GFDLibrary.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\runtimes\win-x64\native\assimp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\runtimes\win-x86\native\assimp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dependencies\PAKPack\AtlusFileSystemLibrary.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -550,6 +593,27 @@
     </Content>
     <Content Include="Dependencies\PM1MessageScriptEditor\PM1MessageScriptEditor.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\Scarlet.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\Scarlet.IO.ImageFormats.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\Scarlet.IO.ImageFormats.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\Scarlet.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\System.Numerics.Vectors.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\System.Runtime.CompilerServices.Unsafe.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dependencies\GFDLibrary\System.Runtime.CompilerServices.Unsafe.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="license.txt" />
     <Content Include="pstudio.ico" />
@@ -1577,11 +1641,24 @@
     <None Include="Resources\script_add1.ico" />
     <None Include="Resources\page_white_add1.ico" />
     <None Include="Resources\note_go1.ico" />
+    <None Include="Resources\arrow_down1.ico" />
+    <None Include="Resources\package2.ico" />
+    <None Include="Resources\music1.ico" />
     <Content Include="Windows Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Calendar\" />
     <Folder Include="Dependencies\AtlusScriptCompiler\Libraries\Persona4Golden\Modules\Unknown\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Amicitia\Source\Amicitia\Amicitia.csproj">
+      <Project>{1d35a70e-a6be-40cc-a829-3b4f0d5caf74}</Project>
+      <Name>Amicitia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AtlusFileSystemLibrary\Source\AtlusFileSystemLibrary\AtlusFileSystemLibrary.csproj">
+      <Project>{9960b785-6207-44e8-ba42-ec7f6f785344}</Project>
+      <Name>AtlusFileSystemLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
