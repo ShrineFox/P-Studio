@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using ShrineFox.IO;
 using System;
 using System.IO;
 using System.Reflection;
@@ -81,7 +82,7 @@ namespace P_Studio
                             ExtractArchive();
                         }
                         else
-                            Program.status.Update($"[INFO] Extracted {settings.Game} files already found, skipping...");
+                            Output.Log($"[INFO] Extracted {settings.Game} files already found, skipping...");
                         settings.ExtractedPath = defaultExtractPath;
                         // Update settings now that extraction is done
                         settings.UseExtractedPath = true;
@@ -239,31 +240,31 @@ namespace P_Studio
         {
             if (!settings.UseExtractedPath && !File.Exists(settings.ArchivePath))
             {
-                Program.status.Update("[ERROR] Failed to load project: invalid Archive Path");
+                Output.Log("[ERROR] Failed to load project: invalid Archive Path");
                 return false;
             }
             if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
             {
-                Program.status.Update("[ERROR] Failed to load project: invalid Extracted Path");
+                Output.Log("[ERROR] Failed to load project: invalid Extracted Path");
                 return false;
             }
             if (settings.UseExtractedPath && !Directory.Exists(settings.ExtractedPath))
             {
-                Program.status.Update("[ERROR] Failed to load project: invalid Extracted Path");
+                Output.Log("[ERROR] Failed to load project: invalid Extracted Path");
                 return false;
             }
             if (settings.ProjectName == "" || !Regex.IsMatch(settings.ProjectName, "^[a-zA-Z0-9-_ .]*$"))
             {
-                Program.status.Update("[ERROR] Failed to load project: invalid Project Name");
+                Output.Log("[ERROR] Failed to load project: invalid Project Name");
                 return false;
             }
             if (!Directory.Exists(settings.OutputPath))
             {
-                Program.status.Update("[ERROR] Failed to load project: invalid Output Path");
+                Output.Log("[ERROR] Failed to load project: invalid Output Path");
                 return false;
             }
 
-            Program.status.Update($"[INFO] Successfully loaded project: \"{settings.ProjectName}\"");
+            Output.Log($"[INFO] Successfully loaded project: \"{settings.ProjectName}\"");
             return true;
         }
 

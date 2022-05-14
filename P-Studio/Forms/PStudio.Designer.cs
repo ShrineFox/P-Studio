@@ -329,7 +329,7 @@ namespace P_Studio
             this.richTextBox_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox_Status.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.richTextBox_Status.ForeColor = System.Drawing.Color.DarkGray;
+            this.richTextBox_Status.ForeColor = System.Drawing.Color.Silver;
             this.richTextBox_Status.Location = new System.Drawing.Point(3, 387);
             this.richTextBox_Status.Name = "richTextBox_Status";
             this.richTextBox_Status.ReadOnly = true;
@@ -457,7 +457,7 @@ namespace P_Studio
             this.dumpTexturesToolStripMenuItem.Image = global::P_Studio.Properties.Resources.picture;
             this.dumpTexturesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpTexturesToolStripMenuItem.Name = "dumpTexturesToolStripMenuItem";
-            this.dumpTexturesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dumpTexturesToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.dumpTexturesToolStripMenuItem.Text = "All Textures";
             this.dumpTexturesToolStripMenuItem.Click += new System.EventHandler(this.DumpTextures_Click);
             // 
@@ -468,7 +468,7 @@ namespace P_Studio
             this.dumpSoundsToolStripMenuItem.Image = global::P_Studio.Properties.Resources.music;
             this.dumpSoundsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpSoundsToolStripMenuItem.Name = "dumpSoundsToolStripMenuItem";
-            this.dumpSoundsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dumpSoundsToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.dumpSoundsToolStripMenuItem.Text = "All Sounds";
             // 
             // dumpScriptsToolStripMenuItem
@@ -478,7 +478,7 @@ namespace P_Studio
             this.dumpScriptsToolStripMenuItem.Image = global::P_Studio.Properties.Resources.page_code;
             this.dumpScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpScriptsToolStripMenuItem.Name = "dumpScriptsToolStripMenuItem";
-            this.dumpScriptsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dumpScriptsToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.dumpScriptsToolStripMenuItem.Text = "All Scripts";
             // 
             // contextMenuStrip_Game

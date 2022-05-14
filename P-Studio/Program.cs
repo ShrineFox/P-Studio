@@ -10,7 +10,6 @@ namespace P_Studio
 {
     static class Program
     {
-        public static Status status;
         public static List<string> processList = new List<string>()
             {
                 ".\\Dependencies\\Amicitia\\Amicitia.exe",

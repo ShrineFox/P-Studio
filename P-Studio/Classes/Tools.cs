@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ShrineFox.IO;
 
 namespace P_Studio
 {
@@ -53,7 +54,7 @@ namespace P_Studio
             if (File.Exists(exePath))
             {
                 string processName = Path.GetFileName(exePath);
-                PStudio.assetEditor = processName;
+                PStudio.assetEditorName = processName;
                 // Close existing process
                 if (processName == "Amicitia.exe" || processName == "GFDStudio.exe")
                 {
@@ -78,11 +79,11 @@ namespace P_Studio
                 process.WaitForInputIdle();
                 // Add program to form and focus on it
                 if (processName == "Amicitia.exe")
-                    PStudio.assetEditorHandle = process.MainWindowHandle;
+                    PStudio.assetEditor = process.MainWindowHandle;
                 else if (processName == "GFDStudio.exe")
-                    PStudio.assetEditorHandle = process.MainWindowHandle;
+                    PStudio.assetEditor = process.MainWindowHandle;
                 else if (processName == "notepad++.exe")
-                    PStudio.scriptEditorHandle = process.MainWindowHandle;
+                    PStudio.scriptEditor = process.MainWindowHandle;
                 SetParent(process.MainWindowHandle, panel);
                 ShowWindow(process.MainWindowHandle, SW_MINIMIZE);
                 SetForegroundWindow(process.MainWindowHandle);
@@ -97,11 +98,11 @@ namespace P_Studio
                 ShowWindow(process.MainWindowHandle, SW_MAXIMIZE);
                 SetForegroundWindow(process.MainWindowHandle);
                 SetFocus(process.MainWindowHandle);
-                Program.status.Update($"[INFO] Loaded \"{Path.GetFileName(inputFile)}\" with {processName}");
+                Output.Log($"[INFO] Loaded \"{Path.GetFileName(inputFile)}\" with {processName}");
             }
             else
             {
-                Program.status.Update($"[ERROR] Could not find program at path: \"{exePath}\"");
+                Output.Log($"[ERROR] Could not find program at path: \"{exePath}\"");
             }
         }
 
@@ -133,11 +134,11 @@ namespace P_Studio
             {
                 foreach (Process p in Process.GetProcessesByName(procName))
                     p.Kill();
-                PStudio.assetEditor = "";
+                PStudio.assetEditorName = "";
             }
             catch
             {
-                Program.status.Update($"[ERROR] Failed to kill process: {procName}");
+                Output.Log($"[ERROR] Failed to kill process: {procName}");
             }
         }
 
@@ -167,7 +168,7 @@ namespace P_Studio
                 }
                 else
                 {
-                    Program.status.Update($"[ERROR] Could not find program at path: \"{exePath}\"");
+                    Output.Log($"[ERROR] Could not find program at path: \"{exePath}\"");
                 }
         }
 

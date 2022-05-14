@@ -1,50 +1,54 @@
-﻿using MetroSet_UI.Controls;
-using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsInput;
-using WindowsInput.Native;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+using ShrineFox.IO;
 
 namespace P_Studio
 {
     public partial class PStudio : MetroSet_UI.Forms.MetroSetForm
     {
-        public static IntPtr assetPanelHandle;
-        public static IntPtr assetEditorHandle;
-        public static IntPtr scriptingPanelHandle;
-        public static IntPtr scriptEditorHandle;
+        public static IntPtr assetPanel;
+        public static IntPtr assetEditor;
+        public static IntPtr scriptPanel;
+        public static IntPtr scriptEditor;
+
         public static int formWidth;
         public static int formHeight;
-        public static string assetEditor = "";
+        public static string assetEditorName = "";
         public static bool collapsed;
         public PStudio()
         {
             InitializeComponent();
-            Tools.CloseAll(); Tools.OpenAll(); Tools.CloseAll();
-            Program.status = new Status(this.richTextBox_Status);
-            Program.status.Update("Create a new project or load an existing one to get started.");
+            // Set up logging
+            Output.LogPath = "log.txt";
+            Output.LogControl = richTextBox_Status;
+            #if DEBUG
+                Output.VerboseLogging = true;
+            #endif
+            // Open and close dependency processes so they can be mounted to the form more quickly
+            Tools.OpenAll(); Tools.CloseAll();
+            // Sample Logs
+            Output.Log("Program started.", ConsoleColor.Gray, true);
+            Output.Log("Create a new project or load an existing one to get started.", ConsoleColor.Green, false, true);
+            Output.Log("Log test.");
+            // Select Game tab by default
             metroSetTabControl_Workspace.SelectedIndex = 0;
+            // Set up renderer for toolstrip/menustrip
             ToolStripManager.Renderer = r;
             menuStrip_Main.Renderer = r;
+            // Set icons for treeviews
             treeView_Game.ImageList = Treeview.treeViewImageList;
             treeView_Project.ImageList = Treeview.treeViewImageList;
-            assetPanelHandle = panel_Asset.Handle;
-            scriptingPanelHandle = panel_Scripting.Handle;
+            // Save panel handles for mounting
+            assetPanel = panel_Asset.Handle;
+            scriptPanel = panel_Scripting.Handle;
+            // Uncollapse sidebar by default
             collapsed = false;
         }
 
@@ -122,7 +126,7 @@ namespace P_Studio
                     {
                         SettingsForm.settings.ProjectName = newName;
                         SettingsForm.settings.ProjectPath = newProj;
-                        Program.status.Update($"[INFO] Copying project files from \"{Path.GetFileNameWithoutExtension(originalProj)}\" to \"{Path.GetFileNameWithoutExtension(newProj)}\"");
+                        Output.Log($"[INFO] Copying project files from \"{Path.GetFileNameWithoutExtension(originalProj)}\" to \"{Path.GetFileNameWithoutExtension(newProj)}\"");
                         // Copy all project files to new directory
                         Unpacker.CopyEntireDirectory(new DirectoryInfo(projDir), new DirectoryInfo(Path.GetDirectoryName(newProj)), true);
                         // Delete original project file copied with other project stuff
@@ -132,7 +136,7 @@ namespace P_Studio
                         LoadProject();
                     }
                     else
-                        Program.status.Update($"[ERROR] Failed to save project as \"{newName}\", directory already exists");
+                        Output.Log($"[ERROR] Failed to save project as \"{newName}\", directory already exists");
                 }
             }
         }
@@ -175,10 +179,10 @@ namespace P_Studio
                 }
                 else
                 {
-                    Program.status.Update($"[ERROR] Failed to copy {Path.GetFileName(file)} to project.");
+                    Output.Log($"[ERROR] Failed to copy {Path.GetFileName(file)} to project.");
                     return;
                 }
-                Program.status.Update($"[INFO] Copied {Path.GetFileName(file)} to project.");
+                Output.Log($"[INFO] Copied {Path.GetFileName(file)} to project.");
                 Treeview_Project();
             }
             HideContextMenus();
@@ -221,20 +225,20 @@ namespace P_Studio
                         if (File.Exists(originalName) && !File.Exists(newName))
                         {
                             File.Copy(originalName, newName);
-                            Program.status.Update($"[INFO] Copied \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\"");
+                            Output.Log($"[INFO] Copied \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\"");
                         }
                         else if (Directory.Exists(originalName) && !Directory.Exists(newName))
                         {
                             Unpacker.CopyEntireDirectory(new DirectoryInfo(originalName), new DirectoryInfo(newName));
-                            Program.status.Update($"[INFO] Copied \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\"");
+                            Output.Log($"[INFO] Copied \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\"");
                         }
                         else
-                            Program.status.Update($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\", file already exists");
+                            Output.Log($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\", file already exists");
                     }
                     Treeview_Project();
                 }
                 else
-                    Program.status.Update($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\", file or folder does not exist");
+                    Output.Log($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\", file or folder does not exist");
             }
         }
 
@@ -253,15 +257,15 @@ namespace P_Studio
                     if (File.Exists(originalName) && !File.Exists(newName))
                     {
                         File.Move(originalName, newName);
-                        Program.status.Update($"[INFO] Renamed \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\"");
+                        Output.Log($"[INFO] Renamed \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\"");
                     }
                     else if (Directory.Exists(originalName) && !Directory.Exists(newName))
                     {
                         Directory.Move(treeView_Project.SelectedNode.Name, newName);
-                        Program.status.Update($"[INFO] Renamed \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\"");
+                        Output.Log($"[INFO] Renamed \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\"");
                     }
                     else
-                        Program.status.Update($"[ERROR] Failed to rename \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\", file already exists");
+                        Output.Log($"[ERROR] Failed to rename \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\", file already exists");
                     Treeview_Project();
                 }
             }
@@ -275,16 +279,16 @@ namespace P_Studio
                 if (Directory.Exists(file))
                 {
                     Directory.Delete(file, true);
-                    Program.status.Update($"[INFO] Deleted directory and contents: {Path.GetFileName(file)}.");
+                    Output.Log($"[INFO] Deleted directory and contents: {Path.GetFileName(file)}.");
                 }
                 else if (File.Exists(file))
                 {
                     File.Delete(file);
-                    Program.status.Update($"[INFO] Deleted file: {Path.GetFileName(file)}.");
+                    Output.Log($"[INFO] Deleted file: {Path.GetFileName(file)}.");
                 }
                 else
                 {
-                    Program.status.Update($"[ERROR] Couldn't find file to delete: {Path.GetFileName(file)}.");
+                    Output.Log($"[ERROR] Couldn't find file to delete: {Path.GetFileName(file)}.");
                     return;
                 }
                 Treeview_Project();
@@ -311,7 +315,7 @@ namespace P_Studio
                     case ".amd":
                     case ".pac":
                     case ".pak":
-                        Tools.Mount(Program.processList[0], treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        Tools.Mount(Program.processList[0], treeView_Project.SelectedNode.Name, assetPanel);
                         metroSetTabControl_Workspace.SelectedIndex = 0;
                         break;
                     case ".gmd":
@@ -325,7 +329,7 @@ namespace P_Studio
                     case ".gmod":
                     case ".dds":
                     case ".epl":
-                        Tools.Mount(Program.processList[1], treeView_Project.SelectedNode.Name, assetPanelHandle);
+                        Tools.Mount(Program.processList[1], treeView_Project.SelectedNode.Name, assetPanel);
                         metroSetTabControl_Workspace.SelectedIndex = 0;
                         break;
                     case ".flow":
@@ -335,7 +339,7 @@ namespace P_Studio
                     case ".yml":
                     case ".bat":
                     case ".xml":
-                        Tools.Mount(Program.processList[2], treeView_Project.SelectedNode.Name, scriptingPanelHandle);
+                        Tools.Mount(Program.processList[2], treeView_Project.SelectedNode.Name, scriptPanel);
                         metroSetTabControl_Workspace.SelectedIndex = 1;
                         break;
                     default:
@@ -472,30 +476,13 @@ namespace P_Studio
         {
             int formWidth = panel_Asset.Width;
             int formHeight = panel_Asset.Height;
-            if (assetEditorHandle != null)
-                Tools.MoveWindow(assetEditorHandle, 0, 0, formWidth, formHeight, true);
-            if (scriptEditorHandle != null)
-                Tools.MoveWindow(scriptEditorHandle, 0, 0, formWidth, formHeight, true);
+            if (assetEditor != null)
+                Tools.MoveWindow(assetEditor, 0, 0, formWidth, formHeight, true);
+            if (scriptEditor != null)
+                Tools.MoveWindow(scriptEditor, 0, 0, formWidth, formHeight, true);
         }
         #endregion
 
-    }
-
-    /* Append to Status Text from other classes and forms */
-    public class Status
-    {
-        RichTextBox rtb;
-        public Status(RichTextBox rtb)
-        {
-            this.rtb = rtb;
-        }
-
-        public void Update(string msg)
-        {
-            rtb.Text += "\n" + msg;
-            rtb.SelectionStart = rtb.Text.Length;
-            rtb.ScrollToCaret();
-        }
     }
 
     /* Toggle TableLayoutPanel rows/columns that are set to autosize */

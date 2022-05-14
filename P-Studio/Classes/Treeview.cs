@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShrineFox.IO;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -146,7 +147,7 @@ namespace P_Studio
                 Process.Start(info);
             }
             else
-                Program.status.Update($"[ERROR] Couldn't open path to \"{Path.GetFileName(file)}\".");
+                Output.Log($"[ERROR] Couldn't open path to \"{Path.GetFileName(file)}\".");
         }
     }
 
