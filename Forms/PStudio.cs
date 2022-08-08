@@ -34,8 +34,8 @@ namespace P_Studio
             // Open and close dependency processes so they can be mounted to the form more quickly
             Tools.OpenAll(); Tools.CloseAll();
             // Sample Logs
-            Output.Log("Program started.", ConsoleColor.Gray, true);
-            Output.Log("Create a new project or load an existing one to get started.", ConsoleColor.Green, false, true);
+            Output.Log("Program started.", ConsoleColor.Gray);
+            Output.Log("Create a new project or load an existing one to get started.", ConsoleColor.Green);
             Output.Log("Log test.");
             // Select Game tab by default
             metroSetTabControl_Workspace.SelectedIndex = 0;

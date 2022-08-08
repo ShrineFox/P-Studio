@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P-Studio", "P-Studio\P-Studio.csproj", "{587A0511-2C46-4049-9849-CCDDCDE707C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P-Studio", "P-Studio.csproj", "{587A0511-2C46-4049-9849-CCDDCDE707C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlusFileSystemLibrary", "..\AtlusFileSystemLibrary\Source\AtlusFileSystemLibrary\AtlusFileSystemLibrary.csproj", "{9960B785-6207-44E8-BA42-EC7F6F785344}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amicitia", "..\Amicitia\Source\Amicitia\Amicitia.csproj", "{1D35A70E-A6BE-40CC-A829-3B4F0D5CAF74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShrineFox.IO", "..\ShrineFox.io\ShrineFox.io\ShrineFox.IO.csproj", "{7640412A-7372-4925-B20C-0178D8818A8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShrineFox.IO", "..\ShrineFox.io\ShrineFox.IO.csproj", "{7640412A-7372-4925-B20C-0178D8818A8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmicitiaLibrary", "..\Amicitia\Source\AmicitiaLibrary\AmicitiaLibrary.csproj", "{E3DCDE4D-078F-463F-9462-3D918F9363B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,18 @@ Global
 		{7640412A-7372-4925-B20C-0178D8818A8F}.Release|x64.Build.0 = Release|Any CPU
 		{7640412A-7372-4925-B20C-0178D8818A8F}.Release|x86.ActiveCfg = Release|Any CPU
 		{7640412A-7372-4925-B20C-0178D8818A8F}.Release|x86.Build.0 = Release|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Debug|x64.Build.0 = Debug|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Debug|x86.Build.0 = Debug|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Release|x64.ActiveCfg = Release|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Release|x64.Build.0 = Release|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{E3DCDE4D-078F-463F-9462-3D918F9363B9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
