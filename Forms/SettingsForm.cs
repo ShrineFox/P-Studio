@@ -207,7 +207,7 @@ namespace P_Studio
         {
             var serializer = new SerializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
             var yaml = serializer.Serialize(settings);
-            using (Tools.WaitForFile(settings.ProjectPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None)) { };
+            //using (Tools.WaitForFile(settings.ProjectPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None)) { };
             File.WriteAllText(settings.ProjectPath, yaml);
 
             MessageBox.Show(new SettingsForm(), $"Saved project as \"{settings.ProjectName}\"!", "Project Saved",

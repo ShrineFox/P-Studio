@@ -19,7 +19,7 @@ namespace P_Studio.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -107,26 +107,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("accept", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap add {
-            get {
-                object obj = ResourceManager.GetObject("add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap add1 {
-            get {
-                object obj = ResourceManager.GetObject("add1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -267,16 +247,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("application_get", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap application_go {
-            get {
-                object obj = ResourceManager.GetObject("application_go", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -501,42 +471,12 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap application_xp_terminal {
-            get {
-                object obj = ResourceManager.GetObject("application_xp_terminal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon arrow_branch {
             get {
                 object obj = ResourceManager.GetObject("arrow_branch", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap arrow_divide {
-            get {
-                object obj = ResourceManager.GetObject("arrow_divide", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap arrow_down {
-            get {
-                object obj = ResourceManager.GetObject("arrow_down", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -557,16 +497,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("arrow_inout", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap arrow_join {
-            get {
-                object obj = ResourceManager.GetObject("arrow_join", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -717,16 +647,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("asterisk_orange", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap asterisk_yellow {
-            get {
-                object obj = ResourceManager.GetObject("asterisk_yellow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -2261,16 +2181,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chart_organisation {
-            get {
-                object obj = ResourceManager.GetObject("chart_organisation", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon chart_organisation_add {
@@ -3451,42 +3361,12 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap delete {
-            get {
-                object obj = ResourceManager.GetObject("delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon disconnect {
             get {
                 object obj = ResourceManager.GetObject("disconnect", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap disk {
-            get {
-                object obj = ResourceManager.GetObject("disk", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap disk_multiple {
-            get {
-                object obj = ResourceManager.GetObject("disk_multiple", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -4341,16 +4221,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap folder_add {
-            get {
-                object obj = ResourceManager.GetObject("folder_add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon folder_bell {
@@ -4431,16 +4301,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap folder_explore {
-            get {
-                object obj = ResourceManager.GetObject("folder_explore", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon folder_feed {
@@ -4457,16 +4317,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("folder_find", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap folder_go {
-            get {
-                object obj = ResourceManager.GetObject("folder_go", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -4527,16 +4377,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("folder_magnify", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap folder_page {
-            get {
-                object obj = ResourceManager.GetObject("folder_page", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -5971,16 +5811,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap music {
-            get {
-                object obj = ResourceManager.GetObject("music", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon newspaper {
@@ -6081,32 +5911,12 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap note_go {
-            get {
-                object obj = ResourceManager.GetObject("note_go", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon overlays {
             get {
                 object obj = ResourceManager.GetObject("overlays", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap package {
-            get {
-                object obj = ResourceManager.GetObject("package", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -6131,16 +5941,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap package_go {
-            get {
-                object obj = ResourceManager.GetObject("package_go", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon package_green {
@@ -6161,16 +5961,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap package1 {
-            get {
-                object obj = ResourceManager.GetObject("package1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon page {
@@ -6181,42 +5971,12 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap page_add {
-            get {
-                object obj = ResourceManager.GetObject("page_add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon page_attach {
             get {
                 object obj = ResourceManager.GetObject("page_attach", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap page_code {
-            get {
-                object obj = ResourceManager.GetObject("page_code", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap page_copy {
-            get {
-                object obj = ResourceManager.GetObject("page_copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -6407,16 +6167,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("page_white_actionscript", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap page_white_add {
-            get {
-                object obj = ResourceManager.GetObject("page_white_add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -7141,16 +6891,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap picture {
-            get {
-                object obj = ResourceManager.GetObject("picture", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon picture_add {
@@ -7757,16 +7497,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("script", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap script_add {
-            get {
-                object obj = ResourceManager.GetObject("script_add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -8721,16 +8451,6 @@ namespace P_Studio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap table_gear {
-            get {
-                object obj = ResourceManager.GetObject("table_gear", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon table_go {
@@ -9467,16 +9187,6 @@ namespace P_Studio.Properties {
             get {
                 object obj = ResourceManager.GetObject("textfield_key", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap textfield_rename {
-            get {
-                object obj = ResourceManager.GetObject("textfield_rename", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

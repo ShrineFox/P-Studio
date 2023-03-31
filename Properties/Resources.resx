@@ -1938,10 +1938,6 @@
         AAChwQAAoeMAAKwPAACuPwAAv/8AAP//AAA=
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="asterisk_yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\asterisk_yellow1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="tag_blue_edit" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -2137,9 +2133,6 @@
         QkAtAAAAAAAAAAAAAAAAAAAAAAAAAP//AADgAQAAAAEAAAABAAAAAQAAwAEAAOABAADgAQAA4AEAAOAB
         AADgAQAA4AEAAOABAADgAwAA4AcAAP//AAA=
 </value>
-  </data>
-  <data name="chart_organisation" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chart_organisation1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="textfield_add" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3401,9 +3394,6 @@
         AADwDwAA+B8AAPgfAAD8PwAA/H8AAP5/AAA=
 </value>
   </data>
-  <data name="page_white_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\page_white_add1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="server_go" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -3795,9 +3785,6 @@
         MjEwLy4oAAAAAAAAAAAAAAAAAAAAAP/jAAD/gQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAA=
 </value>
-  </data>
-  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_star" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6039,9 +6026,6 @@
         AAAAAQAAAAEAAIABAADgAwAA4AcAAP//AAA=
 </value>
   </data>
-  <data name="application_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_go1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="cart" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -6742,9 +6726,6 @@
         AAADwAAAA+AAAAPgAAAD4AAAA/AAAP//AAA=
 </value>
   </data>
-  <data name="folder_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_go1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="email_open" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -6968,9 +6949,6 @@
         AAAAAAAAAAAAAAAAGgUIAAAAAAAAAOPnAACAAwAAgAEAAIADAADgAwAA4AMAAOADAADwBwAA8AcAAPgP
         AAD8HwAA/B8AAPwfAAD8HwAA/D8AAPx/AAA=
 </value>
-  </data>
-  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shape_align_top" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -7391,9 +7369,6 @@
         j4uHWgAAgGBWVVVVVVVUVFRUV34AAPgAAAD4AAAAAAEAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAAD
         AAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAA=
 </value>
-  </data>
-  <data name="table_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\table_gear1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="layers" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -7954,9 +7929,6 @@
         KiMAAAAAAAAAAAAAAAAAAAAAAAAAAP/BAADAAQAAwAAAAMAAAADAAAAAwAEAAMABAADAAwAAwAMAAMAD
         AADAAwAAwAMAAMADAADABwAAwA8AAP//AAA=
 </value>
-  </data>
-  <data name="script_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\script_add1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="contrast_low" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -8741,9 +8713,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AADn/wAAwB8AAIAHAACAAwAAwAMAAOeBAAD/wQAA/8EAAP+B
         AADAAwAAwAMAAMAHAADAHwAA//8AAP//AAA=
 </value>
-  </data>
-  <data name="disk_multiple" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\disk_multiple1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="disconnect" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -10761,9 +10730,6 @@
         AACAAQAAgA8AAMAPAADgDwAA8A8AAP//AAA=
 </value>
   </data>
-  <data name="folder_explore" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_explore1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="date_delete" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -10875,9 +10841,6 @@
         UgAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD4HwAA8A8AAOAHAADAAwAAgAEAAIABAACAAQAAgAEAAIAB
         AACAAQAAwAMAAOAHAADwDwAA+B8AAP//AAA=
 </value>
-  </data>
-  <data name="picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\picture.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bug_delete" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -12111,9 +12074,6 @@
         AAAAAAAAz/8AAM//AADgfwAA//8AAP//AAA=
 </value>
   </data>
-  <data name="note_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\note_go1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="database_lightning" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -12449,9 +12409,6 @@
         BgYGB08AAAAAAAAAAAAAAAAAAAAAAPD/AACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAAAAIAA
         AACAAQAAgAEAAIABAACAAQAAgAEAAP//AAA=
 </value>
-  </data>
-  <data name="package1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\package2.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="page_white_horizontal" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -13180,9 +13137,6 @@
         aBwWAAAAAAAZEA8ODg4ODhU7AAAAAMAAAACAAAAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIAB
         AACAAQAAgAEAAIABAACAAwAAgAcAAMAPAAA=
 </value>
-  </data>
-  <data name="package" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\package1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="house" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -15424,11 +15378,9 @@
         AACADwAAgA8AAPh/AAD4fwAA+H8AAP//AAA=
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="7z.dll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Dependencies\7z\7z.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="page_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\page_add1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="telephone_go" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -16438,9 +16390,6 @@
         AADAAwAAwAMAAMADAADAAwAAwAMAAP//AAA=
 </value>
   </data>
-  <data name="disk" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\disk1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="drive_user" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -17168,9 +17117,6 @@
         IQoIAQAAABkPGhgKCgoJCAgIBxMAAAAHAAAAAwAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAB
         AAAAAQAAAAEAAAABAAAAAQAAAAMAAIADAAA=
 </value>
-  </data>
-  <data name="application_xp_terminal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_xp_terminal1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sport_shuttlecock" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -19580,9 +19526,6 @@
         AADAAwAAwAMAAIABAACYGQAA/n8AAP//AAA=
 </value>
   </data>
-  <data name="arrow_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow_down1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="group" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -19638,9 +19581,6 @@
         AAAAAAAAAAAAUFBWSgAAAAAAAAAAAPD/AADwfwAA8D8AAPgfAAD8DwAA4AcAAPMDAAD5gQAA/AAAABjA
         AACYUQAAwR8AAMkPAADpDwAA8f8AAOH/AAA=
 </value>
-  </data>
-  <data name="folder_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_add1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="chart_pie" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -20818,9 +20758,6 @@
         AAAAAAAAAAAAAIAAAADBgQAA/+cAAP//AAA=
 </value>
   </data>
-  <data name="music" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\music1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="time_add" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -21717,34 +21654,6 @@
         AADgHwAAwA8AAMAPAADADwAAwA8AAMAPAAA=
 </value>
   </data>
-  <data name="page_code" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAumczALpoMwC7aDQAvGo2ALxsOgC+bz4AwHI7AMB1PgDBekAAxX1DAMF/RgDFf0QAwnpMANeA
-        PgDGg0YAxYRJAMaLTwDJi00A3pZIAMeMUQDJjlMAyY9UAMmRWADiiEAA4ItLAOKVTgDhkFcA45pVAOSc
-        VwDgkV8A45ZeAOWcWwDjmlwA5Z9cAPasTwD3sU4A5aNXAOWhWQDmpVkA6KZbAOiqXwDorF4A97FQAPez
-        VQD8vV8AyIlhAMuMZQDNnGgA3JVpANGgcwDWqXsA5aJkAOenZwDopWEA6apgAOqrZgDoqWkA7LFkAOy1
-        ZADssWgA6bBtAPu7YAD8u2EA+7xiAPy8YgD7vWQA/L1mAOGvfADqtHAA6bF0AOy6dQDisXwA7Ld4AP3B
-        bQDUp4MA3LCOAOK1gwDutZMA77mSAP/UkgD/1pUA/9aaAP/XnQD/2J8A8dKyAPbRsgDz1LQA9Na3APbY
-        swD11rkA9ti6APbavADy2MMA+NrBAPjcwQD628QA+t7FAPrgxwD64MkA+uXJAPvjzQD84s0A/OXOAPLm
-        1wD75NAA/eXTAPzm1QD+6NYA9erdAPfs3wD+6NgA9+3jAPjv5gD17+kA9/LsAPny6gD48uwA+fTtAPn1
-        8QD89/MA+/f0APz59QD9+/gA/v79AO//sQD2/9EA////AAAAAAAvJgAAUEEAAHBbAACQdAAAsI4AAM+p
-        AADwwwAA/9IRAP/YMQD/3VEA/+RxAP/qkQD/8LEA//bRAP///wAAAAAALxQAAFAiAABwMAAAkD4AALBN
-        AADPWwAA8GkAAP95EQD/ijEA/51RAP+vcQD/wZEA/9KxAP/l0QD///8AAAAAAC8DAABQBAAAcAYAAJAJ
-        AACwCgAAzwwAAPAOAAD/IBIA/z4xAP9cUQD/enEA/5eRAP+2sQD/1NEA////AAAAAAAvAA4AUAAXAHAA
-        IQCQACsAsAA2AM8AQADwAEkA/xFaAP8xcAD/UYYA/3GcAP+RsgD/scgA/9HfAP///wAAAAAALwAgAFAA
-        NgBwAEwAkABiALAAeADPAI4A8ACkAP8RswD/Mb4A/1HHAP9x0QD/kdwA/7HlAP/R8AD///8AAAAAACwA
-        LwBLAFAAaQBwAIcAkAClALAAxADPAOEA8ADwEf8A8jH/APRR/wD2cf8A95H/APmx/wD70f8A////AAAA
-        AAAbAC8ALQBQAD8AcABSAJAAYwCwAHYAzwCIAPAAmRH/AKYx/wC0Uf8AwnH/AM+R/wDcsf8A69H/AP//
-        /wAAAAAACAAvAA4AUAAVAHAAGwCQACEAsAAmAM8ALADwAD4R/wBYMf8AcVH/AIxx/wCmkf8Av7H/ANrR
-        /wD///8AAAAALwYEBAQEAwMDAgUuAAAADXVubm5tbXZ2dHh4fA0AAAhuQ0NDQkJBQT8tP3sEAAAJcEpU
-        U1JRUVFRUEN4BAAACh4ZLBoYIysrKyQkegcAAA40G2ogNR9gZmZjY3sJACY5IV5sYCI5HE5mZmN4DClJ
-        JV1sb2xWKEYdYmJhdA8AKkU2YG9hN0UoT2JhX3YQAAATRTZsOkc4XmJfXFt2EAAAEj0qajs8YWNfWldV
-        dxAAABFxaWlpZmVfXG1zeHILAAAUd2ZnZWVjX1p7Z2RNSwAAF3diY2NiYV9Ye1lEMQAAADJzdnZ1dnV1
-        c2hIMQAAAAAAMxcWFRUVFRUwTAAAAOABAADAAAAAwAAAAMAAAADAAAAAwAAAAIAAAAAAAAAAgAAAAMAA
-        AADAAAAAwAAAAMAAAADAAQAAwAMAAOAHAAA=
-</value>
-  </data>
   <data name="cup_key" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -22613,9 +22522,6 @@
         AAAAAAAAAAAAAIAAAADBgQAA/+cAAP//AAA=
 </value>
   </data>
-  <data name="textfield_rename" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\textfield_rename1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="shape_square_error" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -22979,9 +22885,6 @@
         UlJSUlIAAAAtJyUAAAAAAAAAAAAAAOAhAADAAAAAgAAAAMAAAACAAAAAwAAAAIABAADAAQAAgAEAAMAB
         AACAAQAAwAEAAIABAADAAQAAgAEAAMf/AAA=
 </value>
-  </data>
-  <data name="arrow_join" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow_join1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_orange" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -25450,9 +25353,6 @@
         AACAAwAAgAMAAIADAACAAwAAgAMAAMADAAA=
 </value>
   </data>
-  <data name="package_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\package_go1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="mouse_delete" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -26349,9 +26249,6 @@
         AAAAAQAAAAMAAAAfAAAAHwAA//8AAP//AAA=
 </value>
   </data>
-  <data name="folder_page" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_page1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="page_white_excel" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -26772,9 +26669,6 @@
         AADAAwAAwCcAAP//AAD//wAA//8AAP//AAA=
 </value>
   </data>
-  <data name="add1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add2.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="script_gear" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -27111,9 +27005,6 @@
         AACAAwAAgAMAAIADAAD8AQAA/gMAAP//AAA=
 </value>
   </data>
-  <data name="arrow_divide" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow_divide1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="drive_web" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -27422,9 +27313,6 @@
         AADAAQAAwAMAAOAHAADwDwAA+B8AAP//AAA=
 </value>
   </data>
-  <data name="page_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\page_copy1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="cup_link" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -27480,8 +27368,5 @@
         ES8hLAAAAAAAAAAAAAAAAAAAAAAAAP+PAAD/jwAA/4cAAP+HAAD/hwAAA8cAAAAHAAAAAwAAAAMAAIAD
         AACAAwAAgAMAAIADAAD8AQAA/gMAAP//AAA=
 </value>
-  </data>
-  <data name="page_code" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\page_code.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

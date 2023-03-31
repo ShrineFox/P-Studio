@@ -10,12 +10,6 @@ namespace P_Studio
 {
     static class Program
     {
-        public static List<string> processList = new List<string>()
-            {
-                ".\\Dependencies\\Amicitia\\Amicitia.exe",
-                ".\\Dependencies\\GFDStudio\\GFDStudio.exe",
-                ".\\Dependencies\\notepad++\\notepad++.exe"
-            };
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
