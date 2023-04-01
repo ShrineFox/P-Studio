@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmicitiaLibrary", "..\Amici
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NvTriStripDotNet", "..\Amicitia\Dependencies\NvTriStrip.Net\NvTriStripDotNet\NvTriStripDotNet.csproj", "{66B926EE-FF73-42BE-A27E-CBCB333A4C07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonaGameLib", "..\PersonaGameLib\PersonaGameLib.csproj", "{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{66B926EE-FF73-42BE-A27E-CBCB333A4C07}.Release|x64.Build.0 = Release|Any CPU
 		{66B926EE-FF73-42BE-A27E-CBCB333A4C07}.Release|x86.ActiveCfg = Release|Any CPU
 		{66B926EE-FF73-42BE-A27E-CBCB333A4C07}.Release|x86.Build.0 = Release|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Debug|x64.Build.0 = Debug|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Debug|x86.Build.0 = Debug|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Release|x64.ActiveCfg = Release|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Release|x64.Build.0 = Release|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Release|x86.ActiveCfg = Release|Any CPU
+		{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

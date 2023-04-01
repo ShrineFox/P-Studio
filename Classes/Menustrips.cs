@@ -75,8 +75,9 @@ namespace P_Studio
         {
             this.Text = $"P-Studio v0.1";
             saveProjectToolStripMenuItem.Enabled = false;
-            SettingsForm.settings = new SettingsForm.Settings();
+            settings = new PSettings();
             OpenSettingsForm();
+            // TODO: Prompt user if ready to close all opened workspaces
             metroSetTabControl_GameProject.SelectedIndex = 0;
         }
 
@@ -88,12 +89,15 @@ namespace P_Studio
         private void OpenSettingsForm(string projectPath = "")
         {
             // Load settings from form
-            using (var dialog = new SettingsForm())
+            using (var dialog = new SettingsForm(settings))
             {
-                if (dialog.ShowDialog() != DialogResult.OK)
-                    return;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    settings = dialog.tempSettings;
+                    LoadProject();
+                }
+                return;
             }
-            LoadProject();
         }
 
         private void LoadProject_Click(object sender, EventArgs e)
@@ -109,7 +113,7 @@ namespace P_Studio
             var deserializer = new DeserializerBuilder().WithNamingConvention(PascalCaseNamingConvention.Instance).Build();
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                SettingsForm.settings = deserializer.Deserialize<SettingsForm.Settings>(File.ReadAllText(dialog.FileName));
+                settings = deserializer.Deserialize<PSettings>(File.ReadAllText(dialog.FileName));
                 LoadProject();
             }
             metroSetTabControl_GameProject.SelectedIndex = 1;
@@ -117,9 +121,9 @@ namespace P_Studio
 
         private void LoadProject()
         {
-            if (SettingsForm.IsValid())
+            if (settings.IsValid())
             {
-                this.Text = $"P-Studio v0.1 - {SettingsForm.settings.ProjectName}";
+                this.Text = $"P-Studio v0.1 - {settings.ProjectName}";
                 Treeview_Project();
                 Treeview_Game();
                 saveProjectToolStripMenuItem.Enabled = true;
@@ -128,9 +132,9 @@ namespace P_Studio
 
         private void SaveProjectAs_Click(object sender, EventArgs e)
         {
-            if (SettingsForm.IsValid())
+            if (settings.IsValid())
             {
-                string originalProj = SettingsForm.settings.ProjectPath;
+                string originalProj = settings.ProjectPath;
                 string projDir = Path.GetDirectoryName(originalProj);
                 string newName = "";
                 RenameForm rename = new RenameForm(Path.GetFileNameWithoutExtension(originalProj));
@@ -141,15 +145,15 @@ namespace P_Studio
                     string newProj = Path.Combine(Path.GetDirectoryName(projDir), Path.Combine(newName, newName + ".yml"));
                     if (!Directory.Exists(Path.GetDirectoryName(newProj)))
                     {
-                        SettingsForm.settings.ProjectName = newName;
-                        SettingsForm.settings.ProjectPath = newProj;
+                        settings.ProjectName = newName;
+                        settings.ProjectPath = newProj;
                         Output.Log($"[INFO] Copying project files from \"{Path.GetFileNameWithoutExtension(originalProj)}\" to \"{Path.GetFileNameWithoutExtension(newProj)}\"");
                         // Copy all project files to new directory
                         Unpacker.CopyEntireDirectory(new DirectoryInfo(projDir), new DirectoryInfo(Path.GetDirectoryName(newProj)), true);
                         // Delete original project file copied with other project stuff
                         File.Delete(Path.Combine(Path.GetDirectoryName(newProj), Path.GetFileName(originalProj)));
                         // Save and reload new project
-                        SettingsForm.SaveSettings();
+                        settings.Save();
                         LoadProject();
                     }
                     else

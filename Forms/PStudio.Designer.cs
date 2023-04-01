@@ -34,7 +34,6 @@ namespace P_Studio
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PStudio));
             this.tableLayoutPanel_Container = new System.Windows.Forms.TableLayoutPanel();
             this.metroSetProgressBar_Main = new MetroSet_UI.Controls.MetroSetProgressBar();
             this.styleManager = new MetroSet_UI.Components.StyleManager();
@@ -46,10 +45,6 @@ namespace P_Studio
             this.treeView_Project = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel_Workspace = new System.Windows.Forms.TableLayoutPanel();
             this.metroSetTabControl_Workspace = new MetroSet_UI.Controls.MetroSetTabControl();
-            this.tabPage_Asset = new System.Windows.Forms.TabPage();
-            this.panel_Asset = new System.Windows.Forms.Panel();
-            this.tabPage_Scripting = new System.Windows.Forms.TabPage();
-            this.panel_Scripting = new System.Windows.Forms.Panel();
             this.richTextBox_Status = new System.Windows.Forms.RichTextBox();
             this.metroSetButton_ShowHide = new MetroSet_UI.Controls.MetroSetButton();
             this.menuStrip_Main = new System.Windows.Forms.MenuStrip();
@@ -93,9 +88,6 @@ namespace P_Studio
             this.tabPage_Game.SuspendLayout();
             this.tabPage_Project.SuspendLayout();
             this.tableLayoutPanel_Workspace.SuspendLayout();
-            this.metroSetTabControl_Workspace.SuspendLayout();
-            this.tabPage_Asset.SuspendLayout();
-            this.tabPage_Scripting.SuspendLayout();
             this.menuStrip_Main.SuspendLayout();
             this.contextMenuStrip_Game.SuspendLayout();
             this.contextMenuStrip_Project.SuspendLayout();
@@ -269,16 +261,13 @@ namespace P_Studio
             this.metroSetTabControl_Workspace.AnimateEasingType = MetroSet_UI.Enums.EasingType.CubeOut;
             this.metroSetTabControl_Workspace.AnimateTime = 100;
             this.metroSetTabControl_Workspace.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Asset);
-            this.metroSetTabControl_Workspace.Controls.Add(this.tabPage_Scripting);
-            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetTabControl_Workspace.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroSetTabControl_Workspace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroSetTabControl_Workspace.HotTrack = true;
             this.metroSetTabControl_Workspace.IsDerivedStyle = true;
             this.metroSetTabControl_Workspace.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl_Workspace.Location = new System.Drawing.Point(3, 3);
             this.metroSetTabControl_Workspace.Name = "metroSetTabControl_Workspace";
-            this.metroSetTabControl_Workspace.SelectedIndex = 1;
             this.metroSetTabControl_Workspace.SelectedTextColor = System.Drawing.Color.White;
             this.metroSetTabControl_Workspace.Size = new System.Drawing.Size(652, 378);
             this.metroSetTabControl_Workspace.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -290,42 +279,6 @@ namespace P_Studio
             this.metroSetTabControl_Workspace.ThemeName = "MetroDark";
             this.metroSetTabControl_Workspace.UnselectedTextColor = System.Drawing.Color.Gray;
             this.metroSetTabControl_Workspace.UseAnimation = false;
-            // 
-            // tabPage_Asset
-            // 
-            this.tabPage_Asset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.tabPage_Asset.Controls.Add(this.panel_Asset);
-            this.tabPage_Asset.Location = new System.Drawing.Point(4, 42);
-            this.tabPage_Asset.Name = "tabPage_Asset";
-            this.tabPage_Asset.Size = new System.Drawing.Size(644, 332);
-            this.tabPage_Asset.TabIndex = 0;
-            this.tabPage_Asset.Text = "Edit Asset";
-            // 
-            // panel_Asset
-            // 
-            this.panel_Asset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_Asset.Location = new System.Drawing.Point(0, 0);
-            this.panel_Asset.Name = "panel_Asset";
-            this.panel_Asset.Size = new System.Drawing.Size(644, 332);
-            this.panel_Asset.TabIndex = 2;
-            // 
-            // tabPage_Scripting
-            // 
-            this.tabPage_Scripting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.tabPage_Scripting.Controls.Add(this.panel_Scripting);
-            this.tabPage_Scripting.Location = new System.Drawing.Point(4, 42);
-            this.tabPage_Scripting.Name = "tabPage_Scripting";
-            this.tabPage_Scripting.Size = new System.Drawing.Size(644, 332);
-            this.tabPage_Scripting.TabIndex = 1;
-            this.tabPage_Scripting.Text = "Scripting";
-            // 
-            // panel_Scripting
-            // 
-            this.panel_Scripting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_Scripting.Location = new System.Drawing.Point(0, 0);
-            this.panel_Scripting.Name = "panel_Scripting";
-            this.panel_Scripting.Size = new System.Drawing.Size(644, 332);
-            this.panel_Scripting.TabIndex = 3;
             // 
             // richTextBox_Status
             // 
@@ -392,7 +345,7 @@ namespace P_Studio
             this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.fileToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newProjectToolStripMenuItem
@@ -445,7 +398,7 @@ namespace P_Studio
             this.dumpToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.dumpToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpToolStripMenuItem.Name = "dumpToolStripMenuItem";
-            this.dumpToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
+            this.dumpToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.dumpToolStripMenuItem.Text = "Dump";
             // 
             // dumpTexturesToolStripMenuItem
@@ -780,9 +733,6 @@ namespace P_Studio
             this.tabPage_Game.ResumeLayout(false);
             this.tabPage_Project.ResumeLayout(false);
             this.tableLayoutPanel_Workspace.ResumeLayout(false);
-            this.metroSetTabControl_Workspace.ResumeLayout(false);
-            this.tabPage_Asset.ResumeLayout(false);
-            this.tabPage_Scripting.ResumeLayout(false);
             this.menuStrip_Main.ResumeLayout(false);
             this.menuStrip_Main.PerformLayout();
             this.contextMenuStrip_Game.ResumeLayout(false);
@@ -803,8 +753,6 @@ namespace P_Studio
         private System.Windows.Forms.TreeView treeView_Project;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Workspace;
         private MetroSet_UI.Controls.MetroSetTabControl metroSetTabControl_Workspace;
-        private System.Windows.Forms.TabPage tabPage_Asset;
-        private System.Windows.Forms.TabPage tabPage_Scripting;
         private System.Windows.Forms.MenuStrip menuStrip_Main;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
@@ -818,11 +766,9 @@ namespace P_Studio
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Remove;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_OpenAt2;
         private System.Windows.Forms.RichTextBox richTextBox_Status;
-        public System.Windows.Forms.Panel panel_Asset;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Rename;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Copy;
         private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
-        public System.Windows.Forms.Panel panel_Scripting;
         private MetroSet_UI.Controls.MetroSetButton metroSetButton_ShowHide;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Decompile;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Compile;

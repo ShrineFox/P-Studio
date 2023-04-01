@@ -153,8 +153,8 @@ namespace P_Studio
             var projectExpansionState = treeView_Project.Nodes.GetExpansionState();
 
             treeView_Project.Nodes.Clear();
-            if (Directory.Exists(Path.GetDirectoryName(SettingsForm.settings.ProjectPath)))
-                Treeview.BuildTree(new DirectoryInfo(Path.GetDirectoryName(SettingsForm.settings.ProjectPath)), treeView_Project.Nodes);
+            if (Directory.Exists(Path.GetDirectoryName(settings.ProjectPath)))
+                Treeview.BuildTree(new DirectoryInfo(Path.GetDirectoryName(settings.ProjectPath)), treeView_Project.Nodes);
             treeView_Project.Nodes.SetExpansionState(projectExpansionState);
         }
 
@@ -162,8 +162,8 @@ namespace P_Studio
         {
             var gameExpansionState = treeView_Game.Nodes.GetExpansionState();
             treeView_Game.Nodes.Clear();
-            if (Directory.Exists(SettingsForm.settings.ExtractedPath))
-                Treeview.BuildTree(new DirectoryInfo(SettingsForm.settings.ExtractedPath), treeView_Game.Nodes);
+            if (Directory.Exists(settings.ExtractedPath))
+                Treeview.BuildTree(new DirectoryInfo(settings.ExtractedPath), treeView_Game.Nodes);
             treeView_Game.Nodes.SetExpansionState(gameExpansionState);
         }
 
@@ -174,10 +174,10 @@ namespace P_Studio
             {
                 string file = treeView_Game.SelectedNode.Name;
                 if (Directory.Exists(file))
-                    Unpacker.CopyEntireDirectory(new DirectoryInfo(file), new DirectoryInfo(file.Replace(SettingsForm.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(SettingsForm.settings.ProjectPath)))));
+                    Unpacker.CopyEntireDirectory(new DirectoryInfo(file), new DirectoryInfo(file.Replace(settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(settings.ProjectPath)))));
                 else if (File.Exists(file))
                 {
-                    string copiedFile = file.Replace(SettingsForm.settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(SettingsForm.settings.ProjectPath)));
+                    string copiedFile = file.Replace(settings.ExtractedPath, Path.GetDirectoryName(Path.GetFullPath(settings.ProjectPath)));
                     Directory.CreateDirectory(Path.GetDirectoryName(copiedFile));
                     File.Copy(file, copiedFile);
                 }
@@ -452,9 +452,9 @@ namespace P_Studio
         /* Dump Menustrip Items */
         private void DumpTextures_Click(object sender, EventArgs e)
         {
-            string unpackedDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{SettingsForm.settings.Game}";
-            if (Unpacker.IsDumpReady(true))
-                Unpacker.DumpTextures(unpackedDir, SettingsForm.settings.Game);
+            string unpackedDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{settings.Game}";
+            if (Unpacker.IsDumpReady(true, settings))
+                Unpacker.DumpTextures(unpackedDir, settings.Game);
         }
         #endregion
     }

@@ -134,6 +134,7 @@
     <Compile Include="Classes\Panels.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Classes\Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\PStudio.cs">
@@ -660,6 +661,10 @@
     <ProjectReference Include="..\AtlusFileSystemLibrary\Source\AtlusFileSystemLibrary\AtlusFileSystemLibrary.csproj">
       <Project>{9960b785-6207-44e8-ba42-ec7f6f785344}</Project>
       <Name>AtlusFileSystemLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersonaGameLib\PersonaGameLib.csproj">
+      <Project>{E8CA7F1F-A092-4E78-9A2F-39109B1EB64B}</Project>
+      <Name>PersonaGameLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\ShrineFox.io\ShrineFox.IO.csproj">
       <Project>{7640412a-7372-4925-b20c-0178d8818a8f}</Project>

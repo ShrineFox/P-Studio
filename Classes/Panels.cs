@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,23 +14,25 @@ namespace P_Studio
     {
         public class MountPanel
         {
-            static IntPtr Panel { get; set; } = IntPtr.Zero;
-            static IntPtr Process { get; set; } = IntPtr.Zero;
+            public Panel Panel { get; set; } = null;
+            public IntPtr Process { get; set; } = IntPtr.Zero;
         }
 
         // Keep track of handles for opened processes for workspace tabs
         public static List<MountPanel> MountPanels = new List<MountPanel>();
 
-        // Resize windows within panel
+        // Resize windows within panel to fit
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            int formWidth = panel_Asset.Width;
-            int formHeight = panel_Asset.Height;
-            /*if (assetEditor != null)
-                Tools.MoveWindow(assetEditor, 0, 0, formWidth, formHeight, true);
-            if (scriptEditor != null)
-                Tools.MoveWindow(scriptEditor, 0, 0, formWidth, formHeight, true);*/
+            foreach (MountPanel mountPanel in MountPanels)
+            {
+                if (mountPanel.Panel != null)
+                    MoveWindow(mountPanel.Process, 0, 0, mountPanel.Panel.Width, mountPanel.Panel.Height, true);
+            }
         }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
     }
 
     /* Toggle TableLayoutPanel rows/columns that are set to autosize */

@@ -4,6 +4,7 @@ using AmicitiaLibrary.Graphics.SPR;
 using AmicitiaLibrary.Graphics.TMX;
 using GFDLibrary;
 using GFDLibrary.Textures;
+using PersonaGameLib;
 using ShrineFox.IO;
 using System;
 using System.Collections.Generic;
@@ -264,30 +265,32 @@ namespace P_Studio
                 if (!Directory.Exists(directory))
                     return;
 
+                /*
                 // Extract BIN/PAC contents
-                if (SettingsForm.settings.ExtractPACs)
+                if (settings.ExtractPACs)
                     ExtractPACs(directory, game);
                 else
                     Output.Log("[INFO] Skipping PAC extraction");
 
                 // Decompile .BF/.BMD
-                if (SettingsForm.settings.DecompileScripts)
+                if (settings.DecompileScripts)
                     DecompileScripts(directory, game);
                 else
                     Output.Log("[INFO] Skipping BF/BMD decompilation");
+                */
 
                 Output.Log($"[INFO] Finished unpacking {game} files!");
             }
 
-            public static bool IsDumpReady(bool needsPACfiles)
+            public static bool IsDumpReady(bool needsPACfiles, PSettings settings)
             {
                 // If project is valid...
-                if (SettingsForm.IsValid())
+                if (settings.IsValid())
                 {
-                    string defaultExtractPath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{SettingsForm.settings.Game}";
+                    string defaultExtractPath = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{settings}";
 
                     // Extract archive if you haven't already
-                    if (!Unpacker.HasUnpackedFiles(defaultExtractPath, SettingsForm.settings.Game))
+                    if (!Unpacker.HasUnpackedFiles(defaultExtractPath, settings.Game))
                     {
                         DialogResult result = MessageBox.Show("You need to unpack an ISO/PKG first!\n\n" +
                             "Would you like to do that now? This may take awhile.", "Unpack Archive?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
@@ -299,7 +302,7 @@ namespace P_Studio
                     }
 
                     // Extract PAC files if required and you haven't already extracted them
-                    if (needsPACfiles && !Unpacker.HasUnpackedPACs(defaultExtractPath, SettingsForm.settings.Game))
+                    if (needsPACfiles && !Unpacker.HasUnpackedPACs(defaultExtractPath, settings.Game))
                         {
                             DialogResult result = MessageBox.Show("You need to unpack all PAC files first!\n\n" +
                                 "Would you like to do that now? This may take awhile.", "Unpack Files?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
@@ -308,7 +311,7 @@ namespace P_Studio
                                 Output.Log("[INFO] Dump cancelled by user, no extracted files found for selected game.");
                                 return false;
                             }
-                            Unpacker.ExtractPACs(defaultExtractPath, SettingsForm.settings.Game);
+                            Unpacker.ExtractPACs(defaultExtractPath, settings.Game);
                         }
                     }
                 Output.Log("[INFO] Beginning to dump, please be patient as this may take awhile...");
@@ -434,7 +437,7 @@ namespace P_Studio
 
             public static void DumpTextures(string directory, string game)
             {
-                string outputDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{SettingsForm.settings.Game}\Textures";
+                string outputDir = $@"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\Extracted\{game}\Textures";
                 Directory.CreateDirectory(outputDir);
                 foreach (var file in Directory.GetFiles(directory, "*", SearchOption.AllDirectories))
                 {
@@ -454,7 +457,7 @@ namespace P_Studio
                             break;
                         case (".epl"):
                         case (".bed"):
-                            if (game == "Persona 5")
+                            if (game.Contains("Persona 5"))
                                 ExtractEPL(file, outputDest);
                             break;
                         case (".cpk"):

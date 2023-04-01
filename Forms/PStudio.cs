@@ -14,6 +14,7 @@ namespace P_Studio
 {
     public partial class PStudio : MetroSet_UI.Forms.MetroSetForm
     {
+        public static PSettings settings;
 
         public PStudio()
         {
