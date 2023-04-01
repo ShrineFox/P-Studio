@@ -18,7 +18,6 @@ namespace P_Studio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Treeview.SetupImageList();
             Application.Run(new PStudio());
         }
     }

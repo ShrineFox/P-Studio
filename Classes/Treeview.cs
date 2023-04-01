@@ -5,28 +5,32 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace P_Studio
 {
-    public class Treeview
+    public partial class PStudio : MetroSet_UI.Forms.MetroSetForm
     {
         #region Icons
         /* Set up Treeview icons */
-        public static ImageList treeViewImageList = new ImageList();
+        public static ImageList treeViewImageList = new ImageList() { ColorDepth = ColorDepth.Depth32Bit };
+        public static List<string> treeViewImgs = new List<string>() {"music", "script_code_red", "script_code", "script_edit", "page_white_text", "script_gear",
+            "application_xp_terminal", "database", "table", "package_green", "world", "image", "picture", "font", "film", "vector",
+            "cd", "chart_organisation", "folder", "folder_open", "page_white" };
         public static List<string> unpackTreeViewTypes = new List<string>() { ".pac", ".pak", ".bin", ".amd", ".afs", ".acb", ".awb" };
         public static List<string> compileTreeViewTypes = new List<string>() { ".flow", ".msg" };
         public static List<string> decompileTreeViewTypes = new List<string>() { ".bf", ".bmd" };
 
-        public static void SetupImageList()
+        public static void SetupTreeviewImageList()
         {
             Color transparentColor = Color.FromArgb(60, 63, 65);
-            foreach (var img in new string[] { "music", "script_code_red", "script_code", "script_edit", "page_white_text", "script_gear",
-            "application_xp_terminal", "database", "table", "package_green", "world", "image", "picture", "font", "film", "vector",
-            "cd", "chart_organisation", "folder", "page_white" })
+            foreach (var img in treeViewImgs)
             {
                 treeViewImageList.Images.Add(Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"Icons\\{img}.png")));
             }
@@ -42,25 +46,25 @@ namespace P_Studio
                 case ".awb":
                 case ".wav":
                 case ".afs":
-                    return 0;
+                    return treeViewImgs.IndexOf("music");
                 case ".bf":
-                    return 1;
+                    return treeViewImgs.IndexOf("script_code_red");
                 case ".bmd":
-                    return 2;
+                    return treeViewImgs.IndexOf("script_code");
                 case ".flow":
-                    return 3;
+                    return treeViewImgs.IndexOf("script_edit");
                 case ".msg":
                 case ".txt":
-                    return 4;
+                    return treeViewImgs.IndexOf("page_white_text");
                 case ".bat":
                 case ".yml":
-                    return 5;
+                    return treeViewImgs.IndexOf("script_gear");
                 case ".exe":
-                    return 6;
+                    return treeViewImgs.IndexOf("application_xp_terminal");
                 case ".dll":
-                    return 7;
+                    return treeViewImgs.IndexOf("database");
                 case ".tbl":
-                    return 8;
+                    return treeViewImgs.IndexOf("table");
                 case ".bin":
                 case ".arc":
                 case ".amd":
@@ -68,13 +72,13 @@ namespace P_Studio
                 case ".pak":
                 case ".cpk":
                 case ".cvm":
-                    return 9;
+                    return treeViewImgs.IndexOf("package_green");
                 case ".gmd":
                 case ".gfs":
                 case ".gap":
                 case ".rmd":
                 case ".rws":
-                    return 10;
+                    return treeViewImgs.IndexOf("world");
                 case ".tmx":
                 case ".tm2":
                 case ".dds":
@@ -82,45 +86,33 @@ namespace P_Studio
                 case ".bmp":
                 case ".tga":
                 case ".gnf":
-                    return 11;
+                    return treeViewImgs.IndexOf("image");
                 case ".spr":
-                    return 12;
+                case ".spd":
+                    return treeViewImgs.IndexOf("picture");
                 case ".fnt":
-                    return 13;
+                    return treeViewImgs.IndexOf("font");
                 case ".sfd":
                 case ".umd":
                 case ".mp4":
                 case ".avi":
-                    return 14;
+                    return treeViewImgs.IndexOf("film");
                 case ".plg":
-                    return 15;
+                    return treeViewImgs.IndexOf("vector");
                 case ".iso":
                 case ".img":
-                    return 16;
+                    return treeViewImgs.IndexOf("cd");
                 case ".epl":
-                    return 17;
+                    return treeViewImgs.IndexOf("chart_organisation");
                 case ".folder":
-                    return 18;
+                    return treeViewImgs.IndexOf("folder");
+                case ".folder_open":
+                    return treeViewImgs.IndexOf("folder_open");
                 default:
-                    return 19;
+                    return treeViewImgs.IndexOf("page_white");
             }
         }
         #endregion
-
-        public static void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
-        {
-            string ext = directoryInfo.FullName;
-            if (Directory.Exists(ext))
-                ext += ".folder";
-            // Set icon
-            TreeNode curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, GetIconIndex(ext), GetIconIndex(ext));
-            // Add subdirectories
-            foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
-                BuildTree(subdir, curNode.Nodes);
-            // Add files
-            foreach (FileInfo file in directoryInfo.GetFiles()) // Get all files in directory except those with excluded extensions
-                curNode.Nodes.Add(file.FullName, file.Name, GetIconIndex(file.FullName), GetIconIndex(file.FullName));
-        }
 
         public static void OpenLocation(string file)
         {
@@ -136,35 +128,44 @@ namespace P_Studio
             else
                 Output.Log($"[ERROR] Couldn't open path to \"{Path.GetFileName(file)}\".");
         }
-    }
 
-    public partial class PStudio : MetroSet_UI.Forms.MetroSetForm
-    {
         #region TreeViewEvents
         /* Treeview Setup */
         private void SetTreeViewIcons()
         {
-            treeView_Game.ImageList = Treeview.treeViewImageList;
-            treeView_Project.ImageList = Treeview.treeViewImageList;
+            treeView_Game.ImageList = treeViewImageList;
+            treeView_Project.ImageList = treeViewImageList;
         }
 
-        private void Treeview_Project()
+        private void SetupTreeViews()
         {
-            var projectExpansionState = treeView_Project.Nodes.GetExpansionState();
+            foreach (System.Windows.Forms.TreeView treeView in new System.Windows.Forms.TreeView[] { treeView_Game, treeView_Project })
+            {
+                FolderFileNode root = null;
+                if (treeView.Name == "treeView_Game")
+                    root = new FolderFileNode(settings.ExtractedPath); // TODO: Settings not using actual path from yml?
+                else if (treeView.Name == "treeView_Project")
+                    root = new FolderFileNode(Path.GetDirectoryName(settings.ProjectPath));
 
-            treeView_Project.Nodes.Clear();
-            if (Directory.Exists(Path.GetDirectoryName(settings.ProjectPath)))
-                Treeview.BuildTree(new DirectoryInfo(Path.GetDirectoryName(settings.ProjectPath)), treeView_Project.Nodes);
-            treeView_Project.Nodes.SetExpansionState(projectExpansionState);
-        }
+                treeView.Nodes.Clear();
+                treeView.Nodes.Add(root);
+                root.LoadNodes();
 
-        private void Treeview_Game()
-        {
-            var gameExpansionState = treeView_Game.Nodes.GetExpansionState();
-            treeView_Game.Nodes.Clear();
-            if (Directory.Exists(settings.ExtractedPath))
-                Treeview.BuildTree(new DirectoryInfo(settings.ExtractedPath), treeView_Game.Nodes);
-            treeView_Game.Nodes.SetExpansionState(gameExpansionState);
+                treeView.BeforeSelect += (sender, args) =>
+                {
+                    (args.Node as FolderFileNode)?.LoadNodes();
+                };
+
+                treeView.AfterExpand += (sender, args) =>
+                {
+                    (args.Node as FolderFileNode)?.SetIcon();
+                };
+
+                treeView.AfterCollapse += (sender, args) =>
+                {
+                    (args.Node as FolderFileNode)?.SetIcon();
+                };
+            }
         }
 
         /* Treeview Events */
@@ -187,7 +188,7 @@ namespace P_Studio
                     return;
                 }
                 Output.Log($"[INFO] Copied {Path.GetFileName(file)} to project.");
-                Treeview_Project();
+                // TODO: Refresh matching parent node to show new file in Project files?
             }
             HideContextMenus();
         }
@@ -197,7 +198,7 @@ namespace P_Studio
             if (treeView_Game.SelectedNode != null)
             {
                 string file = treeView_Game.SelectedNode.Name;
-                Treeview.OpenLocation(file);
+                OpenLocation(file);
             }
             HideContextMenus();
         }
@@ -207,7 +208,7 @@ namespace P_Studio
             if (treeView_Project.SelectedNode != null)
             {
                 string file = treeView_Project.SelectedNode.Name;
-                Treeview.OpenLocation(file);
+                OpenLocation(file);
             }
             HideContextMenus();
         }
@@ -239,11 +240,17 @@ namespace P_Studio
                         else
                             Output.Log($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\" as \"{Path.GetFileName(newName)}\", file already exists");
                     }
-                    Treeview_Project();
+                    RefreshTreeNode(treeView_Project.SelectedNode);
                 }
                 else
                     Output.Log($"[ERROR] Failed to copy \"{Path.GetFileName(originalName)}\", file or folder does not exist");
             }
+        }
+
+        private void RefreshTreeNode(TreeNode selectedNode)
+        {
+            selectedNode.Parent.Collapse();
+            selectedNode.Parent.Expand();
         }
 
         private void Rename_Click(object sender, EventArgs e)
@@ -270,7 +277,7 @@ namespace P_Studio
                     }
                     else
                         Output.Log($"[ERROR] Failed to rename \"{Path.GetFileName(originalName)}\" to \"{Path.GetFileName(newName)}\", file already exists");
-                    Treeview_Project();
+                    RefreshTreeNode(treeView_Project.SelectedNode);
                 }
             }
         }
@@ -295,7 +302,7 @@ namespace P_Studio
                     Output.Log($"[ERROR] Couldn't find file to delete: {Path.GetFileName(file)}.");
                     return;
                 }
-                Treeview_Project();
+                RefreshTreeNode(treeView_Project.SelectedNode);
             }
             HideContextMenus();
         }
@@ -367,7 +374,7 @@ namespace P_Studio
                 if (treeView_Game.SelectedNode.Parent == null || treeView_Game.SelectedNode.Parent.Parent == null)
                     ToolStripMenuItem_Add.Visible = false;
                 // Hide expand/collapse if not folder
-                if (treeView_Game.SelectedNode.ImageIndex != 18)
+                if (treeView_Game.SelectedNode.ImageIndex != treeViewImgs.IndexOf("folder"))
                 {
                     ToolStripMenuItem_ExpandGame.Visible = false;
                     ToolStripMenuItem_CollapseGame.Visible = false;
@@ -403,9 +410,9 @@ namespace P_Studio
                     ToolStripMenuItem_Remove.Visible = false;
                 }
                 // Hide (de)compile, new, repack, replace & expand/collapse, unpack
-                if (!Treeview.decompileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
+                if (!decompileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
                     ToolStripMenuItem_Decompile.Visible = false;
-                if (!Treeview.compileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
+                if (!compileTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
                     ToolStripMenuItem_Compile.Visible = false;
                 if (treeView_Project.SelectedNode.ImageIndex != 18)
                 {
@@ -416,7 +423,7 @@ namespace P_Studio
                 }
                 else
                     ToolStripMenuItem_Replace.Visible = false;
-                if (!Treeview.unpackTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
+                if (!unpackTreeViewTypes.Any(x => x.Equals(Path.GetExtension(treeView_Project.SelectedNode.Name).ToLower())))
                     ToolStripMenuItem_Unpack.Visible = false;
                 contextMenuStrip_Project.Show(Cursor.Position);
             }
@@ -488,6 +495,55 @@ namespace P_Studio
                 {
                     yield return child;
                 }
+            }
+        }
+    }
+
+    // Lazy Loading of Subfolder contents: https://stackoverflow.com/a/39686042
+    class FolderFileNode : TreeNode
+    {
+        private readonly string _path;
+
+        private readonly bool _isFile;
+
+        public FolderFileNode(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException(nameof(path));
+            Text = Path.GetFileName(path);
+            Name = Path.GetFileName(path);
+            _isFile = File.Exists(path);
+            _path = path;
+
+            if (!_isFile && Directory.EnumerateFileSystemEntries(_path).Any())
+            {
+                Nodes.Add(new TreeNode());
+            }
+            SetIcon();
+        }
+
+        public void SetIcon()
+        {
+            ImageIndex = _isFile ? ImageIndex = PStudio.GetIconIndex(this.Name) : IsExpanded ? PStudio.treeViewImgs.IndexOf("folder_open") : PStudio.treeViewImgs.IndexOf("folder");
+            SelectedImageIndex = _isFile ? ImageIndex = PStudio.GetIconIndex(this.Name) : IsExpanded ? PStudio.treeViewImgs.IndexOf("folder_open") : PStudio.treeViewImgs.IndexOf("folder");
+        }
+
+        private IEnumerable<string> _children;
+        public void LoadNodes()
+        {
+            if (!_isFile && _children == null)
+            {
+                // _children = Directory.EnumerateFileSystemEntries(_path);
+                // Or Add Directories first
+                _children = Directory.EnumerateDirectories(_path).ToList();
+                ((List<string>)_children).AddRange(Directory.EnumerateFiles(_path));
+
+                //Theres one added in the constructor to indicate it has children 
+                Nodes.Clear();
+
+                Nodes.AddRange(
+                    _children.Select(x =>
+                        (TreeNode)new FolderFileNode(x))
+                        .ToArray());
             }
         }
     }

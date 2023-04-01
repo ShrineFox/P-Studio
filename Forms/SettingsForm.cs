@@ -30,9 +30,6 @@ namespace P_Studio
                 tempSettings.Load();
                 UpdateForm();
             }
-
-            UpdateRegionsDropDown();
-            UpdateGamesDropDown();
         }
 
         private void UpdateRegionsDropDown()
@@ -137,8 +134,8 @@ namespace P_Studio
         {
             txt_ProjectName.Text = tempSettings.ProjectName;
             comboBox_Platform.SelectedIndex = comboBox_Platform.Items.IndexOf(tempSettings.Platform);
-            comboBox_Region.SelectedIndex = comboBox_Region.Items.IndexOf(tempSettings.Region);
             comboBox_Game.SelectedIndex = comboBox_Game.Items.IndexOf(tempSettings.Game);
+            comboBox_Region.SelectedIndex = comboBox_Region.Items.IndexOf(tempSettings.Region);
             txt_Archive.Text = tempSettings.ArchivePath;
             radio_Extracted.Checked = tempSettings.UseExtractedPath;
             radio_Archive.Checked = !tempSettings.UseExtractedPath;
@@ -184,7 +181,6 @@ namespace P_Studio
         private void Platform_Changed(object sender, EventArgs e)
         {
             UpdateRegionsDropDown();
-            UpdateGamesDropDown();
         }
 
         private void Region_Changed(object sender, EventArgs e)

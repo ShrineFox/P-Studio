@@ -22,8 +22,15 @@ namespace P_Studio
             SetupLogging();
             SetDefaultTab();
             SetMenuStripRenderer();
+            SetupTreeviewImageList();
             SetTreeViewIcons();
             SetMenuStripIcons();
+
+#if DEBUG
+            settings = new PSettings();
+            settings.Load("C:\\Users\\Ryan\\Documents\\GitHub\\P-Studio\\bin\\Debug\\Projects\\Test\\Test.yml");
+            LoadProject();
+#endif
         }
 
         private void SetupLogging()

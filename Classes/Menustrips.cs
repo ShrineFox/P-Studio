@@ -55,35 +55,30 @@ namespace P_Studio
 
             // Context Menu Strips
             foreach (ContextMenuStrip menuStrip in new ContextMenuStrip[] { contextMenuStrip_Game, contextMenuStrip_Project })
-            {
-                foreach (ToolStripMenuItem tsmi in menuStrip.Items)
-                {
-                    if (menuStripIcons.Any(x => x.Item1 == tsmi.Name))
-                    {
-                        tsmi.Image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"Icons\\{menuStripIcons.Single(x => x.Item1 == tsmi.Name).Item2}.png"));
-                    }
-                    foreach (ToolStripMenuItem tsmi2 in tsmi.DropDownItems)
-                    {
-                        tsmi2.Image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"Icons\\{menuStripIcons.Single(x => x.Item1 == tsmi2.Name).Item2}.png"));
-                    }
-                }
-            }
+                ApplyIconsFromList(menuStrip.Items, menuStripIcons);
 
             // Menu Strip Items
-            foreach (MenuStrip menuItem in this.FlattenChildren<MenuStrip>())
+            foreach (MenuStrip menuStrip in this.FlattenChildren<MenuStrip>())
+                ApplyIconsFromList(menuStrip.Items, menuStripIcons);
+        }
+
+        private void ApplyIconsFromList(ToolStripItemCollection items, List<Tuple<string, string>> menuStripIcons)
+        {
+            foreach (ToolStripMenuItem tsmi in items)
             {
-                foreach (ToolStripMenuItem tsmi in menuItem.Items)
-                {
-                    if (menuStripIcons.Any(x => x.Item1 == tsmi.Name))
-                    {
-                        tsmi.Image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"Icons\\{menuStripIcons.Single(x => x.Item1 == tsmi.Name).Item2}.png"));
-                    }
-                    foreach (ToolStripMenuItem tsmi2 in tsmi.DropDownItems)
-                    {
-                        tsmi2.Image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"Icons\\{menuStripIcons.Single(x => x.Item1 == tsmi2.Name).Item2}.png"));
-                    }
-                }
+                // Apply context menu icon
+                if (menuStripIcons.Any(x => x.Item1 == tsmi.Name))
+                    ApplyIconFromFile(tsmi, menuStripIcons);
+                // Apply drop down menu icon
+                foreach (ToolStripMenuItem tsmi2 in tsmi.DropDownItems)
+                    ApplyIconFromFile(tsmi2, menuStripIcons);
             }
+        }
+
+        private void ApplyIconFromFile(ToolStripMenuItem tsmi, List<Tuple<string, string>> menuStripIcons)
+        {
+            tsmi.Image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                        $"Icons\\{menuStripIcons.Single(x => x.Item1 == tsmi.Name).Item2}.png"));
         }
 
         #region ToolstripOptions
@@ -137,12 +132,8 @@ namespace P_Studio
 
         private void LoadProject()
         {
-            if (settings.IsValid())
-            {
-                this.Text = $"P-Studio v0.1 - {settings.ProjectName}";
-                Treeview_Project();
-                Treeview_Game();
-            }
+            this.Text = $"P-Studio v0.1 - {settings.ProjectName}";
+            SetupTreeViews();
         }
 
         private void SaveProjectAs_Click(object sender, EventArgs e)
