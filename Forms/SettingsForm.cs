@@ -22,8 +22,6 @@ namespace P_Studio
             InitializeComponent();
 
             PopulatePlatformsDropDown();
-            UpdateRegionsDropDown();
-            UpdateGamesDropDown();
 
             tempSettings = new PSettings();
             if (settings != null && File.Exists(settings.ProjectPath))
@@ -32,6 +30,9 @@ namespace P_Studio
                 tempSettings.Load();
                 UpdateForm();
             }
+
+            UpdateRegionsDropDown();
+            UpdateGamesDropDown();
         }
 
         private void UpdateRegionsDropDown()
@@ -135,7 +136,7 @@ namespace P_Studio
         private void UpdateForm()
         {
             txt_ProjectName.Text = tempSettings.ProjectName;
-            comboBox_Platform.SelectedIndex = comboBox_Game.Items.IndexOf(tempSettings.Platform);
+            comboBox_Platform.SelectedIndex = comboBox_Platform.Items.IndexOf(tempSettings.Platform);
             comboBox_Region.SelectedIndex = comboBox_Region.Items.IndexOf(tempSettings.Region);
             comboBox_Game.SelectedIndex = comboBox_Game.Items.IndexOf(tempSettings.Game);
             txt_Archive.Text = tempSettings.ArchivePath;

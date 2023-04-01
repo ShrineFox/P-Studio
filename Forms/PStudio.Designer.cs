@@ -51,7 +51,6 @@ namespace P_Studio
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpTexturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -171,7 +170,7 @@ namespace P_Studio
             this.metroSetTabControl_GameProject.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabControl_GameProject.Controls.Add(this.tabPage_Game);
             this.metroSetTabControl_GameProject.Controls.Add(this.tabPage_Project);
-            this.metroSetTabControl_GameProject.Cursor = System.Windows.Forms.Cursors.Default;
+            this.metroSetTabControl_GameProject.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroSetTabControl_GameProject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroSetTabControl_GameProject.HotTrack = true;
             this.metroSetTabControl_GameProject.IsDerivedStyle = true;
@@ -340,7 +339,6 @@ namespace P_Studio
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
             this.loadProjectToolStripMenuItem,
-            this.saveProjectToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.fileToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -354,7 +352,7 @@ namespace P_Studio
             this.newProjectToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.newProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject_Click);
             // 
@@ -364,20 +362,9 @@ namespace P_Studio
             this.loadProjectToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.loadProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
-            // 
-            // saveProjectToolStripMenuItem
-            // 
-            this.saveProjectToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.saveProjectToolStripMenuItem.Enabled = false;
-            this.saveProjectToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.saveProjectToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.saveProjectToolStripMenuItem.Text = "Save Project As...";
-            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectAs_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -385,7 +372,7 @@ namespace P_Studio
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.settingsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.Settings_Click);
             // 
@@ -407,7 +394,7 @@ namespace P_Studio
             this.dumpTexturesToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.dumpTexturesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpTexturesToolStripMenuItem.Name = "dumpTexturesToolStripMenuItem";
-            this.dumpTexturesToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
+            this.dumpTexturesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.dumpTexturesToolStripMenuItem.Text = "All Textures";
             this.dumpTexturesToolStripMenuItem.Click += new System.EventHandler(this.DumpTextures_Click);
             // 
@@ -417,7 +404,7 @@ namespace P_Studio
             this.dumpSoundsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.dumpSoundsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpSoundsToolStripMenuItem.Name = "dumpSoundsToolStripMenuItem";
-            this.dumpSoundsToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
+            this.dumpSoundsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.dumpSoundsToolStripMenuItem.Text = "All Sounds";
             // 
             // dumpScriptsToolStripMenuItem
@@ -426,7 +413,7 @@ namespace P_Studio
             this.dumpScriptsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.dumpScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.dumpScriptsToolStripMenuItem.Name = "dumpScriptsToolStripMenuItem";
-            this.dumpScriptsToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
+            this.dumpScriptsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.dumpScriptsToolStripMenuItem.Text = "All Scripts";
             // 
             // contextMenuStrip_Game
@@ -439,7 +426,7 @@ namespace P_Studio
             this.ToolStripMenuItem_ExpandGame,
             this.ToolStripMenuItem_CollapseGame});
             this.contextMenuStrip_Game.Name = "contextMenuStrip_Game";
-            this.contextMenuStrip_Game.Size = new System.Drawing.Size(175, 124);
+            this.contextMenuStrip_Game.Size = new System.Drawing.Size(211, 152);
             // 
             // ToolStripMenuItem_Add
             // 
@@ -756,7 +743,6 @@ namespace P_Studio
         private System.Windows.Forms.MenuStrip menuStrip_Main;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private MetroSet_UI.Components.StyleManager styleManager;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_Game;

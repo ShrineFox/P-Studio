@@ -53,6 +53,23 @@ namespace P_Studio
                 new Tuple<string, string>("ToolStripMenuItem_CollapseProj", "arrow_join"),
             };
 
+            // Context Menu Strips
+            foreach (ContextMenuStrip menuStrip in new ContextMenuStrip[] { contextMenuStrip_Game, contextMenuStrip_Project })
+            {
+                foreach (ToolStripMenuItem tsmi in menuStrip.Items)
+                {
+                    if (menuStripIcons.Any(x => x.Item1 == tsmi.Name))
+                    {
+                        tsmi.Image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"Icons\\{menuStripIcons.Single(x => x.Item1 == tsmi.Name).Item2}.png"));
+                    }
+                    foreach (ToolStripMenuItem tsmi2 in tsmi.DropDownItems)
+                    {
+                        tsmi2.Image = Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"Icons\\{menuStripIcons.Single(x => x.Item1 == tsmi2.Name).Item2}.png"));
+                    }
+                }
+            }
+
+            // Menu Strip Items
             foreach (MenuStrip menuItem in this.FlattenChildren<MenuStrip>())
             {
                 foreach (ToolStripMenuItem tsmi in menuItem.Items)
@@ -74,7 +91,6 @@ namespace P_Studio
         private void NewProject_Click(object sender, EventArgs e)
         {
             this.Text = $"P-Studio v0.1";
-            saveProjectToolStripMenuItem.Enabled = false;
             settings = new PSettings();
             OpenSettingsForm();
             // TODO: Prompt user if ready to close all opened workspaces
@@ -126,7 +142,6 @@ namespace P_Studio
                 this.Text = $"P-Studio v0.1 - {settings.ProjectName}";
                 Treeview_Project();
                 Treeview_Game();
-                saveProjectToolStripMenuItem.Enabled = true;
             }
         }
 
