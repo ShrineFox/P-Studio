@@ -1,0 +1,4 @@
+fileToolStripMenuItem disk
+loadProjectToolStripMenuItem folder_page
+saveProjectToolStripMenuItem disk_multiple
+settingsToolStripMenuItem cog_edit
