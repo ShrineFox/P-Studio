@@ -29,7 +29,7 @@ namespace PStudio
             tabControl_Explorer.TabPages.Add(tabPage_Game);
             tabControl_Explorer.TabPages.Add(tabPage_Project);
 
-            tlp_Main.Controls.Add(tabControl_Explorer, 0, 0);
+            splitContainer_Main.Panel1.Controls.Add(tabControl_Explorer);
 
             LoadTreeview(treeView_Game);
             LoadTreeview(treeView_Project);

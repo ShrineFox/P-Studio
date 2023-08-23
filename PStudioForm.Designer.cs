@@ -36,12 +36,16 @@ namespace PStudio
             loadProjectToolStripMenuItem = new ToolStripMenuItem();
             saveProjectToolStripMenuItem = new ToolStripMenuItem();
             settingsToolStripMenuItem = new ToolStripMenuItem();
-            tlp_Main = new TableLayoutPanel();
-            tlp_Workspace = new TableLayoutPanel();
             rtb_Log = new RichTextBox();
+            splitContainer_Main = new SplitContainer();
+            splitContainer_Workspace = new SplitContainer();
             darkMenuStrip_Main.SuspendLayout();
-            tlp_Main.SuspendLayout();
-            tlp_Workspace.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer_Main).BeginInit();
+            splitContainer_Main.Panel2.SuspendLayout();
+            splitContainer_Main.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer_Workspace).BeginInit();
+            splitContainer_Workspace.Panel2.SuspendLayout();
+            splitContainer_Workspace.SuspendLayout();
             SuspendLayout();
             // 
             // darkMenuStrip_Main
@@ -70,7 +74,7 @@ namespace PStudio
             loadProjectToolStripMenuItem.BackColor = Color.FromArgb(60, 63, 65);
             loadProjectToolStripMenuItem.ForeColor = Color.FromArgb(220, 220, 220);
             loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
-            loadProjectToolStripMenuItem.Size = new Size(224, 26);
+            loadProjectToolStripMenuItem.Size = new Size(175, 26);
             loadProjectToolStripMenuItem.Text = "Load Project";
             loadProjectToolStripMenuItem.Click += LoadProject_Click;
             // 
@@ -79,7 +83,7 @@ namespace PStudio
             saveProjectToolStripMenuItem.BackColor = Color.FromArgb(60, 63, 65);
             saveProjectToolStripMenuItem.ForeColor = Color.FromArgb(220, 220, 220);
             saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            saveProjectToolStripMenuItem.Size = new Size(224, 26);
+            saveProjectToolStripMenuItem.Size = new Size(175, 26);
             saveProjectToolStripMenuItem.Text = "Save Project";
             saveProjectToolStripMenuItem.Click += SaveProject_Click;
             // 
@@ -88,39 +92,9 @@ namespace PStudio
             settingsToolStripMenuItem.BackColor = Color.FromArgb(60, 63, 65);
             settingsToolStripMenuItem.ForeColor = Color.FromArgb(220, 220, 220);
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new Size(224, 26);
+            settingsToolStripMenuItem.Size = new Size(175, 26);
             settingsToolStripMenuItem.Text = "Settings";
             settingsToolStripMenuItem.Click += Settings_Click;
-            // 
-            // tlp_Main
-            // 
-            tlp_Main.BackColor = Color.FromArgb(30, 30, 30);
-            tlp_Main.ColumnCount = 2;
-            tlp_Main.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tlp_Main.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
-            tlp_Main.Controls.Add(tlp_Workspace, 1, 0);
-            tlp_Main.Dock = DockStyle.Fill;
-            tlp_Main.Location = new Point(0, 28);
-            tlp_Main.Name = "tlp_Main";
-            tlp_Main.RowCount = 1;
-            tlp_Main.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlp_Main.Size = new Size(882, 625);
-            tlp_Main.TabIndex = 1;
-            // 
-            // tlp_Workspace
-            // 
-            tlp_Workspace.BackColor = Color.FromArgb(30, 30, 30);
-            tlp_Workspace.ColumnCount = 1;
-            tlp_Workspace.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tlp_Workspace.Controls.Add(rtb_Log, 0, 1);
-            tlp_Workspace.Dock = DockStyle.Fill;
-            tlp_Workspace.Location = new Point(223, 3);
-            tlp_Workspace.Name = "tlp_Workspace";
-            tlp_Workspace.RowCount = 2;
-            tlp_Workspace.RowStyles.Add(new RowStyle(SizeType.Percent, 75F));
-            tlp_Workspace.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tlp_Workspace.Size = new Size(656, 619);
-            tlp_Workspace.TabIndex = 0;
             // 
             // rtb_Log
             // 
@@ -128,13 +102,40 @@ namespace PStudio
             rtb_Log.BorderStyle = BorderStyle.None;
             rtb_Log.Dock = DockStyle.Fill;
             rtb_Log.ForeColor = Color.Silver;
-            rtb_Log.Location = new Point(3, 467);
+            rtb_Log.Location = new Point(0, 0);
             rtb_Log.Name = "rtb_Log";
             rtb_Log.ReadOnly = true;
             rtb_Log.ScrollBars = RichTextBoxScrollBars.Vertical;
-            rtb_Log.Size = new Size(650, 149);
+            rtb_Log.Size = new Size(584, 120);
             rtb_Log.TabIndex = 0;
             rtb_Log.Text = "";
+            // 
+            // splitContainer_Main
+            // 
+            splitContainer_Main.Dock = DockStyle.Fill;
+            splitContainer_Main.Location = new Point(0, 28);
+            splitContainer_Main.Name = "splitContainer_Main";
+            // 
+            // splitContainer_Main.Panel2
+            // 
+            splitContainer_Main.Panel2.Controls.Add(splitContainer_Workspace);
+            splitContainer_Main.Size = new Size(882, 625);
+            splitContainer_Main.SplitterDistance = 294;
+            splitContainer_Main.TabIndex = 2;
+            // 
+            // splitContainer_Workspace
+            // 
+            splitContainer_Workspace.Dock = DockStyle.Fill;
+            splitContainer_Workspace.Location = new Point(0, 0);
+            splitContainer_Workspace.Name = "splitContainer_Workspace";
+            splitContainer_Workspace.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainer_Workspace.Panel2
+            // 
+            splitContainer_Workspace.Panel2.Controls.Add(rtb_Log);
+            splitContainer_Workspace.Size = new Size(584, 625);
+            splitContainer_Workspace.SplitterDistance = 501;
+            splitContainer_Workspace.TabIndex = 0;
             // 
             // PStudioForm
             // 
@@ -142,7 +143,7 @@ namespace PStudio
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(882, 653);
-            Controls.Add(tlp_Main);
+            Controls.Add(splitContainer_Main);
             Controls.Add(darkMenuStrip_Main);
             ForeColor = Color.Silver;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -152,8 +153,12 @@ namespace PStudio
             Text = "P-Studio";
             darkMenuStrip_Main.ResumeLayout(false);
             darkMenuStrip_Main.PerformLayout();
-            tlp_Main.ResumeLayout(false);
-            tlp_Workspace.ResumeLayout(false);
+            splitContainer_Main.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer_Main).EndInit();
+            splitContainer_Main.ResumeLayout(false);
+            splitContainer_Workspace.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer_Workspace).EndInit();
+            splitContainer_Workspace.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,8 +170,8 @@ namespace PStudio
         private ToolStripMenuItem loadProjectToolStripMenuItem;
         private ToolStripMenuItem saveProjectToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
-        private TableLayoutPanel tlp_Main;
-        private TableLayoutPanel tlp_Workspace;
         private RichTextBox rtb_Log;
+        private SplitContainer splitContainer_Main;
+        private SplitContainer splitContainer_Workspace;
     }
 }
