@@ -21,6 +21,7 @@ namespace PStudio
             InitializeComponent();
             WinForms.SetDefaultIcon();
             MenuStripHelper.SetMenuStripIcons(MenuStripHelper.GetMenuStripIconPairs("Icons.txt"), this);
+            TreeViewBuilder.BuildImageList("treeviewimglist.txt");
             SetupLogging();
 
             SetupTreeviews();
