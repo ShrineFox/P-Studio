@@ -20,10 +20,12 @@ namespace PStudio
 
             var tabPage_Game = SFControls.SFTabPage("tabPage_Game", "Game");
             treeView_Game = SFControls.SFTreeView("treeView_Game");
+            treeView_Game.MouseWheel += TreeView_MouseScrolled;
             tabPage_Game.Controls.Add(treeView_Game);
 
             var tabPage_Project = SFControls.SFTabPage("tabPage_Project", "Project");
             treeView_Project = SFControls.SFTreeView("treeView_Project");
+            treeView_Project.MouseWheel += TreeView_MouseScrolled;
             tabPage_Project.Controls.Add(treeView_Project);
 
             tabControl_Explorer.TabPages.Add(tabPage_Game);
@@ -35,6 +37,18 @@ namespace PStudio
             LoadTreeview(treeView_Project);
 
             Output.VerboseLog("Done loading treeviews.");
+        }
+
+        private void TreeView_MouseScrolled(object? sender, MouseEventArgs e)
+        {
+            TreeView treeView = sender as TreeView;
+
+            if (ModifierKeys == Keys.Control)
+            {
+                float fontSizeAdjust = treeView.Font.Size + e.Delta * SystemInformation.MouseWheelScrollLines / 120;
+                if (fontSizeAdjust > 0f && fontSizeAdjust < 20f)
+                    treeView.Font = new Font("Segoe UI", fontSizeAdjust, FontStyle.Regular, GraphicsUnit.Point);
+            }
         }
 
         public void LoadTreeview(TreeView treeView)

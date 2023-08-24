@@ -106,7 +106,7 @@ namespace PStudio
             rtb_Log.Name = "rtb_Log";
             rtb_Log.ReadOnly = true;
             rtb_Log.ScrollBars = RichTextBoxScrollBars.Vertical;
-            rtb_Log.Size = new Size(584, 120);
+            rtb_Log.Size = new Size(584, 121);
             rtb_Log.TabIndex = 0;
             rtb_Log.Text = "";
             // 
@@ -134,7 +134,7 @@ namespace PStudio
             // 
             splitContainer_Workspace.Panel2.Controls.Add(rtb_Log);
             splitContainer_Workspace.Size = new Size(584, 625);
-            splitContainer_Workspace.SplitterDistance = 501;
+            splitContainer_Workspace.SplitterDistance = 500;
             splitContainer_Workspace.TabIndex = 0;
             // 
             // PStudioForm
